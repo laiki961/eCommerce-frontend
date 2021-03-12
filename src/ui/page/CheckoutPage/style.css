@@ -1,0 +1,13 @@
+.payment{
+    border: 2px black solid;
+    border-radius: 1em;
+    padding: 1em;
+    margin: 2em 0em;
+}
+
+.billingInformation{
+    border: 2px #000000 solid;
+    border-radius: 1em;
+    padding: 1em;
+    margin: 2em 0em;
+}

@@ -1,0 +1,38 @@
+.productContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.productCard{
+    width: 300px;
+    height: 400px;
+    margin: 16px;
+}
+
+.productCard .image{
+    width: 298px;
+    height: 298px;
+    /* padding: 3px; */
+}
+
+.centerCropped {
+    width: 100px;
+    height: 100px;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+.navbar-brand{
+    margin-left: 16px;
+}
+
+.cardTitle.productName{
+    font-size: medium;
+}
+
+.loading{
+    margin: 16px
+}

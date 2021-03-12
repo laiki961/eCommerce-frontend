@@ -1,0 +1,24 @@
+#productDetailPage{
+    margin-top: 16px;
+}
+
+#productDetailPage h1{
+    color: rgb(0, 183, 255);
+    margin: 16px 0;
+}
+
+.bannerImage{
+    width: 100%;
+    max-width: 400px;
+    margin: 16px 0;
+}
+
+.toastContainer{
+    position: fixed;
+    bottom: 56px;
+    right: 32px;
+}
+
+.loading{
+    margin: 16px
+}

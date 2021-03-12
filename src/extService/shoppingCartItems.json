@@ -1,0 +1,42 @@
+{
+    "1":{   
+        "productId": 1,
+        "productName": 
+            "500 14\" BIKE 3-5 YEARS - UNICORN",
+        "description": 
+            "A sturdy 14\" bike with stabilisers.\n\n 14\"bike equipped with a bell, stabilisers featuring tool-free removal, and a mudguard. Brakes designed to suit children's hands and chain guard that's ideal for learning to ride in complete safety.",
+        "imageUrl":
+            "https://contents.mediadecathlon.com/p1138250/k$0dc28246d300f3dd317f464381ebfdaa/sq/500+14+Inch+Bike+3+5+Years+Unicorn.webp?f=400x400",
+        "price": 799
+    },
+    "2":{   
+        "productId": 2,
+        "productName": 
+            "5ROCKRIDER ST 120 KIDS' 20\" MOUNTAIN BIKE AGES 6-9",
+        "description": 
+            "6 to 9-year olds (120 to 135 cm) wanting to start mountain biking.\n\nTo take on the first slopes, our engineers have equipped this kids' MTB with 6 speeds. This bike allows the rider to take on sloped terrains.",
+        "imageUrl":
+            "https://contents.mediadecathlon.com/p1621607/k$f28fc58793509d4ab7682632abcfa868/sq/Rockrider+ST+120+Kids+20+Inch+Mountain+Bike+Ages+6+9.webp?f=400x400",
+        "price": 999
+    },
+    "3":{   
+        "productId": 3,
+        "productName": 
+            "ORIGINAL 100 KIDS' 24\" HYBRID BIKE 9-12 YEARS",
+        "description": 
+            "Designed for children aged 9 to 12 years (135 to 155 cm) who want to learn how to ride a hybrid bike.\n\nA children's 24-inch, white, 6-speed bike with a comfortable saddle. Children can ride anywhere on this bike, from trails to town",
+        "imageUrl":
+            "https://contents.mediadecathlon.com/p1319542/k$2d8e5cb61ae2d9f274ef9f9f1a8b12e5/sq/Original+100+Kids+24+Hybrid+Bike+9+12+Years.webp?f=1000x1000",
+        "price": 1199
+    },
+    "4":{   
+        "productId": 4,
+        "productName": 
+            "TRIBAN RC 100 ROAD BIKE",
+        "description": 
+            "We've designed this bike specially for and with beginners: reassuring tyres, simple speed changes, and straight handlebars!\n\nDiscover the ideal bike for starting out: with only one chainring, you'll never end up in the wrong gear! Great comfort thanks to the 32mm tyres, allowing you to take on any road or trail with gusto!",
+        "imageUrl":
+            "https://contents.mediadecathlon.com/p1662199/k$4d461294413f611f2b18751bd05f0fed/sq/Triban+RC+100+Road+Bike.webp?f=1000x1000",
+        "price": 1999
+    }
+}
