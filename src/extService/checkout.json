@@ -1,33 +1,33 @@
 {
     "transactionId": 1,
     "items":[
-        {
-            "details":{
-                "productId": 1,
-                "productName": 
-                    "500 14\" BIKE 3-5 YEARS - UNICORN",
-                "description": 
-                    "A sturdy 14\" bike with stabilisers.\n\n 14\"bike equipped with a bell, stabilisers featuring tool-free removal, and a mudguard. Brakes designed to suit children's hands and chain guard that's ideal for learning to ride in complete safety.",
-                "imageUrl":
-                    "https://contents.mediadecathlon.com/p1138250/k$0dc28246d300f3dd317f464381ebfdaa/sq/500+14+Inch+Bike+3+5+Years+Unicorn.webp?f=400x400",
-                "price": 799
-            },
-            "subtotal": 799
-        },
-        {
-            "details":{
-                "productId": 2,
-                "productName": 
-                    "5ROCKRIDER ST 120 KIDS' 20\" MOUNTAIN BIKE AGES 6-9",
-                "description": 
-                    "6 to 9-year olds (120 to 135 cm) wanting to start mountain biking.\n\nTo take on the first slopes, our engineers have equipped this kids' MTB with 6 speeds. This bike allows the rider to take on sloped terrains.",
-                "imageUrl":
-                    "https://contents.mediadecathlon.com/p1621607/k$f28fc58793509d4ab7682632abcfa868/sq/Rockrider+ST+120+Kids+20+Inch+Mountain+Bike+Ages+6+9.webp?f=400x400",
-                "price": 999
-            },
-            "subtotal": 999
-        }
-    ],
-    "total": 1798,
-    "status": "initiated"
+                {
+                    "details":{
+                        "productId": 1,
+                        "productName": 
+                            "500 14\" BIKE 3-5 YEARS - UNICORN",
+                        "description": 
+                            "A sturdy 14\" bike with stabilisers.\n\n 14\"bike equipped with a bell, stabilisers featuring tool-free removal, and a mudguard. Brakes designed to suit children's hands and chain guard that's ideal for learning to ride in complete safety.",
+                        "imageUrl":
+                            "https://contents.mediadecathlon.com/p1138250/k$0dc28246d300f3dd317f464381ebfdaa/sq/500+14+Inch+Bike+3+5+Years+Unicorn.webp?f=400x400",
+                        "price": 799
+                    },
+                    "subtotal": 799
+                },
+                {
+                    "details":{
+                        "productId": 2,
+                        "productName": 
+                            "5ROCKRIDER ST 120 KIDS' 20\" MOUNTAIN BIKE AGES 6-9",
+                        "description": 
+                            "6 to 9-year olds (120 to 135 cm) wanting to start mountain biking.\n\nTo take on the first slopes, our engineers have equipped this kids' MTB with 6 speeds. This bike allows the rider to take on sloped terrains.",
+                        "imageUrl":
+                            "https://contents.mediadecathlon.com/p1621607/k$f28fc58793509d4ab7682632abcfa868/sq/Rockrider+ST+120+Kids+20+Inch+Mountain+Bike+Ages+6+9.webp?f=400x400",
+                        "price": 999
+                    },
+                    "subtotal": 999
+                }
+            ],
+"total": 1798,
+"status": "initiated"
 }
