@@ -30,7 +30,7 @@ export default class App extends React.Component<Props, State>{
                 <Navbar.Brand href="#">Ventail</Navbar.Brand>
                 <Navbar.Collapse className="justify-content-end">
                   <Nav.Link href="#/cart">
-                    <FontAwesomeIcon icon={faShoppingCart}/>
+                    <FontAwesomeIcon className="icon" icon={faShoppingCart}/>
                   </Nav.Link>
                 </Navbar.Collapse>
             </Container>

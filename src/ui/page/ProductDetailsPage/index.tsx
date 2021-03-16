@@ -59,7 +59,7 @@ export default class ProductDetailsPage extends React.Component<Props, State>{
                 <h3>Description:</h3>
                 <p>{productDetails.description}</p>
 
-                <h4>Price: ${productDetails.price}</h4>
+                <div><span className="priceTag">HK$ </span>{productDetails.price}</div>
                 <Button 
                     variant="primary"
                     onClick={this.onClickAddToCartButton}

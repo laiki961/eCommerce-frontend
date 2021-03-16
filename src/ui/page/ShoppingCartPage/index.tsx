@@ -88,7 +88,7 @@ export default class ShoppingCartPage extends React.Component<Props, State>{
         return (
             <section>
                 <hr/>
-                <h3>Total: ${totalPrice}</h3>
+                <h3><span>Total: $ {totalPrice}</span></h3>
                 <Button variant="primary" onClick={this.onClickCheckoutButton}>Checkout</Button>
             </section>
         )

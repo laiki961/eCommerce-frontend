@@ -56,7 +56,7 @@ class CheckoutPage extends React.Component<Props, State>{
                     shouldShowRemoveButton={false}
                     displayItems={checkoutItems}
                 />
-                <h3>Total: ${this.state.transaction.total}</h3>
+                <h3><span>Total: HK$ {this.state.transaction.total}</span></h3>
             </section>
         )   
     }

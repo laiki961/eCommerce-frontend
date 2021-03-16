@@ -5,3 +5,11 @@
 Breadcrumb{
     background-color: white;
 }
+
+.navbar-brand{
+    font-family:'Pacifico', cursive;
+}
+
+.icon{
+    color: black;
+}

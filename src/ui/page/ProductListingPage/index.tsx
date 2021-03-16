@@ -41,7 +41,7 @@ export default class ProductListingPage extends React.Component<Props, State> {
                     <Card.Body>
                         <Card.Title className="cardTitle productName">{item.productName}</Card.Title>
                             <Card.Text className="price">
-                                ${item.price}
+                                <span className="priceTag">HK$ </span>{item.price}
                             </Card.Text>
                     </Card.Body>
                 </Card>
