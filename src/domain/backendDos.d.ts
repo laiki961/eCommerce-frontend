@@ -12,7 +12,7 @@ export type ProductMap ={
     [key:number] : ProductItem
 };
 
-///////////////
+///////////////////////////////////
 export type TransactionItem ={
     details: ProductItem,
     subtotal: number
@@ -24,3 +24,16 @@ export type Transaction = {
     total: number,
     status: "initiated" | "success" | "fail"
 }
+///////////////////////////////////
+
+export type Login ={
+    userId: number,
+    email: string,
+    password: string
+};
+
+export type LoginResponse = {
+    [key:number]: Login
+}
+
+///////////////////////////////////

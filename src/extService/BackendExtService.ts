@@ -1,20 +1,25 @@
 import React from 'react';
-import { ProductItem, ProductList, ProductMap, Transaction } from '../domain/backendDos';
+import { Login, ProductItem, ProductList, ProductMap, Transaction } from '../domain/backendDos';
 import mockProductList from './products.json';
 import mockProductDetails from './productDetails.json';
 import mockShoppingCartItems from './shoppingCartItems.json';
 import mockCheckout from './checkout.json';
-import { CheckoutResponseDto, ProductDetailsResponseDto, ShoppingCartItemResponseDto } from '../domain/dto/backendDtos';
+import mockLoginUser from './loginUser.json';
+import { CheckoutResponseDto, LoginResponseDto, ProductDetailsResponseDto, ProductListResponseDto, ShoppingCartItemResponseDto } from '../domain/dto/backendDtos';
 import { ShoppingCartItem } from '../domain/shoppingCartDos';
 
 export default class BackendExtService{
     static getProductList(callback: (data: ProductList)=> void){
         new Promise((resolve, reject) => {
+            // Step 1: in the new world
             setTimeout(() => {
-                resolve(mockProductList); //function
+                // Step 1 siccess, bring mockProductList to the next step
+                resolve(mockProductList as ProductListResponseDto); //function
             }, 2000); //number
-        
+        // data = mockProduct in the step 1
         }).then(data => {
+            // Step 2
+            // callback refers to onLoadedProductList
             callback(data as ProductList);
         })
     }
@@ -70,5 +75,15 @@ export default class BackendExtService{
     }
 
     //PostPaymentAPI
+
+    static login(userId: number, callback:(data: Login)=> void){
+        new Promise((resolve, reject)=> {
+            setTimeout(() => {
+                resolve(mockLoginUser as LoginResponseDto); 
+            },1000);
+        }).then(data =>{
+            callback(data as Login);
+        });
+    }
 
 }

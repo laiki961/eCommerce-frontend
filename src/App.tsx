@@ -1,4 +1,4 @@
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart, faUser} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
@@ -6,6 +6,7 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import ShoppingCartService from './service/ShoppingCartService';
 import CheckoutPage from './ui/page/CheckoutPage';
+import LoginPage from './ui/page/LoginPage';
 import ProductDetailsPage from './ui/page/ProductDetailsPage';
 import ProductListingPage from './ui/page/ProductListingPage';
 import ShoppingCartPage from './ui/page/ShoppingCartPage';
@@ -29,6 +30,9 @@ export default class App extends React.Component<Props, State>{
             <Container>
                 <Navbar.Brand href="#">Ventail</Navbar.Brand>
                 <Navbar.Collapse className="justify-content-end">
+                  <Nav.Link href="#/login">
+                    <FontAwesomeIcon className="icon" icon={faUser}/>
+                  </Nav.Link>
                   <Nav.Link href="#/cart">
                     <FontAwesomeIcon className="icon" icon={faShoppingCart}/>
                   </Nav.Link>
@@ -54,6 +58,9 @@ export default class App extends React.Component<Props, State>{
             </Route>
             <Route exact path="/checkout/:transactionId">
               <CheckoutPage/>
+            </Route>
+            <Route exact path="/login">
+              <LoginPage/>
             </Route>
           </Switch>
         </HashRouter>

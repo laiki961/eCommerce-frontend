@@ -28,4 +28,16 @@ export type TransactionDto = {
 }
 
 export type CheckoutResponseDto = TransactionDto;
-///////////////////
+///////////////////////////////////
+
+export type LoginDto ={
+    userId: number,
+    email: string,
+    password: string
+};
+
+export type LoginResponseDto = {
+    [key:number]: LoginDto 
+}
+
+///////////////////////////////////
