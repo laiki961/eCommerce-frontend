@@ -5,6 +5,9 @@
     align-items: flex-start;
     flex-wrap: wrap;
 }
+.col-md-3{
+    padding: 0px !important;
+}
 
 .productCard{
     width: 250px;

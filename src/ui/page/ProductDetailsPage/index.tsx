@@ -1,5 +1,7 @@
+import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { Breadcrumb, Button, Container, Toast } from 'react-bootstrap';
+import { Breadcrumb, Button, Container, FormControl, Toast } from 'react-bootstrap';
 import { ProductItem } from '../../../domain/backendDos';
 import BackendExtService from '../../../extService/BackendExtService';
 import ShoppingCartService from '../../../service/ShoppingCartService';
@@ -60,12 +62,22 @@ export default class ProductDetailsPage extends React.Component<Props, State>{
                 <p>{productDetails.description}</p>
 
                 <div><span className="priceTag">HK$ </span>{productDetails.price}</div>
-                <Button 
+                <div className="quantity">
+                    <FontAwesomeIcon className="quantity icon" icon={faMinus}/>
+                    <input className="quantity"
+                        type="number"
+                        placeholder="Quantity"
+                        defaultValue={1}
+                    />
+                    <FontAwesomeIcon className="quantity icon" icon={faPlus}/>
+                    <Button 
                     variant="primary"
                     onClick={this.onClickAddToCartButton}
                     >
                         Add to cart
-                </Button>
+                    </Button>
+                </div>
+
             </div>
         )
     }

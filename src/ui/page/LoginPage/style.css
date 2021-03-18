@@ -10,10 +10,9 @@ Form{
     background-color: rgba(255, 255, 255, 0.582);
 }
 
-img{
+.loginBackground{
+    background-image: url('https://wallpaperaccess.com/full/209731.jpg');
     width: 100%;
-    z-index: -1;
-    position: absolute;
     overflow: auto;
     max-height: 94%;
 }

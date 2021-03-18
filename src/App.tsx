@@ -1,7 +1,7 @@
 import { faShoppingCart, faUser} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { Container, Nav, Navbar } from 'react-bootstrap';
+import { Col, Container, Nav, Navbar, Row } from 'react-bootstrap';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import ShoppingCartService from './service/ShoppingCartService';
@@ -30,11 +30,18 @@ export default class App extends React.Component<Props, State>{
             <Container>
                 <Navbar.Brand href="#">Ventail</Navbar.Brand>
                 <Navbar.Collapse className="justify-content-end">
-                  <Nav.Link href="#/login">
-                    <FontAwesomeIcon className="icon" icon={faUser}/>
+                
+                <div className="dropdown">
+                  <Nav.Link href="#/login" className="btn">
+                    <FontAwesomeIcon className="nav-icon account" icon={faUser}/>
+                      <div className="dropdown-content">
+                        <a href="#/login">Login</a>
+                      </div>
                   </Nav.Link>
-                  <Nav.Link href="#/cart">
-                    <FontAwesomeIcon className="icon" icon={faShoppingCart}/>
+                </div>
+
+                  <Nav.Link href="#/cart" className="btn">
+                    <FontAwesomeIcon className="nav-icon cart" icon={faShoppingCart}/>
                   </Nav.Link>
                 </Navbar.Collapse>
             </Container>
@@ -64,6 +71,21 @@ export default class App extends React.Component<Props, State>{
             </Route>
           </Switch>
         </HashRouter>
+
+        <footer>
+          <Container id="footer-container">
+            <div id="footer-content">
+              <Row>
+                <Col md={6}>
+                  <div>Ventail Company Ltd.</div>
+                </Col>
+                <Col md={6}>
+                  <div>Contact Us</div>
+                </Col>
+              </Row>
+            </div>
+          </Container>
+        </footer>
       </div>
     );
   }

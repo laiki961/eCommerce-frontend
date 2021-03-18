@@ -26,3 +26,12 @@
 .priceTag{
     font-size: small;
 }
+
+.quantity{
+    display: inline-block;
+}
+
+.quantity.icon{
+    width: 30px;
+    height: 30px;
+}

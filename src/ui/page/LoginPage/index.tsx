@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FormEvent } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import { Login } from '../../../domain/backendDos';
 import BackendExtService from '../../../extService/BackendExtService';
@@ -13,43 +13,45 @@ export default class LoginPage extends React.Component<Props, State>{
 
     constructor(props: Props){
         super(props);
+        this.onLoadedUserDetails = this.onLoadedUserDetails.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-    // componentDidMount(){
-    //     BackendExtService.login(+this.state.user!.userId, this.onLoadedUserDetails)
-    // }
+    componentDidMount(){
+        if(!this.state.user){
+            return null; 
+        }
+        BackendExtService.login(+this.state.user!.userId, this.onLoadedUserDetails)
+    }
 
-    // onLoadedUserDetails(data: Login){
-    //     this.setState({user: data});
-    // }
+    onLoadedUserDetails(data: Login){
+        this.setState({user: data});
+    }
 
-    // renderLogin(){
-    //     if(!this.state.user){
-    //         return null; 
-    //     }
-    //     const 
-    //     for(let userId of Object.keys(this.state.user)){
-            
-    //     }
-    // }
+    loginAttempt(event: FormEvent<HTMLFormElement>){
+        event.preventDefault();
+        this.setState({},()=>{
+            BackendExtService.login(+this.state.user!.userId, this.onLoadedUserDetails)
+        })
+    }
 
-    handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+    handleInputChange(event: React.ChangeEvent<HTMLInputElement| HTMLSelectElement>) {
         const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const value = target.type;
         const name = target.name;
     
         // @ts-ignore
         this.setState({
           [name]: value
-        });
+        }as State);
     }
 
     render(){
         return(
-            <div>
-                <img src="https://wallpaperaccess.com/full/209731.jpg" alt="loginBackgroundPic"/>
+            <div className="loginBackground">
                 <Container>
-                    <Form className="loginForm">
+                    <div className="box">
+                    <Form id="loginForm" onSubmit={this.loginAttempt}>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
                             <Form.Control 
@@ -57,8 +59,7 @@ export default class LoginPage extends React.Component<Props, State>{
                                 placeholder="Enter email"
                                 onChange={this.handleInputChange}
                                 />
-                            <Form.Text className="text-muted">
-                            </Form.Text>
+                            <Form.Text className="text-muted"></Form.Text>
                         </Form.Group>
 
                         <Form.Group controlId="formBasicPassword">
@@ -75,11 +76,11 @@ export default class LoginPage extends React.Component<Props, State>{
                         <Button 
                             variant="primary" 
                             type="submit" 
-                            // onChange={this.renderLogin}
                             >
                             Login
                         </Button>
                     </Form>
+                    </div>
                 </Container>
             </div>
         )

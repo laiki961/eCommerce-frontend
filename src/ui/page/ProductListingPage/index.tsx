@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Container} from 'react-bootstrap';
+import { Card, Col, Container} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { ProductList } from '../../../domain/backendDos';
 import BackendExtService from '../../../extService/BackendExtService';
@@ -35,6 +35,7 @@ export default class ProductListingPage extends React.Component<Props, State> {
         for(let item of this.state.productList){
             cards.push(
             //Link is from Router
+            <Col md={3}>
             <Link to={"/details/" + item.productId}>
                 <Card className="productCard">
                     <Card.Img className="image centerCropped" variant="top" src={item.imageUrl}/>
@@ -46,6 +47,7 @@ export default class ProductListingPage extends React.Component<Props, State> {
                     </Card.Body>
                 </Card>
             </Link>
+            </Col>
             )
         }
         return cards;
