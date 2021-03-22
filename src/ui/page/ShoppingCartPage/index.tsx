@@ -47,7 +47,8 @@ export default class ShoppingCartPage extends React.Component<Props, State>{
         const checkoutItems: ShoppingCartItem[] = [];
         for (let productId of Object.keys(this.state.shoppingCartItems!)){
             checkoutItems.push({
-                productId: +productId
+                productId: +productId,
+                quantity: 1
             });
         }
         BackendExtService.checkout(checkoutItems, this.onCreatedTransaction)

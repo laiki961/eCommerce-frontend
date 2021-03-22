@@ -85,86 +85,87 @@ class CheckoutPage extends React.Component<Props, State>{
                     {this.renderProductList()}
                     <hr/>
 
-                    <div className="payment">
-                        <h4>Payment Details</h4>
-                        <Form>
-                            <Form.Row>
-                                <Form.Group as={Col} controlId="creditCardNumber">
-                                    <Form.Label>Credit Card No.</Form.Label>
-                                    <Form.Control 
-                                        type="text" 
-                                        name="creditCardNumber"
-                                        value={this.state.creditCardNumber}
-                                        placeholder="Credit Card Number"
-                                        onChange={this.handleInputChange}
-                                    />
-                                </Form.Group>
-                                </Form.Row>
+                    <div>
+                        <div className="payment">
+                            <h4>Payment Details</h4>
+                            <Form>
                                 <Form.Row>
-                                <Form.Group as={Col} controlId="expiryDate">
-                                    <Form.Label>Expiry Date</Form.Label>
-                                    <Form.Control 
-                                        type="text"
-                                        name="expiryDate"
-                                        value={this.state.expiryDate}
-                                        placeholder="Expiry Date"
-                                        onChange={this.handleInputChange}
-                                    />
+                                    <Form.Group as={Col} controlId="creditCardNumber">
+                                        <Form.Label>Credit Card No.</Form.Label>
+                                        <Form.Control 
+                                            type="text" 
+                                            name="creditCardNumber"
+                                            value={this.state.creditCardNumber}
+                                            placeholder="Credit Card Number"
+                                            onChange={this.handleInputChange}
+                                        />
+                                    </Form.Group>
+                                    </Form.Row>
+                                    <Form.Row>
+                                    <Form.Group as={Col} controlId="expiryDate">
+                                        <Form.Label>Expiry Date</Form.Label>
+                                        <Form.Control 
+                                            type="text"
+                                            name="expiryDate"
+                                            value={this.state.expiryDate}
+                                            placeholder="Expiry Date"
+                                            onChange={this.handleInputChange}
+                                        />
+                                    </Form.Group>
+                                    <Form.Group as={Col} controlId="cvv">
+                                        <Form.Label>CVV</Form.Label>
+                                        <Form.Control 
+                                            type="password"
+                                            name="cvv"
+                                            value={this.state.cvv}
+                                            placeholder="CVV"
+                                            onChange={this.handleInputChange}
+                                        />
+                                    </Form.Group>
+                                </Form.Row>
+                            </Form>
+                        </div>
+                        <div className="billingInformation">
+                            <h4>Billing Information</h4>
+                            <Form>
+                                <Row>
+                                    <Col>
+                                    <Form.Label>First Name</Form.Label>
+                                    <Form.Control placeholder="First name" />
+                                    </Col>
+                                    <Col>
+                                    <Form.Label>Last Name</Form.Label>
+                                    <Form.Control placeholder="Last name" />
+                                    </Col>
+                                </Row>
+                                <Form.Group controlId="exampleForm.ControlInput1">
+                                    <Form.Label>Email address</Form.Label>
+                                    <Form.Control type="email" placeholder="name@example.com" />
                                 </Form.Group>
-                                <Form.Group as={Col} controlId="cvv">
-                                    <Form.Label>CVV</Form.Label>
-                                    <Form.Control 
-                                        type="password"
-                                        name="cvv"
-                                        value={this.state.cvv}
-                                        placeholder="CVV"
-                                        onChange={this.handleInputChange}
-                                    />
+                                <Form.Group controlId="formGridAddress1">
+                                    <Form.Label>Address Line 1</Form.Label>
+                                    <Form.Control placeholder="Room, floor, or apartment" />
                                 </Form.Group>
-                            </Form.Row>
-                        </Form>
+                                <Form.Group controlId="formGridAddress2">
+                                    <Form.Label>Address Lind 2</Form.Label>
+                                    <Form.Control placeholder="Street"/>
+                                </Form.Group>
+                                <Form.Row>
+                                    <Form.Group as={Col} controlId="formGridCity">
+                                    <Form.Label>City</Form.Label>
+                                    <Form.Control placeholder="Hong Kong"/>
+                                    </Form.Group>
+                                    <Form.Group as={Col} controlId="formGridZip">
+                                    <Form.Label>Zip</Form.Label>
+                                    <Form.Control />
+                                    </Form.Group>
+                                </Form.Row>
+                            </Form>
+                        </div>
+                        <Button variant="primary" type="submit">
+                            Submit
+                        </Button>
                     </div>
-                    <div className="billingInformation">
-                        <h4>Billing Information</h4>
-                        <Form>
-                            <Row>
-                                <Col>
-                                <Form.Label>First Name</Form.Label>
-                                <Form.Control placeholder="First name" />
-                                </Col>
-                                <Col>
-                                <Form.Label>Last Name</Form.Label>
-                                <Form.Control placeholder="Last name" />
-                                </Col>
-                            </Row>
-                            <Form.Group controlId="exampleForm.ControlInput1">
-                                <Form.Label>Email address</Form.Label>
-                                <Form.Control type="email" placeholder="name@example.com" />
-                            </Form.Group>
-                            <Form.Group controlId="formGridAddress1">
-                                <Form.Label>Address</Form.Label>
-                                <Form.Control placeholder="Room, floor, or apartment" />
-                            </Form.Group>
-                            <Form.Group controlId="formGridAddress2">
-                                <Form.Label>Address 2</Form.Label>
-                                <Form.Control placeholder="Street"/>
-                            </Form.Group>
-                            <Form.Row>
-                                <Form.Group as={Col} controlId="formGridCity">
-                                <Form.Label>City</Form.Label>
-                                <Form.Control placeholder="Hong Kong"/>
-                                </Form.Group>
-                                <Form.Group as={Col} controlId="formGridZip">
-                                <Form.Label>Zip</Form.Label>
-                                <Form.Control />
-                                </Form.Group>
-                            </Form.Row>
-                            <Button variant="primary" type="submit">
-                                Submit
-                            </Button>
-                        </Form>
-                    </div>
-                    
                 </Container>
                 )
     }

@@ -16,14 +16,17 @@ type State = {};
 
 export default class App extends React.Component<Props, State>{
   shoppingCartService: ShoppingCartService; //contain the latest shoppingCartItems
-
   constructor(props: Props){
     super(props);
 
     this.shoppingCartService = new ShoppingCartService();
   }
 
+
+  
   render(){
+  const year = new Date().getFullYear();
+
     return (
       <div className="App">
         <Navbar expand="lg">
@@ -83,6 +86,7 @@ export default class App extends React.Component<Props, State>{
                   <div>Contact Us</div>
                 </Col>
               </Row>
+              <span className="copyright">Copyright @ {year}</span>
             </div>
           </Container>
         </footer>

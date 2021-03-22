@@ -13,3 +13,23 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+html, body {
+  margin:0;
+  padding:0;
+  height:100%;
+}
+
+.App{
+  position: relative;
+  height: 100%
+}
+
+section{
+  padding: 0px 16px;
+}
+
+.copyright{
+  text-align: center;
+  color: rgb(189, 185, 185);
+}

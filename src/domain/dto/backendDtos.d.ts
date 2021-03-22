@@ -41,3 +41,6 @@ export type LoginResponseDto = {
 }
 
 ///////////////////////////////////
+
+export type CheckoutResponseDto = TransactionDto;
+export type TransactionResponseDto = TransactionDto;

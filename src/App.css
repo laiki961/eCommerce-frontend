@@ -62,3 +62,8 @@ footer{
 .btn:hover {
     background-color: #9c9c9c;
   }
+
+footer{
+    position: absolute;
+    bottom: 0;
+    }

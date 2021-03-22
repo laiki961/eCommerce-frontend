@@ -50,7 +50,7 @@ export default class LoginPage extends React.Component<Props, State>{
         return(
             <div className="loginBackground">
                 <Container>
-                    <div className="box">
+                    <div className="login-box">
                     <Form id="loginForm" onSubmit={this.loginAttempt}>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
