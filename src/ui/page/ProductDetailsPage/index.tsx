@@ -6,8 +6,6 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { ProductItem } from '../../../domain/backendDos';
 import BackendExtService from '../../../extService/BackendExtService';
 import ShoppingCartService from '../../../service/ShoppingCartService';
-import DecreaseButton from '../../../ui/component/DecreaseButton';
-import IncreaseButton from '../../../ui/component/IncreaseButton';
 import "./style.css";
 
 type RouterParams = {
@@ -20,7 +18,7 @@ type Props =
     };
 type State = {
     productDetails?: ProductItem, //since there is nth at the beginning
-    isShowToast: boolean
+    isShowToast: boolean,
     count: number;
 };
 
@@ -32,7 +30,6 @@ class ProductDetailsPage extends React.Component<Props, State>{
 
     constructor(props: Props){ // Step 2: props = shopingCartService: this.shoppingCartService
         super(props);
-        this.state.count = 1;
 
         this.onLoadedProductDetails = this.onLoadedProductDetails.bind(this);
         this.onClickAddToCartButton = this.onClickAddToCartButton.bind(this);

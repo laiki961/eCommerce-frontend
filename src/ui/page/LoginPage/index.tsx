@@ -6,10 +6,13 @@ import "./style.css";
 
 type Props = {};
 type State = {
+    isMember: boolean,
     user?: Login
 };
 export default class LoginPage extends React.Component<Props, State>{
-    state = {} as State;
+    state = {
+        isMember: false,
+    } as State;
 
     constructor(props: Props){
         super(props);

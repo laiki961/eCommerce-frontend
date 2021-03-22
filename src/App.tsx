@@ -10,6 +10,7 @@ import LoginPage from './ui/page/LoginPage';
 import ProductDetailsPage from './ui/page/ProductDetailsPage';
 import ProductListingPage from './ui/page/ProductListingPage';
 import ShoppingCartPage from './ui/page/ShoppingCartPage';
+import ThankyouPage from './ui/page/ThankyouPage';
 
 type Props = {};
 type State = {};
@@ -71,6 +72,9 @@ export default class App extends React.Component<Props, State>{
             </Route>
             <Route exact path="/login">
               <LoginPage/>
+            </Route>
+            <Route exact path="/thankyou">
+              <ThankyouPage/>
             </Route>
           </Switch>
         </HashRouter>
