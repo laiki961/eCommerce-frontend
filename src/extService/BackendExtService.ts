@@ -5,7 +5,7 @@ import mockProductDetails from './productDetails.json';
 import mockShoppingCartItems from './shoppingCartItems.json';
 import mockCheckout from './checkout.json';
 import mockLoginUser from './loginUser.json';
-import { CheckoutResponseDto, LoginResponseDto, ProductDetailsResponseDto, ProductListResponseDto, ShoppingCartItemResponseDto, TransactionResponseDto } from '../domain/dto/backendDtos';
+import { CheckoutResponseDto, LoginResponseDto, ProductDetailsResponseDto, ProductListResponseDto, ShoppingCartItemDto, ShoppingCartItemResponseDto, TransactionResponseDto } from '../domain/dto/backendDtos';
 import { ShoppingCartItem } from '../domain/shoppingCartDos';
 import axios from 'axios';
 
@@ -75,7 +75,7 @@ export default class BackendExtService{
         // })
     }
 
-    static checkout(items: ShoppingCartItem[], callback: (data: Transaction) => void){
+    static checkout(items: ShoppingCartItemDto[], callback: (data: Transaction) => void){
         // new Promise((resolve, reject)=> {
         //     setTimeout(() => {
         //         resolve(mockCheckout as CheckoutResponseDto); 

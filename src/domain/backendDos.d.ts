@@ -31,6 +31,7 @@ export type ProductMap ={
 ///////////////////////////////////
 export type TransactionItem ={
     details: ProductItem,
+    quantity: number,
     subtotal: number
 }
 

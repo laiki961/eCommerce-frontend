@@ -6,8 +6,9 @@ import { ShoppingCartProduct } from '../../../domain/backendDos';
 import Quantity from '../Quantity';
 
 type Props = {
-    onUpdatedQuantity: (productId: number, quantity: number) => void,
+    onUpdatedQuantity?: (productId: number, quantity: number) => void,
     shouldShowRemoveButton: boolean,
+    shouldEnableQuantityButton: boolean,
     displayItems?: ShoppingCartProduct, //from ShoppingCartPage <ProductList displayItems={this.state.shoppingCartItems}/>
     onClickRemoveFromCartButton?: (productId: number)=> void //to pass the function to
 };
@@ -39,13 +40,16 @@ export default class ShoppingCartList extends React.Component<Props, State> {
                     {item.productName}
                 </td>
                 <td>
-                    <div>
-                        <Quantity
-                            productId={this.props.displayItems[+productId].productId} 
-                            updateQuantity={this.props.onUpdatedQuantity}
-                            quantity={this.props.displayItems[+productId].quantity}
-                        />
-                    </div>
+                    {
+                        (this.props.shouldEnableQuantityButton) ? (<div>
+                            <Quantity
+                                productId={this.props.displayItems[+productId].productId} 
+                                updateQuantity={this.props.onUpdatedQuantity!}
+                                quantity={this.props.displayItems[+productId].quantity}
+                            />
+                        </div>
+                        ): null
+                    }
                 </td>
                 <td>
                     <span>Unit price: </span>HK$ {item.price}

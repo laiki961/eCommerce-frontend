@@ -24,6 +24,7 @@ export default class Quantity extends React.Component<Props, State> {
     }
 
     onClickMinusButton(){
+        //if (quantity <=1 ) return
         this.props.updateQuantity(this.props.productId, this.props.quantity-1)
     }
 

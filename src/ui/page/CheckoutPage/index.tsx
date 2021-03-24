@@ -1,7 +1,7 @@
 import React from 'react';
 import { Breadcrumb, Button, Col, Container, Form, Row, Table } from 'react-bootstrap';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import { ProductItem, Transaction } from '../../../domain/backendDos';
+import { ProductItem, ShoppingCartProduct, Transaction } from '../../../domain/backendDos';
 import BackendExtService from '../../../extService/BackendExtService';
 import ProductList from '../../component/ProductList';
 import ShoppingCartList from '../../component/ShoppingCartList';
@@ -47,18 +47,42 @@ class CheckoutPage extends React.Component<Props, State>{
         }
         const items = this.state.transaction!.items;
         const checkoutItems: {[key: number]: ProductItem} = {};
-
+        const shoppingCartProduct: ShoppingCartProduct = {};
+        console.log("TransactionItem[]: ", items);
         for(let item of items){
             checkoutItems[item.details.productId] = item.details;
+
+            console.log("TransactionItem: ", item);
+            console.log("checkoutItems: ", checkoutItems);
+
+            for (let productId of Object.keys(checkoutItems)){
+                console.log("productId: ", productId)
+                shoppingCartProduct[+productId] = {
+                    productId: +productId,
+                    productName: checkoutItems[+productId].productName,
+                    description: checkoutItems[+productId].description,
+                    price: checkoutItems[+productId].price,
+                    imageUrl: checkoutItems[+productId].imageUrl,
+                    quantity: 2
+                    // quantity: items[+productId].quantity
+
+                }
+            }
+            console.log("shoppingCartProduct: ", shoppingCartProduct);
+            
         }
+
+
+
         return (
             <section>
-                {/* <ShoppingCartList
+                <ShoppingCartList
                     // onUpdatedQuantity ={this.onUpdatedQuantity} //remove
+                    shouldEnableQuantityButton={false}
                     shouldShowRemoveButton={false}
-                    displayItems={checkoutItems} // checkoutItems -> ShoppingCartProduct ???
+                    displayItems={shoppingCartProduct} // checkoutItems -> ShoppingCartProduct ???
                     // onClickRemoveFromCartButton={this.onClickRemoveFromCartButton} // remove
-                /> */}
+                />
                 <ProductList
                     shouldShowRemoveButton={false}
                     displayItems={checkoutItems}

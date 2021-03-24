@@ -4,6 +4,7 @@ import React from 'react';
 import { Breadcrumb, Button, Container, Table } from 'react-bootstrap';
 import { isTemplateTail } from 'typescript';
 import { ProductMap, ShoppingCartProduct, Transaction } from '../../../domain/backendDos';
+import { ShoppingCartItemDto } from '../../../domain/dto/backendDtos';
 import { ShoppingCartItem } from '../../../domain/shoppingCartDos';
 import BackendExtService from '../../../extService/BackendExtService';
 import ShoppingCartService from '../../../service/ShoppingCartService';
@@ -58,7 +59,7 @@ export default class ShoppingCartPage extends React.Component<Props, State>{
     }
 
     onClickCheckoutButton(){
-        const checkoutItems: ShoppingCartItem[] = [];
+        const checkoutItems: ShoppingCartItemDto[] = [];
         for (let productId of Object.keys(this.state.shoppingCartProduct!)){
             checkoutItems.push({
                 productId: +productId,
@@ -128,6 +129,7 @@ export default class ShoppingCartPage extends React.Component<Props, State>{
                 </Breadcrumb>
                 
                 <ShoppingCartList
+                    shouldEnableQuantityButton={true}
                     onUpdatedQuantity={this.onUpdatedQuantity}
                     shouldShowRemoveButton={true}
                     displayItems={this.state.shoppingCartProduct}
