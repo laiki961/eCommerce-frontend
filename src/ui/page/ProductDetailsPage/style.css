@@ -21,9 +21,6 @@
     z-index: 2;
 }
 
-.loading{
-    margin: 16px
-}
 
 .price.details{
     font-size: 35px;
@@ -39,8 +36,6 @@
 
 
 .addtoCart{
-    position: absolute;
-    left: 30%;
     padding: 3px 12px !important;
 }
 

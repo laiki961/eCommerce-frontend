@@ -94,6 +94,7 @@ class ProductDetailsPage extends React.Component<Props, State>{
                             </div>
                             <div className="details-quantity">
                                 <span>Quantity </span>
+            
                                 <Quantity
                                     productId={this.state.productDetails!.productId}
                                     quantity={this.state.quantity}
@@ -107,9 +108,6 @@ class ProductDetailsPage extends React.Component<Props, State>{
                                 Add to cart
                                 </Button>
 
-                                {/* <IncreaseButton
-                                    increase={this.onClickPlusButton}
-                                /> */}
                             </div>
                             
                         </div>
@@ -137,7 +135,7 @@ class ProductDetailsPage extends React.Component<Props, State>{
                     </div>
                     {
                         (this.state.productDetails) ? this.renderProductDetails() : (  //true: this.renderProductDetails(); false: Loading...
-                            <div className="loading">Loading...</div>
+                            <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
                         )
                     }
                 </Container>
