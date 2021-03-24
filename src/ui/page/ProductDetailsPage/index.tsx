@@ -1,5 +1,5 @@
 import React from 'react';
-import { Breadcrumb, Button, Col, Container, FormControl, Row, Toast } from 'react-bootstrap';
+import { Breadcrumb, Button, Col, Container, Row, Toast } from 'react-bootstrap';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { ProductItem } from '../../../domain/backendDos';
 import BackendExtService from '../../../extService/BackendExtService';

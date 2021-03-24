@@ -79,7 +79,7 @@ export default class App extends React.Component<Props, State>{
           </Switch>
         </HashRouter>
 
-        <footer>
+        {/* <footer>
           <Container id="footer-container">
             <div id="footer-content">
               <Row>
@@ -93,7 +93,51 @@ export default class App extends React.Component<Props, State>{
               <span className="copyright">Copyright @ {year}</span>
             </div>
           </Container>
-        </footer>
+        </footer> */}
+        <footer className="site-footer">
+          <div className="container">
+
+            <div className="row">
+              <div className="col-sm-12 col-md-6">
+                <h6>About</h6>
+                <p className="text-justify">Ventail Company Ltd. <br/><i>A Bicycle eCommerce </i><br/> Created by Nikki Ip</p>
+              </div>
+              <div className="col-xs-6 col-md-3">
+                <h6>Categories</h6>
+                <ul className="footer-links">
+                  <li><a href="http://scanfcode.com/category/java-programming-language/">Java</a></li>
+
+                </ul>
+              </div>
+              <div className="col-xs-6 col-md-3">
+                <h6>Quick Links</h6>
+                <ul className="footer-links">
+                  <li><a href="http://scanfcode.com/about/">About Us</a></li>
+                  <li><a href="http://scanfcode.com/contact/">Contact Us</a></li>
+                  <li><a href="http://scanfcode.com/contribute-at-scanfcode/">Weather</a></li>
+                </ul>
+              </div>
+            </div>
+            <hr/>
+          </div>
+          <div className="container">
+            <div className="row">
+              <div className="col-md-8 col-sm-6 col-xs-12">
+                <p className="copyright-text">Copyright @ {year} All Rights Reserved by Nikki.
+                </p>
+              </div>
+
+              <div className="col-md-4 col-sm-6 col-xs-12">
+                <ul className="social-icons">
+                  {/* <li><a className="facebook" href="#"><i className="fa fa-facebook"></i></a></li>
+                  <li><a className="twitter" href="#"><i className="fa fa-twitter"></i></a></li>
+                  <li><a className="dribbble" href="#"><i className="fa fa-dribbble"></i></a></li> */}
+                  <li><a className="linkedin" href="#"><i className="fa fa-linkedin"></i></a></li>   
+                </ul>
+              </div>
+            </div>
+          </div>
+          </footer>
       </div>
     );
   }

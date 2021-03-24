@@ -35,14 +35,14 @@ export default class ProductListingPage extends React.Component<Props, State> {
         for(let item of this.state.productList){
             cards.push(
             //Link is from Router
-            <Col md={3} sm={6}>
+            <Col md={3} sm={6} key={item.productId}>
                 <Link to={"/details/" + item.productId}>
                     <Card className="productCard">
                         <Card.Img className="image centerCropped" variant="top" src={item.imageUrl}/>
                         <Card.Body>
                             <Card.Title className="cardTitle productName">{item.productName}</Card.Title>
                                 <Card.Text className="price">
-                                    <span className="priceTag">HK$ </span>{item.price}
+                                    <span className="priceTag listing">HK$ </span>{item.price}
                                 </Card.Text>
                         </Card.Body>
                     </Card>

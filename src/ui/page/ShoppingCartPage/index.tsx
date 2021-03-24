@@ -1,11 +1,7 @@
-import { faTrash, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { Breadcrumb, Button, Container, Table } from 'react-bootstrap';
-import { isTemplateTail } from 'typescript';
+import { Breadcrumb, Button, Container } from 'react-bootstrap';
 import { ProductMap, ShoppingCartProduct, Transaction } from '../../../domain/backendDos';
 import { ShoppingCartItemDto } from '../../../domain/dto/backendDtos';
-import { ShoppingCartItem } from '../../../domain/shoppingCartDos';
 import BackendExtService from '../../../extService/BackendExtService';
 import ShoppingCartService from '../../../service/ShoppingCartService';
 import ShoppingCartList from '../../component/ShoppingCartList';
@@ -111,7 +107,8 @@ export default class ShoppingCartPage extends React.Component<Props, State>{
         return (
             <section>
                 <hr/>
-                <h3><span>Total: $ {totalPrice}</span></h3>
+                <div className="price cart"><span className="priceTag cart">Total: $ </span>{totalPrice}</div>
+                <br/>
                 <Button variant="primary" onClick={this.onClickCheckoutButton}>Checkout</Button>
             </section>
         )

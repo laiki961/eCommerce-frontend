@@ -4,6 +4,7 @@ import React from 'react'
 import { Button, Table } from 'react-bootstrap';
 import { ShoppingCartProduct } from '../../../domain/backendDos';
 import Quantity from '../Quantity';
+import "./style.css";
 
 type Props = {
     onUpdatedQuantity?: (productId: number, quantity: number) => void,
@@ -41,14 +42,15 @@ export default class ShoppingCartList extends React.Component<Props, State> {
                 </td>
                 <td>
                     {
-                        (this.props.shouldEnableQuantityButton) ? (<div>
+                        (this.props.shouldEnableQuantityButton) ? (
+                        <div className="quantity">
                             <Quantity
                                 productId={this.props.displayItems[+productId].productId} 
                                 updateQuantity={this.props.onUpdatedQuantity!}
                                 quantity={this.props.displayItems[+productId].quantity}
                             />
                         </div>
-                        ): null
+                        ): item.quantity
                     }
                 </td>
                 <td>

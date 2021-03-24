@@ -18,6 +18,7 @@ html, body {
   margin:0;
   padding:0;
   height:100%;
+
 }
 
 .App{
@@ -33,3 +34,8 @@ section{
   text-align: center;
   color: rgb(189, 185, 185);
 }
+
+html, body .App {
+  background-color: #e7e3e3;
+}
+

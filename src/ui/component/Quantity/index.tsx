@@ -14,16 +14,16 @@ export default class Quantity extends React.Component<Props, State> {
 
     constructor(props: Props) {
         super(props);
-        this.onClickPlusButton = this.onClickPlusButton.bind(this);
-        this.onClickMinusButton = this.onClickMinusButton.bind(this);
+        this.onClickIncrementButton = this.onClickIncrementButton.bind(this);
+        this.onClickDecrementButton = this.onClickDecrementButton.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-    onClickPlusButton(){
+    onClickIncrementButton(){
         this.props.updateQuantity(this.props.productId, this.props.quantity+1)
     }
 
-    onClickMinusButton(){
+    onClickDecrementButton(){
         //if (quantity <=1 ) return
         this.props.updateQuantity(this.props.productId, this.props.quantity-1)
     }
@@ -40,7 +40,7 @@ export default class Quantity extends React.Component<Props, State> {
             <div>
                 <div 
                     className="quantity-deduct quantity-icon" 
-                    onClick={this.onClickMinusButton}
+                    onClick={this.onClickDecrementButton}
                 >
                 -
                 </div>
@@ -54,7 +54,7 @@ export default class Quantity extends React.Component<Props, State> {
                 />
                 <div
                     className="quantity-add quantity-icon" 
-                    onClick={this.onClickPlusButton}
+                    onClick={this.onClickIncrementButton}
                 >
                 +
                 </div>

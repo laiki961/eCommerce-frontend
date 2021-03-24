@@ -1,5 +1,5 @@
 import React from 'react';
-import { Breadcrumb, Button, Col, Container, Form, Row, Table } from 'react-bootstrap';
+import { Breadcrumb, Button, Col, Container, Form, Row} from 'react-bootstrap';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { ProductItem, ShoppingCartProduct, Transaction } from '../../../domain/backendDos';
 import BackendExtService from '../../../extService/BackendExtService';
@@ -48,28 +48,18 @@ class CheckoutPage extends React.Component<Props, State>{
         const items = this.state.transaction!.items;
         const checkoutItems: {[key: number]: ProductItem} = {};
         const shoppingCartProduct: ShoppingCartProduct = {};
-        console.log("TransactionItem[]: ", items);
         for(let item of items){
             checkoutItems[item.details.productId] = item.details;
-
-            console.log("TransactionItem: ", item);
-            console.log("checkoutItems: ", checkoutItems);
-
             for (let productId of Object.keys(checkoutItems)){
-                console.log("productId: ", productId)
                 shoppingCartProduct[+productId] = {
                     productId: +productId,
                     productName: checkoutItems[+productId].productName,
                     description: checkoutItems[+productId].description,
                     price: checkoutItems[+productId].price,
                     imageUrl: checkoutItems[+productId].imageUrl,
-                    quantity: 2
-                    // quantity: items[+productId].quantity
-
+                    quantity: item.quantity
                 }
-            }
-            console.log("shoppingCartProduct: ", shoppingCartProduct);
-            
+            }            
         }
 
 
@@ -83,11 +73,13 @@ class CheckoutPage extends React.Component<Props, State>{
                     displayItems={shoppingCartProduct} // checkoutItems -> ShoppingCartProduct ???
                     // onClickRemoveFromCartButton={this.onClickRemoveFromCartButton} // remove
                 />
-                <ProductList
+                {/* <ProductList
                     shouldShowRemoveButton={false}
                     displayItems={checkoutItems}
-                />
-                <h3><span>Total: HK$ {this.state.transaction.total}</span></h3>
+                /> */}
+                <div className="price checkout">
+                    <span className="priceTag checkout">Total: HK$ </span>{this.state.transaction.total}
+                </div>
             </section>
         )   
     }
