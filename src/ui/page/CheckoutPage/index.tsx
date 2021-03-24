@@ -4,6 +4,7 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { ProductItem, Transaction } from '../../../domain/backendDos';
 import BackendExtService from '../../../extService/BackendExtService';
 import ProductList from '../../component/ProductList';
+import ShoppingCartList from '../../component/ShoppingCartList';
 import "./style.css";
 
 type RouterParamProps = {
@@ -52,6 +53,12 @@ class CheckoutPage extends React.Component<Props, State>{
         }
         return (
             <section>
+                {/* <ShoppingCartList
+                    // onUpdatedQuantity ={this.onUpdatedQuantity} //remove
+                    shouldShowRemoveButton={false}
+                    displayItems={checkoutItems} // checkoutItems -> ShoppingCartProduct ???
+                    // onClickRemoveFromCartButton={this.onClickRemoveFromCartButton} // remove
+                /> */}
                 <ProductList
                     shouldShowRemoveButton={false}
                     displayItems={checkoutItems}

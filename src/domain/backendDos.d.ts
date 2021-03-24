@@ -1,3 +1,19 @@
+export type ShoppingCartProduct ={
+    [key: number] : {
+        productId: number,
+        productName: string,
+        description: string,
+        price: number,
+        imageUrl: string,
+        quantity: number
+    }
+}
+
+// export type ShoppingCartProduct ={
+//     [key: number] : ProductItem & {quantity: number}
+    
+// }
+
 export type ProductItem = {
     productId: number,
     productName: string,

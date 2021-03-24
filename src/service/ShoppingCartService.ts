@@ -13,51 +13,13 @@ export default class ShoppingCartService{
         }
     }
 
-    plusQuantity(productId: number){
-        let quantity = 1;
-
-        this.shoppingCart[productId] = {
-            productId: productId,
-            quantity: quantity++
-        };
-    }
-
-    minusQuantity(productId: number){
-        let quantity = 1;
-
-        this.shoppingCart[productId] = {
-            productId: productId,
-            quantity: quantity--
-        };
-    }
-
-
-    addToCart(productId: number, quantity: number){
-        if(this.shoppingCart[productId]){
-            return;
-        }
-        
+    updateCart(productId: number, quantity: number){
         this.shoppingCart[productId] = {
             productId: productId,
             quantity: quantity
         };
-
         LocalStorageUtil.setValue(this.shoppingCartKey, this.shoppingCart);
     }
-
-    // addToCart(productId: number){
-    //     if(this.shoppingCart[productId]){
-    //         return;
-    //     }
-        
-    //     this.shoppingCart[productId] = {
-    //         productId: productId,
-    //         quantity: 1
-    //         //quantity: depends the number on the box
-    //     };
-
-    //     LocalStorageUtil.setValue(this.shoppingCartKey, this.shoppingCart);
-    // }
 
     removeFromCart(productId: number){
         delete this.shoppingCart[productId];

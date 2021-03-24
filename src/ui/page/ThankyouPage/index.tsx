@@ -18,9 +18,9 @@ export default class ThankyouPage extends React.Component<Props, State> {
         return (
             <div>
                 <Container>
-                    <FontAwesomeIcon icon={faCheckCircle}/>
-                    <h1>Thank you</h1>
-                    <h2>You order was completed successfully</h2>
+                    <FontAwesomeIcon className="thankyou-icon" icon={faCheckCircle}/>
+                    <h1 className="thankyou-title">Thank you</h1>
+                    <h2 className="thankyou-content">You order was completed successfully</h2>
                 </Container>
             </div>
         )

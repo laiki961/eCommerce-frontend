@@ -1,11 +1,10 @@
-import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { Component } from 'react';
+import React from 'react';
 import { Breadcrumb, Button, Col, Container, FormControl, Row, Toast } from 'react-bootstrap';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { ProductItem } from '../../../domain/backendDos';
 import BackendExtService from '../../../extService/BackendExtService';
 import ShoppingCartService from '../../../service/ShoppingCartService';
+import Quantity from '../../component/Quantity';
 import "./style.css";
 
 type RouterParams = {
@@ -19,12 +18,12 @@ type Props =
 type State = {
     productDetails?: ProductItem, //since there is nth at the beginning
     isShowToast: boolean,
-    count: number;
+    quantity: number;
 };
 
 class ProductDetailsPage extends React.Component<Props, State>{
     state = {
-        count: 1,
+        quantity: 1,
         isShowToast: false
     } as State;
 
@@ -35,8 +34,7 @@ class ProductDetailsPage extends React.Component<Props, State>{
         this.onClickAddToCartButton = this.onClickAddToCartButton.bind(this);
         this.onCloseToast = this.onCloseToast.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
-        this.onClickPlusButton = this.onClickPlusButton.bind(this);
-        this.onClickMinusButton = this.onClickMinusButton.bind(this);
+        this.updateQuantity = this.updateQuantity.bind(this);
     }
 
     componentDidMount(){
@@ -45,6 +43,10 @@ class ProductDetailsPage extends React.Component<Props, State>{
 
     onLoadedProductDetails(data: ProductItem){
         this.setState({productDetails: data});
+    }
+
+    updateQuantity(productId: number, quantity: number){
+        this.setState({quantity: quantity});
     }
 
     handleInputChange(event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
@@ -58,29 +60,15 @@ class ProductDetailsPage extends React.Component<Props, State>{
             } as State);
     }
 
-    
     onClickAddToCartButton(){
         const shoppingCartService = this.props.shoppingCartService;
         const productDetails = this.state.productDetails!;
 
-        shoppingCartService.addToCart(productDetails.productId, this.state.count);
+        shoppingCartService.updateCart(productDetails.productId, this.state.quantity);
         this.setState({
             isShowToast: true
         });
     }
-
-    onClickPlusButton(){
-        this.setState({
-            count: this.state.count+1
-        });
-    }
-
-    onClickMinusButton(){
-        this.setState({
-            count: this.state.count-1
-        });
-    }
-
 
     renderProductDetails(){
         const productDetails = this.state.productDetails!;
@@ -106,26 +94,11 @@ class ProductDetailsPage extends React.Component<Props, State>{
                             </div>
                             <div className="details-quantity">
                                 <span>Quantity </span>
-                                <div
-                                    className="quantity-deduct quantity-icon" 
-                                    onClick={this.onClickMinusButton}
-                                >
-                                -
-                                </div>
-                                <input 
-                                    className="quantity quantity-input"
-                                    type="number"
-                                    placeholder="Quantity"
-                                    name="count"
-                                    value={this.state.count}
-                                    onChange={this.handleInputChange}
+                                <Quantity
+                                    productId={this.state.productDetails!.productId}
+                                    quantity={this.state.quantity}
+                                    updateQuantity={this.updateQuantity}
                                 />
-                                <div
-                                    className="quantity-add quantity-icon" 
-                                    onClick={this.onClickPlusButton}
-                                >
-                                +
-                                </div>
                                 <Button 
                                     className="addtoCart"
                                     variant="primary"
@@ -133,13 +106,15 @@ class ProductDetailsPage extends React.Component<Props, State>{
                                 >
                                 Add to cart
                                 </Button>
+
+                                {/* <IncreaseButton
+                                    increase={this.onClickPlusButton}
+                                /> */}
                             </div>
                             
                         </div>
                     </Col>
                 </Row>
-                
-                
             </div>
         )
     }
@@ -166,7 +141,6 @@ class ProductDetailsPage extends React.Component<Props, State>{
                         )
                     }
                 </Container>
-
         );
     }
 }
