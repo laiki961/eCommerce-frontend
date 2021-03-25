@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -12,8 +14,34 @@ code {
     monospace;
 }
 
-.container{
-  padding-left: 0px !important;
-  padding-right: 0px !important;
+html, body {
+  margin:0;
+  padding:0;
+  height:100%;
+
 }
 
+
+.App{
+  position: relative;
+  min-height: 100%;
+  height: 100%;
+}
+
+section{
+  padding: 0px 16px;
+}
+
+.copyright{
+  text-align: center;
+  color: rgb(189, 185, 185);
+}
+
+html, body .App {
+  background-color: #e7e3e3;
+}
+
+
+.container{
+  min-height: 100%;
+}

@@ -2,7 +2,7 @@ import React from 'react';
 
 export default class LocalStorageUtil{
     static setValue(key: string, value: any){
-        localStorage.setItem(key, JSON.stringify(value));
+        localStorage.setItem(key, JSON.stringify(value)); //converts a JavaScript object or value to a JSON string
     }
 
     static getValue(key: string){
@@ -14,4 +14,6 @@ export default class LocalStorageUtil{
 
         return undefined;
     }
+
+
 }

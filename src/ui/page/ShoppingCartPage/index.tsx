@@ -1,20 +1,18 @@
-import { faTrash, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { Breadcrumb, Button, Container, Table } from 'react-bootstrap';
-import { isTemplateTail } from 'typescript';
-import { ProductMap, Transaction } from '../../../domain/backendDos';
-import { ShoppingCartItem } from '../../../domain/shoppingCartDos';
+import { Breadcrumb, Button, Container } from 'react-bootstrap';
+import { ProductMap, ShoppingCartProduct, Transaction } from '../../../domain/backendDos';
+import { ShoppingCartItemDto } from '../../../domain/dto/backendDtos';
 import BackendExtService from '../../../extService/BackendExtService';
 import ShoppingCartService from '../../../service/ShoppingCartService';
-import ProductList from '../../component/ProductList';
+import ShoppingCartList from '../../component/ShoppingCartList';
+
 import './style.css';
 
 type Props ={ 
     shoppingCartService: ShoppingCartService
 };
 type State ={ //maintain by ourself
-    shoppingCartItems?: ProductMap
+    shoppingCartProduct?: ShoppingCartProduct
 };
 
 export default class ShoppingCartPage extends React.Component<Props, State>{
@@ -26,6 +24,7 @@ export default class ShoppingCartPage extends React.Component<Props, State>{
         this.onLoadedShoppingCartItems = this.onLoadedShoppingCartItems.bind(this);
         this.onClickRemoveFromCartButton = this.onClickRemoveFromCartButton.bind(this);
         this.onClickCheckoutButton = this.onClickCheckoutButton.bind(this);
+        this.onUpdatedQuantity = this.onUpdatedQuantity.bind(this);
     }
 
     componentDidMount(){
@@ -36,18 +35,31 @@ export default class ShoppingCartPage extends React.Component<Props, State>{
 
     onLoadedShoppingCartItems(data: ProductMap){
         this.setState({
-            shoppingCartItems: data
+            shoppingCartProduct: this.setQuantityintoShoppingCartProduct(data),
         });
     }
 
-    // onClickRemoveFromCartButton(productId: number){}
-    // renderShoppingCartItems(){}
+    setQuantityintoShoppingCartProduct(data: ProductMap){   
+    const shoppingCartProduct: ShoppingCartProduct = {};
+        for(let productId of Object.keys(data!)){
+            shoppingCartProduct[+productId] = ({
+                productId: +productId,
+                productName: data![+productId].productName,
+                description: data![+productId].description,
+                price: data![+productId].price,
+                imageUrl: data![+productId].imageUrl,
+                quantity: this.props.shoppingCartService.shoppingCart[+productId].quantity
+            })
+        }
+        return shoppingCartProduct;
+    }
 
     onClickCheckoutButton(){
-        const checkoutItems: ShoppingCartItem[] = [];
-        for (let productId of Object.keys(this.state.shoppingCartItems!)){
+        const checkoutItems: ShoppingCartItemDto[] = [];
+        for (let productId of Object.keys(this.state.shoppingCartProduct!)){
             checkoutItems.push({
-                productId: +productId
+                productId: +productId,
+                quantity: this.props.shoppingCartService.shoppingCart[+productId].quantity
             });
         }
         BackendExtService.checkout(checkoutItems, this.onCreatedTransaction)
@@ -68,33 +80,44 @@ export default class ShoppingCartPage extends React.Component<Props, State>{
         // };
         // delete shoppingCartItems[productId]
 
-        const shoppingCartItems = this.state.shoppingCartItems!; 
-        delete shoppingCartItems[productId];
+        const shoppingCartProduct = this.state.shoppingCartProduct!; 
+        delete shoppingCartProduct[productId];
 
         this.setState({
-            shoppingCartItems: shoppingCartItems
+            shoppingCartProduct: shoppingCartProduct
         });
+    }
+
+    onUpdatedQuantity(productId: number, quantity: number) {
+        this.props.shoppingCartService.updateCart(productId, quantity);
+        const shoppingCartProduct = this.state.shoppingCartProduct!;
+        shoppingCartProduct[+productId].quantity = quantity;
+        this.setState({shoppingCartProduct: shoppingCartProduct});
     }
 
     renderShoppingCartTotalPrice(){
         let totalPrice = 0;
-        if(!this.state.shoppingCartItems){
+        if(!this.state.shoppingCartProduct){
             return null;
         }else{
-            for(let productId of Object.keys(this.state.shoppingCartItems)){
-            totalPrice += this.state.shoppingCartItems[+productId].price;
+            for(let productId of Object.keys(this.state.shoppingCartProduct)){
+            totalPrice += this.state.shoppingCartProduct[+productId].price * this.state.shoppingCartProduct[+productId].quantity;
             }
         }
         return (
             <section>
                 <hr/>
-                <h3>Total: ${totalPrice}</h3>
+                <div className="price cart"><span className="priceTag cart">Total: $ </span>{totalPrice}</div>
+                <br/>
                 <Button variant="primary" onClick={this.onClickCheckoutButton}>Checkout</Button>
             </section>
         )
     }
 
-    render(){        
+    render(){      
+        console.log(this.state.shoppingCartProduct);
+        console.log(this.props.shoppingCartService.shoppingCart);
+
         return(
             <Container>
                 <Breadcrumb>
@@ -102,12 +125,18 @@ export default class ShoppingCartPage extends React.Component<Props, State>{
                     <Breadcrumb.Item active>Shopping Cart</Breadcrumb.Item>
                 </Breadcrumb>
                 
-                {/* {moved the table to productList} */}
-                <ProductList
+                <ShoppingCartList
+                    shouldEnableQuantityButton={true}
+                    onUpdatedQuantity={this.onUpdatedQuantity}
+                    shouldShowRemoveButton={true}
+                    displayItems={this.state.shoppingCartProduct}
+                    onClickRemoveFromCartButton={this.onClickRemoveFromCartButton}
+                />
+                {/* <ProductList
                     shouldShowRemoveButton={true}
                     displayItems={this.state.shoppingCartItems}
                     onClickRemoveFromCartButton={this.onClickRemoveFromCartButton}
-                />
+                /> */}
                 {this.renderShoppingCartTotalPrice()}
             </Container>
         )

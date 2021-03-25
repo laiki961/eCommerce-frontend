@@ -1,0 +1,18 @@
+.login-box{
+    width: 40%;
+    height: auto;
+    border: 1px solid grey;
+    border-radius: 1em;
+    padding: 1em;
+    margin: 25% auto;
+    display: inline-block;
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.582);
+}
+
+.loginBackground{
+    background-image: url('https://wallpaperaccess.com/full/209731.jpg');
+    width: 100%;
+    overflow: auto;
+    max-height: 94%;
+}

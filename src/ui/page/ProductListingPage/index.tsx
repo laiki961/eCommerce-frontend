@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Container} from 'react-bootstrap';
+import { Card, Col, Container} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { ProductList } from '../../../domain/backendDos';
 import BackendExtService from '../../../extService/BackendExtService';
@@ -34,18 +34,20 @@ export default class ProductListingPage extends React.Component<Props, State> {
         }
         for(let item of this.state.productList){
             cards.push(
-                //Link is from Router
-            <Link to={"/details/" + item.productId}> 
-                <Card className="productCard" >
-                    <Card.Img className="image centerCropped" variant="top" src={item.imageUrl} />
-                    <Card.Body>
-                        <Card.Title className="cardTitle productName">{item.productName}</Card.Title>
-                            <Card.Text className="price">
-                                ${item.price}
-                            </Card.Text>
-                    </Card.Body>
-                </Card>
-            </Link>
+            //Link is from Router
+            <Col md={3} sm={6} key={item.productId}>
+                <Link to={"/details/" + item.productId}>
+                    <Card className="productCard">
+                        <Card.Img className="image centerCropped" variant="top" src={item.imageUrl}/>
+                        <Card.Body>
+                            <Card.Title className="cardTitle productName">{item.productName}</Card.Title>
+                                <Card.Text className="price">
+                                    <span className="priceTag listing">HK$ </span>{item.price}
+                                </Card.Text>
+                        </Card.Body>
+                    </Card>
+                </Link>
+            </Col>
             )
         }
         return cards;
@@ -53,17 +55,21 @@ export default class ProductListingPage extends React.Component<Props, State> {
 
     render(){
         return(
-            <div>
-                <Container>
+
+                <Container className="container">
                     <div className="productContainer">
                         {
                             (this.state.productList)? this.renderProductItems() : (
-                                <div className="loading">Loading...</div>
+                                <div className="lds-ellipsis loading">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
                             )
                         }
                     </div>
                 </Container>
-            </div>
         )
     }
 }

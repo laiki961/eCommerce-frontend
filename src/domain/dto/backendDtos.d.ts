@@ -17,6 +17,7 @@ export type ShoppingCartItemResponseDto = {
 ///////////////////////////////////
 export type TransactionItemDto ={
     details: ProductItemDto,
+    quantity: number,
     subtotal: number
 }
 
@@ -28,4 +29,22 @@ export type TransactionDto = {
 }
 
 export type CheckoutResponseDto = TransactionDto;
-///////////////////
+export type TransactionResponseDto = TransactionDto;
+///////////////////////////////////
+
+export type LoginDto ={
+    userId: number,
+    email: string,
+    password: string
+};
+
+export type LoginResponseDto = {
+    [key:number]: LoginDto 
+}
+
+///////////////////////////////////
+
+export type ShoppingCartItemDto ={
+    productId: number, 
+    quantity: number
+}

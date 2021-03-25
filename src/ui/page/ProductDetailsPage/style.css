@@ -3,22 +3,58 @@
 }
 
 #productDetailPage h1{
-    color: rgb(0, 183, 255);
-    margin: 16px 0;
+    color: rgb(43, 61, 100);
+    font-size: 40px;
+    padding: 16px 0;
 }
 
 .bannerImage{
     width: 100%;
     max-width: 400px;
-    margin: 16px 0;
+    margin: 16px;    
 }
 
 .toastContainer{
     position: fixed;
-    bottom: 56px;
-    right: 32px;
+    top: 56px;
+    right: 80px;
+    z-index: 2;
 }
 
-.loading{
-    margin: 16px
+
+.price.details{
+    font-size: 35px;
 }
+
+.quantity{
+    display: inline-block;
+}
+
+#root{
+    height: 100%;
+}
+
+
+.addtoCart.button{
+    padding: 3px 12px !important;
+    float: right;
+    margin: 10px;
+}
+
+.addtoCart{
+    display: inline-block;
+    justify-content: flex-end;
+}
+
+
+.quantity-input{
+    width: 38px;
+    height: 28px;
+    border: 0;
+    text-align: center;
+}
+
+.details-quantity{
+    padding: 16px 0;
+}
+

@@ -38,7 +38,7 @@ export default class ProductList extends React.Component<Props, State>{
             <tr>
                 <td><img className="cartImg" src={item.imageUrl}/></td>
                 <td>{item.productName}</td>
-                <td>{item.price}</td>
+                <td>HK$ {item.price}</td>
                 {
                     (this.props.shouldShowRemoveButton)?(
                         <td>

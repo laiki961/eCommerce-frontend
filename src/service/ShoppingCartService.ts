@@ -13,15 +13,11 @@ export default class ShoppingCartService{
         }
     }
 
-    addToCart(productId: number){
-        if(this.shoppingCart[productId]){
-            return;
-        }
-        
+    updateCart(productId: number, quantity: number){
         this.shoppingCart[productId] = {
-            productId: productId
+            productId: productId,
+            quantity: quantity
         };
-
         LocalStorageUtil.setValue(this.shoppingCartKey, this.shoppingCart);
     }
 
@@ -34,5 +30,6 @@ export default class ShoppingCartService{
         return this.shoppingCart;
     }
     
+
 
 }

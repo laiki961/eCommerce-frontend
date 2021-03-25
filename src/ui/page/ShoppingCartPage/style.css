@@ -2,3 +2,12 @@
     height: 100px;
     width: 100px;
 }
+
+.priceTag.cart{
+    font-size: 20px;
+}
+
+.price.cart{
+    font-size: 30px;
+}
+

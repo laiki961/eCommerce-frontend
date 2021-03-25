@@ -1,20 +1,29 @@
 import React from 'react';
-import { Breadcrumb, Button, Container, Toast } from 'react-bootstrap';
+import { Breadcrumb, Button, Col, Container, Row, Toast } from 'react-bootstrap';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { ProductItem } from '../../../domain/backendDos';
 import BackendExtService from '../../../extService/BackendExtService';
 import ShoppingCartService from '../../../service/ShoppingCartService';
+import Quantity from '../../component/Quantity';
 import "./style.css";
 
-type Props = { 
-    shoppingCartService: ShoppingCartService
-};
+type RouterParams = {
+    productId: string
+}
+
+type Props = 
+    RouteComponentProps<RouterParams> & {
+        shoppingCartService: ShoppingCartService
+    };
 type State = {
     productDetails?: ProductItem, //since there is nth at the beginning
-    isShowToast: boolean
+    isShowToast: boolean,
+    quantity: number;
 };
 
-export default class ProductDetailsPage extends React.Component<Props, State>{
+class ProductDetailsPage extends React.Component<Props, State>{
     state = {
+        quantity: 1,
         isShowToast: false
     } as State;
 
@@ -23,22 +32,39 @@ export default class ProductDetailsPage extends React.Component<Props, State>{
 
         this.onLoadedProductDetails = this.onLoadedProductDetails.bind(this);
         this.onClickAddToCartButton = this.onClickAddToCartButton.bind(this);
-        this.onCloseToast = this.onCloseToast.bind(this)
+        this.onCloseToast = this.onCloseToast.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.updateQuantity = this.updateQuantity.bind(this);
     }
 
     componentDidMount(){
-        BackendExtService.getProductDetails(this.onLoadedProductDetails)
+        BackendExtService.getProductDetails(+this.props.match.params.productId, this.onLoadedProductDetails)
     }
 
     onLoadedProductDetails(data: ProductItem){
         this.setState({productDetails: data});
     }
+
+    updateQuantity(productId: number, quantity: number){
+        this.setState({quantity: quantity});
+    }
+
+    handleInputChange(event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
+        const target = event.target; //input
+        const value = target.value;
+        const name = target.name;
     
+        // @ts-ignore
+        this.setState({
+            [name]: value //district: Kwun -> trigger rerender
+            } as State);
+    }
+
     onClickAddToCartButton(){
         const shoppingCartService = this.props.shoppingCartService;
         const productDetails = this.state.productDetails!;
 
-        shoppingCartService.addToCart(productDetails.productId);
+        shoppingCartService.updateCart(productDetails.productId, this.state.quantity);
         this.setState({
             isShowToast: true
         });
@@ -52,20 +78,39 @@ export default class ProductDetailsPage extends React.Component<Props, State>{
                     <Breadcrumb.Item href="#/">All Products</Breadcrumb.Item>
                     <Breadcrumb.Item active>{productDetails.productName}</Breadcrumb.Item>
                 </Breadcrumb>
-
-                <h1>{productDetails.productName}</h1>
-                <img className="bannerImage" src={productDetails.imageUrl} alt={"Product "+ productDetails.productName + " image"}/>
-                
-                <h3>Description:</h3>
-                <p>{productDetails.description}</p>
-
-                <h4>Price: ${productDetails.price}</h4>
-                <Button 
-                    variant="primary"
-                    onClick={this.onClickAddToCartButton}
-                    >
-                        Add to cart
-                </Button>
+                <Row>
+                    <Col>
+                        <div>
+                            <img className="bannerImage" src={productDetails.imageUrl} alt={"Product "+ productDetails.productName + " image"}/>
+                        </div>
+                    </Col>
+                    <Col>
+                        <div className="product-details">
+                            <h1 className-="title details">{productDetails.productName}</h1>
+                            <h3>Description:</h3>
+                            <p>{productDetails.description}</p>
+                            <div className="price details">
+                                <span className="priceTag details">HK$ </span>{productDetails.price}
+                            </div>
+                            <div className="details-quantity">
+                                <span>Quantity </span>
+                                <Quantity
+                                    productId={this.state.productDetails!.productId}
+                                    quantity={this.state.quantity}
+                                    updateQuantity={this.updateQuantity}
+                                />
+                                
+                                <Button 
+                                    className="addtoCart button"
+                                    variant="primary"
+                                    onClick={this.onClickAddToCartButton}
+                                >
+                                Add to cart
+                                </Button>
+                            </div>
+                        </div>
+                    </Col>
+                </Row>
             </div>
         )
     }
@@ -88,11 +133,11 @@ export default class ProductDetailsPage extends React.Component<Props, State>{
                     </div>
                     {
                         (this.state.productDetails) ? this.renderProductDetails() : (  //true: this.renderProductDetails(); false: Loading...
-                            <div className="loading">Loading...</div>
+                            <div className="lds-ellipsis loading"><div></div><div></div><div></div><div></div></div>
                         )
                     }
                 </Container>
-
         );
     }
 }
+export default withRouter(ProductDetailsPage);
