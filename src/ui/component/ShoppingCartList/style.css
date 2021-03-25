@@ -1,0 +1,9 @@
+.productName{
+    display: inline-block;
+    padding-left: 10px;
+}
+
+.unitPrice{
+    display: inline-block;
+    padding-left: 10px;
+}

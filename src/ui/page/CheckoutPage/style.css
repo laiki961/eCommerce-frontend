@@ -19,3 +19,12 @@
 .priceTag.checkout{
     font-size: 20px;
 }
+
+.priceTotal.checkout{
+    font-size: 30px;
+}
+
+.checkout.button{
+    text-align: right;
+    margin-bottom: 20px;  
+}

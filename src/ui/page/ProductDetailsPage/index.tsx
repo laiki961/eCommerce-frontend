@@ -86,7 +86,7 @@ class ProductDetailsPage extends React.Component<Props, State>{
                     </Col>
                     <Col>
                         <div className="product-details">
-                            <h1 className-="title title-details">{productDetails.productName}</h1>
+                            <h1 className-="title details">{productDetails.productName}</h1>
                             <h3>Description:</h3>
                             <p>{productDetails.description}</p>
                             <div className="price details">
@@ -94,22 +94,20 @@ class ProductDetailsPage extends React.Component<Props, State>{
                             </div>
                             <div className="details-quantity">
                                 <span>Quantity </span>
-            
                                 <Quantity
                                     productId={this.state.productDetails!.productId}
                                     quantity={this.state.quantity}
                                     updateQuantity={this.updateQuantity}
                                 />
+                                
                                 <Button 
-                                    className="addtoCart"
+                                    className="addtoCart button"
                                     variant="primary"
                                     onClick={this.onClickAddToCartButton}
                                 >
                                 Add to cart
                                 </Button>
-
                             </div>
-                            
                         </div>
                     </Col>
                 </Row>
@@ -135,7 +133,7 @@ class ProductDetailsPage extends React.Component<Props, State>{
                     </div>
                     {
                         (this.state.productDetails) ? this.renderProductDetails() : (  //true: this.renderProductDetails(); false: Loading...
-                            <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+                            <div className="lds-ellipsis loading"><div></div><div></div><div></div><div></div></div>
                         )
                     }
                 </Container>

@@ -1,7 +1,7 @@
 import { faShoppingCart, faUser} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { Col, Container, Nav, Navbar, Row } from 'react-bootstrap';
+import { Container, Nav, Navbar} from 'react-bootstrap';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import ShoppingCartService from './service/ShoppingCartService';
@@ -35,6 +35,11 @@ export default class App extends React.Component<Props, State>{
                 <Navbar.Brand href="#">Ventail</Navbar.Brand>
                 <Navbar.Collapse className="justify-content-end">
                 
+                {/* <input 
+                  type="text" 
+                  placeholder="Search Product">
+                </input> */}
+
                 <div className="dropdown">
                   <Nav.Link href="#/login" className="btn">
                     <FontAwesomeIcon className="nav-icon account" icon={faUser}/>
@@ -78,22 +83,6 @@ export default class App extends React.Component<Props, State>{
             </Route>
           </Switch>
         </HashRouter>
-
-        {/* <footer>
-          <Container id="footer-container">
-            <div id="footer-content">
-              <Row>
-                <Col md={6}>
-                  <div>Ventail Company Ltd.</div>
-                </Col>
-                <Col md={6}>
-                  <div>Contact Us</div>
-                </Col>
-              </Row>
-              <span className="copyright">Copyright @ {year}</span>
-            </div>
-          </Container>
-        </footer> */}
         <footer className="site-footer">
           <div className="container">
 

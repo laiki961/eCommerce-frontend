@@ -54,3 +54,19 @@ export type LoginResponse = {
 }
 
 ///////////////////////////////////
+
+export type PaymentDetails={
+    creditCardNumber: string,
+    expiryDate: string,
+    cvv: string
+}
+
+export type PersonalInformation ={
+    firstName: string,
+    lastName: string,
+    email: string,
+    addressLine1: string,
+    addressLine2: string,
+    city: string,
+    zip: string
+}

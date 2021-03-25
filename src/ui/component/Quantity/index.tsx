@@ -24,7 +24,9 @@ export default class Quantity extends React.Component<Props, State> {
     }
 
     onClickDecrementButton(){
-        //if (quantity <=1 ) return
+        if(this.props.quantity <= 1) {
+            return;
+        }
         this.props.updateQuantity(this.props.productId, this.props.quantity-1)
     }
 

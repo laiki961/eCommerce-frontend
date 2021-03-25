@@ -35,9 +35,17 @@
 }
 
 
-.addtoCart{
+.addtoCart.button{
     padding: 3px 12px !important;
+    float: right;
+    margin: 10px;
 }
+
+.addtoCart{
+    display: inline-block;
+    justify-content: flex-end;
+}
+
 
 .quantity-input{
     width: 38px;

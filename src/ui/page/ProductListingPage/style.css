@@ -4,6 +4,7 @@
     justify-content: space-between;
     align-items: flex-start;
     flex-wrap: wrap;
+    min-height: 100%;
 }
 .col-md-3{
     padding: 0px !important;
@@ -19,6 +20,10 @@
     width: 248px;
     height: 248px;
     /* padding: 3px; */
+}
+
+.priceTag.listing{
+    padding-left:10px;
 }
 
 .centerCropped {
@@ -47,11 +52,6 @@
 .priceTag.listing{
     font-size: small;
 }
-
-
-
-
-
 
   
   

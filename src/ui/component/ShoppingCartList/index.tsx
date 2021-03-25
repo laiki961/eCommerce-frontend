@@ -33,14 +33,18 @@ export default class ShoppingCartList extends React.Component<Props, State> {
             // Get the actual shopping cart items form this.props.displayItems by the key "productId"
             // Prefixed a "+" to productId to convert it form string to number
             const item = this.props.displayItems[+productId]; // string to number
-            const subtotal = item.price * this.props.displayItems[+productId].quantity;
+            const subtotal = item.price * item.quantity;
             cartItems.push(
             <tr>
                 <td>
                     <img className="cartImg" src={item.imageUrl}/>
-                    {item.productName}
+                    <div className="productName">
+                        {item.productName}<br/>
+                        <span>Unit price: </span>HK$ {item.price}
+                    </div>
                 </td>
                 <td>
+                    {console.log("productId: ", this.props.displayItems[+productId], "quantity: ", this.props.displayItems[+productId].quantity)}
                     {
                         (this.props.shouldEnableQuantityButton) ? (
                         <div className="quantity">
@@ -50,11 +54,11 @@ export default class ShoppingCartList extends React.Component<Props, State> {
                                 quantity={this.props.displayItems[+productId].quantity}
                             />
                         </div>
-                        ): item.quantity
+                        ): item.quantity 
                     }
                 </td>
                 <td>
-                    <span>Unit price: </span>HK$ {item.price}
+                    {/* <span>Unit price: </span>HK$ {item.price} */}
                     <br/>
                     <span>Subtotal: </span>HK$ {subtotal}
                 </td>

@@ -55,18 +55,21 @@ export default class ProductListingPage extends React.Component<Props, State> {
 
     render(){
         return(
-            <div>
-                <Container>
+
+                <Container className="container">
                     <div className="productContainer">
                         {
                             (this.state.productList)? this.renderProductItems() : (
-                                // <div className="loading">Loading...</div>
-                                <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+                                <div className="lds-ellipsis loading">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
                             )
                         }
                     </div>
                 </Container>
-            </div>
         )
     }
 }
