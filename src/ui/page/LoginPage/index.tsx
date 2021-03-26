@@ -1,47 +1,41 @@
-import React, { FormEvent } from 'react';
+import React from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
-import { Login } from '../../../domain/backendDos';
-import BackendExtService from '../../../extService/BackendExtService';
+import AuthService from '../../../service/AuthService';
 import "./style.css";
 
-type Props = {};
+type Props = {
+    authService: AuthService
+};
 type State = {
+    email: string,
+    password: string,
     isMember: boolean,
-    user?: Login
 };
 export default class LoginPage extends React.Component<Props, State>{
     state = {
+        email: "",
+        password: "",
         isMember: false,
     } as State;
 
     constructor(props: Props){
         super(props);
-        this.onLoadedUserDetails = this.onLoadedUserDetails.bind(this);
+        this.onClickLogin = this.onClickLogin.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.onSignInWithGoogle = this.onSignInWithGoogle.bind(this);
     }
 
-    componentDidMount(){
-        if(!this.state.user){
-            return null; 
-        }
-        BackendExtService.login(+this.state.user!.userId, this.onLoadedUserDetails)
-    }
-
-    onLoadedUserDetails(data: Login){
-        this.setState({user: data});
-    }
-
-    loginAttempt(event: FormEvent<HTMLFormElement>){
-        event.preventDefault();
-        this.setState({},()=>{
-            BackendExtService.login(+this.state.user!.userId, this.onLoadedUserDetails)
-        })
+    onClickLogin(event: React.FormEvent<HTMLFormElement>){
+        event.preventDefault(); //prevent change page
+        this.props.authService.signInWithEmailPassword(this.state.email, this.state.password);
     }
 
     handleInputChange(event: React.ChangeEvent<HTMLInputElement| HTMLSelectElement>) {
         const target = event.target;
-        const value = target.type;
+        const value = target.value;
         const name = target.name;
+
+        console.log({[name]: value  })
     
         // @ts-ignore
         this.setState({
@@ -49,17 +43,25 @@ export default class LoginPage extends React.Component<Props, State>{
         }as State);
     }
 
+    onSignInWithGoogle(event: React.MouseEvent<HTMLButtonElement>){
+        event.preventDefault();
+        this.props.authService.signInWithGoogle();
+    }
+
+
     render(){
         return(
             <div className="loginBackground">
                 <Container>
                     <div className="login-box">
-                    <Form id="loginForm" onSubmit={this.loginAttempt}>
+                    <Form id="loginForm" onSubmit={this.onClickLogin}>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
-                            <Form.Control 
+                            <Form.Control
+                                name="email"
                                 type="email" 
                                 placeholder="Enter email"
+                                value={this.state.email}
                                 onChange={this.handleInputChange}
                                 />
                             <Form.Text className="text-muted"></Form.Text>
@@ -68,20 +70,26 @@ export default class LoginPage extends React.Component<Props, State>{
                         <Form.Group controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
                             <Form.Control 
+                                name="password"
                                 type="password" 
                                 placeholder="Password"
+                                value={this.state.password}
                                 onChange={this.handleInputChange}
                                 />
                         </Form.Group>
-                        <Form.Group controlId="formBasicCheckbox">
-                            <Form.Check type="checkbox" label="remember me" />
-                        </Form.Group>
                         <Button 
                             variant="primary" 
-                            type="submit" 
+                            type="submit"
                             >
                             Login
                         </Button>
+                        <br/>
+                        <Button 
+                            onClick={this.onSignInWithGoogle}
+                        >
+                            Sign In with Google
+                        </Button>
+
                     </Form>
                     </div>
                 </Container>

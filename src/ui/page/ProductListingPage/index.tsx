@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Col, Container} from 'react-bootstrap';
+import { Card, Carousel, Col, Container} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { ProductList } from '../../../domain/backendDos';
 import BackendExtService from '../../../extService/BackendExtService';
@@ -55,8 +55,34 @@ export default class ProductListingPage extends React.Component<Props, State> {
 
     render(){
         return(
-
                 <Container className="container">
+                    
+                    {/* <Carousel fade>
+                        <Carousel.Item>
+                            <img
+                                className="d-block w-100 heroImg1"
+                                src="https://images.giant-bicycles.com/b_white,c_crop,h_600,q_70,w_1920/co9lssayxjtc2xcmhboo/Giant_Header_EBike_Main.jpg"
+                                alt="First slide"
+                            />
+                            <Carousel.Caption>
+                                <h3>First slide label</h3>
+                                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                            </Carousel.Caption>
+                        </Carousel.Item>
+                        <Carousel.Item>
+                            <img
+                                className="d-block w-100 heroImg2"
+                                src="https://wepedal.co.uk/wp-content/uploads/2020/01/whistler-canada-mountain-biking.jpg"
+                                alt="Second slide"
+                            />
+                            <Carousel.Caption>
+                                <h3>Second slide label</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            </Carousel.Caption>
+                        </Carousel.Item>
+                    </Carousel> */}
+
+
                     <div className="productContainer">
                         {
                             (this.state.productList)? this.renderProductItems() : (

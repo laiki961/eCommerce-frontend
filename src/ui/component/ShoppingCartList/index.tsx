@@ -60,7 +60,10 @@ export default class ShoppingCartList extends React.Component<Props, State> {
                 <td>
                     {/* <span>Unit price: </span>HK$ {item.price} */}
                     <br/>
-                    <span>Subtotal: </span>HK$ {subtotal}
+                    <div className="price">
+                        <span className="priceTag">HK$ </span>{subtotal}
+                    </div>
+                    
                 </td>
                 {
                     (this.props.shouldShowRemoveButton)?(

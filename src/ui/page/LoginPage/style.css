@@ -13,6 +13,6 @@
 .loginBackground{
     background-image: url('https://wallpaperaccess.com/full/209731.jpg');
     width: 100%;
-    overflow: auto;
+    /* overflow: auto; */
     max-height: 94%;
 }

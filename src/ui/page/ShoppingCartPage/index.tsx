@@ -107,9 +107,11 @@ export default class ShoppingCartPage extends React.Component<Props, State>{
         return (
             <section>
                 <hr/>
-                <div className="price cart"><span className="priceTag cart">Total: $ </span>{totalPrice}</div>
-                <br/>
-                <Button variant="primary" onClick={this.onClickCheckoutButton}>Checkout</Button>
+                
+                    <div className="price cart"><span className="priceTag cart">Total: $ </span>{totalPrice}</div>
+                    <br/>
+                    <Button variant="primary" onClick={this.onClickCheckoutButton}>Checkout</Button>
+                
             </section>
         )
     }
