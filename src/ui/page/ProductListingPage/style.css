@@ -1,6 +1,5 @@
 .productListContainer {
-    display: inline-block;
-    vertical-align: top;
+
 }
 
 .productContainer{
@@ -58,20 +57,26 @@
 
 
 
-
-
-
+.siteNavbar {
+  height: 58px;
+  z-index: 2;
+}
 
 .sidenav {
+    position: fixed;
     height: 100%;
     width: 160px;
     z-index: 1;
     top: 0;
-    left: 0;
+    left: -160px;
     background-color: #111;
     overflow-x: hidden;
-    padding-top: 20px;
-    display: inline-block;
+    padding-top: 78px;
+    transition: left 0.5s;
+  }
+
+  .sidenav.active {
+      left: 0;
   }
   
   .sidenav a {
@@ -93,7 +98,7 @@
   }
 
 .listing-content{
-    background-color: #111;
+    position: relative;
     min-height: 100%;
 }
 
@@ -102,8 +107,9 @@
   }
 
   .listing-right{
-    width: calc(100% - 160px);
-    background-color: #e7e3e3;
+    /* width: calc(100% - 160px);
+    min-height: 100%;
+    background-color: #e7e3e3; */
   }
 
   .categoryName{

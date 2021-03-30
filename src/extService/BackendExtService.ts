@@ -23,21 +23,29 @@ export default class BackendExtService{
 
 
     //All products
-    static getProductList(callback: (data: ProductList) =>void){
-        axios.get<ProductListResponseDto>("http://localhost:8080/public/product/all")
+    static getProductList(callback: (data: ProductList) =>void, categoryId?: string){
+        (!categoryId)?(
+            axios.get<ProductListResponseDto>("http://localhost:8080/public/product/all")
             .then(response => {
                 callback(response.data as ProductList);
             })
+        ):(
+            axios.get<ProductListResponseDto>("http://localhost:8080/public/product/"+ categoryId)
+            .then(response => {
+                callback(response.data as ProductList);
+            })
+        )
+        
     }
 
     
-    //Specific Categoty Product List
-    static getCategoryProductList(categoryId: string, callback: (data: ProductList) =>void){
-        axios.get<ProductListResponseDto>("http://localhost:8080/public/product/"+ categoryId)
-            .then(response => {
-                callback(response.data as ProductList);
-            })
-    }
+    // //Specific Categoty Product List
+    // static getCategoryProductList(categoryId: string, callback: (data: ProductList) =>void){
+    //     axios.get<ProductListResponseDto>("http://localhost:8080/public/product/"+ categoryId)
+    //         .then(response => {
+    //             callback(response.data as ProductList);
+    //         })
+    // }
 
 
     static getCategoryList(callback: (data: Category[]) =>void){

@@ -17,7 +17,7 @@ export type ShoppingCartProduct ={
 export type ProductItem = {
     productId: number,
     productName: string,
-    // category: string,
+    category: string,
     description: string,
     price: number,
     imageUrl: string

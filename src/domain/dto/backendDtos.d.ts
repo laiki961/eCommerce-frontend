@@ -1,6 +1,7 @@
 export type ProductItemDto = {
     productId: number,
     productName: string,
+    category: string,
     description: string,
     price: number,
     imageUrl: string

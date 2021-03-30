@@ -1,55 +1,77 @@
 import React from "react";
-import { Card, Col, Container, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Category, ProductList } from "../../../domain/backendDos";
 import BackendExtService from "../../../extService/BackendExtService";
 import "./style.css";
 
 type Props = {
-categoryId?: string;
+    categoryId?: string,
 };
 type State = {
-productList?: ProductList;
-category?: Category[];
+    productList?: ProductList,
+    // category?: Category[],
+    // isShowSidebar: boolean
 };
 
 export default class ProductListingPage extends React.Component<Props, State> {
-    state = {} as State;
+    state = {
+        // isShowSidebar: false
+    } as State;
+
+    prevCategoryId?: string;
 
     constructor(props: Props) {
         super(props);
 
         this.onLoadedProductList = this.onLoadedProductList.bind(this);
-        this.onLoadedCategoryList = this.onLoadedCategoryList.bind(this);
+        // this.onLoadedCategoryList = this.onLoadedCategoryList.bind(this);
+        // this.onClickSidebarToggle = this.onClickSidebarToggle.bind(this);
     }
 
     componentDidMount() {
-        BackendExtService.getProductList(this.onLoadedProductList); //叫BackendExtService call method, then jump to onLoadedProductList
-        BackendExtService.getCategoryList(this.onLoadedCategoryList);
+        this.prevCategoryId = this.props.categoryId;
+        BackendExtService.getProductList(this.onLoadedProductList, this.props.categoryId); //ask BackendExtService call method, then jump to onLoadedProductList
+        // BackendExtService.getCategoryList(this.onLoadedCategoryList);
+    }
+
+    componentDidUpdate() {
+        if (this.prevCategoryId !== this.props.categoryId) {
+            BackendExtService.getProductList(this.onLoadedProductList, this.props.categoryId); 
+            this.prevCategoryId = this.props.categoryId;
+        }
+        // BackendExtService.getProductList(this.onLoadedProductList); 
     }
 
     onLoadedProductList(data: ProductList) {
         this.setState({ productList: data });
     }
 
-    onLoadedCategoryList(data: Category[]){
-        this.setState({category: data})
-    }
+    // onLoadedCategoryList(data: Category[]){
+    //     this.setState({category: data})
+    // }
 
-    renderCategoryList() {
-        const list: JSX.Element[] = [];
-        if (!this.state.category) {
-            return null;
-        }
-        console.log(this.state.category)
-        for (let category of this.state.category)
-        list.push(
-            <Link to={"/category/" + category.id} key={category.id}>
-                <div className="categoryName">{category.name}</div>
-            </Link>
-        )
-        return list;
-    }
+
+    // onClickSidebarToggle() {
+    //     this.setState((prevState) => ({
+    //         isShowSidebar: !prevState.isShowSidebar
+    //     }))
+    // }
+
+    // renderCategoryList() {
+    //     const list: JSX.Element[] = [];
+    //     if (!this.state.category) {
+    //         return null;
+    //     }
+    //     console.log(this.state.category)
+    //     for (let category of this.state.category)
+    //     list.push(
+    //         <Link to={"/category/" + category.id} key={category.id}>
+    //             <div className="categoryName">{category.name}</div>
+    //         </Link>
+    //     )
+    //     return list;
+    // }
 
     renderProductItems() {
         const cards: JSX.Element[] = [];
@@ -82,18 +104,29 @@ export default class ProductListingPage extends React.Component<Props, State> {
     }
 
     render() {
+        // let sidebarClassName = "sidenav listing-left";
+        // if (this.state.isShowSidebar) {
+        //     sidebarClassName += " active";
+        // }
         return (
-                (this.state.productList && this.state.category) ? (
-                    <div className="listing-content">
-                        <div className="sidenav listing-left">
-                            {this.renderCategoryList()}
-                        </div>
-                        <div className="productListContainer listing-right">
-                            <div className="productContainer">
-                                {this.renderProductItems()}
-                            </div>
-                        </div>
-                    </div>
+                (this.state.productList ) ? (   // && this.state.category
+                    // <div className="listing-content">
+                    //     <div className={sidebarClassName}>
+                    //         {this.renderCategoryList()}
+                    //     </div>
+                    //     <div className="productListContainer listing-right">
+                            <Container>
+                                 {/* <Button
+                                    onClick={this.onClickSidebarToggle}
+                                >
+                                    Menu
+                                </Button> */}
+                                <div className="productContainer">
+                                    {this.renderProductItems()}
+                                </div>
+                             </Container>
+                    //     </div>
+                    // </div>
                 ):(
                     <div className="lds-ellipsis loading">
                         <div></div>
@@ -103,18 +136,7 @@ export default class ProductListingPage extends React.Component<Props, State> {
                     </div>
                 )
             )
-        // <div className="listing-content">
-        //     <div className="sidenav listing-left">
-        //         {this.props.categoryId ? (this.renderCategoryList()) : (
-        //             <div className="lds-ellipsis loading">
-        //             <div></div>
-        //             <div></div>
-        //             <div></div>
-        //             <div></div>
-        //             </div>
-        //         )}
-        //     </div>
-        //     <div className="productListContainer listing-right">
+
         //     {/* <Carousel fade>
         //                         <Carousel.Item>
         //                             <img
@@ -140,21 +162,7 @@ export default class ProductListingPage extends React.Component<Props, State> {
         //                         </Carousel.Item>
         //                     </Carousel> */}
 
-        //     <div className="productContainer">
-        //         {this.state.productList ? (
-        //         this.renderProductItems()
-        //         ) : (
-        //         <div className="lds-ellipsis loading">
-        //             <div></div>
-        //             <div></div>
-        //             <div></div>
-        //             <div></div>
-        //         </div>
-        //         )}
-        //     </div>
-        //     </div>
-        // </div>
-        //);
+    
     }
 
 

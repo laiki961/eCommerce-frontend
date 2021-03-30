@@ -1,9 +1,11 @@
-import { faShoppingCart, faSignOutAlt, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faShoppingCart, faSignOutAlt, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Container, Nav, Navbar} from "react-bootstrap";
 import { HashRouter, Link, Route, Switch } from "react-router-dom";
 import "./App.css";
+import { Category } from "./domain/backendDos";
+import BackendExtService from "./extService/BackendExtService";
 import AuthService from "./service/AuthService";
 import ShoppingCartService from "./service/ShoppingCartService";
 import CategoryProductPage from "./ui/page/CategoryProductPage";
@@ -17,6 +19,8 @@ import ThankyouPage from "./ui/page/ThankyouPage";
 type Props = {};
 type State = {
   isLoading: boolean;
+  isShowSidebar: boolean,
+  category?: Category[]
 };
 
 export default class App extends React.Component<Props, State> {
@@ -30,6 +34,8 @@ export default class App extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.onAuthStateChange = this.onAuthStateChange.bind(this);
+        this.onClickSidebarToggle = this.onClickSidebarToggle.bind(this);
+        this.onLoadedCategoryList = this.onLoadedCategoryList.bind(this);
         this.onClickSignOut = this.onClickSignOut.bind(this);
 
         this.shoppingCartService = new ShoppingCartService();
@@ -49,7 +55,36 @@ export default class App extends React.Component<Props, State> {
 
     componentDidMount() {
         this.authService.init();
+        BackendExtService.getCategoryList(this.onLoadedCategoryList);
     }
+
+
+    onLoadedCategoryList(data: Category[]){
+        this.setState({category: data})
+    }
+
+    onClickSidebarToggle() {
+        this.setState((prevState) => ({
+            isShowSidebar: !prevState.isShowSidebar
+        }))
+    }
+
+    renderCategoryList() {
+        const list: JSX.Element[] = [];
+        if (!this.state.category) {
+            return null;
+        }
+        console.log(this.state.category)
+        for (let category of this.state.category)
+        list.push(
+            <Link to={"/category/" + category.id} key={category.id}>
+                <div className="categoryName">{category.name}</div>
+            </Link>
+        )
+        return list;
+    }
+
+
 
     render() {
         const year = new Date().getFullYear();
@@ -59,10 +94,26 @@ export default class App extends React.Component<Props, State> {
             loadingOverlayClassName += " active";
         }
 
+
+        let sidebarClassName = "sidenav";
+        if (this.state.isShowSidebar) {
+            sidebarClassName += " active";
+        }
+
         return (
         <div className="App">
-            <Navbar expand="lg">
+            <HashRouter>
+            
+            <Navbar expand="lg" className="siteNavbar">
             <Container>
+                
+                <FontAwesomeIcon 
+                    className="nav-icon" 
+                    icon={faBars}
+                    onClick={this.onClickSidebarToggle}
+                />
+                
+
                 <Navbar.Brand href="#">Ventail</Navbar.Brand>
                 <Navbar.Collapse className="justify-content-end">
 
@@ -102,8 +153,10 @@ export default class App extends React.Component<Props, State> {
             </Container>
             </Navbar>
 
-           
-            <HashRouter>
+            <div className={sidebarClassName}>
+                {this.renderCategoryList()}
+            </div>
+            
             {/* HashRouter: using the string after # to decide which page the user are going */}
             <Switch>
                 <Route exact path="/">
@@ -138,7 +191,7 @@ export default class App extends React.Component<Props, State> {
                     <ThankyouPage />
                 </Route>
             </Switch>
-            </HashRouter>
+            
 
             <div className={loadingOverlayClassName}>
                 <div className="loader loadingSpinner">
@@ -211,6 +264,7 @@ export default class App extends React.Component<Props, State> {
                     </div>
                 </div>
             </footer>
+            </HashRouter>
         </div>
         );
     }
