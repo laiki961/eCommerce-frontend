@@ -140,4 +140,5 @@ class ProductDetailsPage extends React.Component<Props, State>{
         );
     }
 }
+
 export default withRouter(ProductDetailsPage);

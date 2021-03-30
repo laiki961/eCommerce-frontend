@@ -108,6 +108,8 @@ export default class ProductListingPage extends React.Component<Props, State> {
         // if (this.state.isShowSidebar) {
         //     sidebarClassName += " active";
         // }
+
+
         return (
                 (this.state.productList ) ? (   // && this.state.category
                     // <div className="listing-content">
@@ -128,12 +130,15 @@ export default class ProductListingPage extends React.Component<Props, State> {
                     //     </div>
                     // </div>
                 ):(
-                    <div className="lds-ellipsis loading">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
+                    <div className="loadingOverlay-content active">
+                        <div className="lds-ellipsis loading">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
                     </div>
+                            
                 )
             )
 

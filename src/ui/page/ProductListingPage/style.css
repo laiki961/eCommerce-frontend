@@ -1,7 +1,3 @@
-.productListContainer {
-
-}
-
 .productContainer{
     display: flex;
     flex-direction: row;
@@ -10,7 +6,6 @@
     flex-wrap: wrap;
     min-height: 100%;
 }
-
 
 .productCard{
     width: 250px;
@@ -78,7 +73,7 @@
   .sidenav.active {
       left: 0;
   }
-  
+
   .sidenav a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
@@ -90,7 +85,6 @@
   .sidenav a:hover {
     color: #f1f1f1;
   }
-  
   
   @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
@@ -106,11 +100,11 @@
     width: 160px;
   }
 
-  .listing-right{
-    /* width: calc(100% - 160px);
-    min-height: 100%;
-    background-color: #e7e3e3; */
-  }
+ 
+
+
+
+
 
   .categoryName{
       color: white;

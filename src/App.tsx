@@ -1,4 +1,4 @@
-import { faBars, faShoppingCart, faSignOutAlt, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faSearch, faShoppingCart, faSignOutAlt, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Container, Nav, Navbar} from "react-bootstrap";
@@ -8,7 +8,6 @@ import { Category } from "./domain/backendDos";
 import BackendExtService from "./extService/BackendExtService";
 import AuthService from "./service/AuthService";
 import ShoppingCartService from "./service/ShoppingCartService";
-import CategoryProductPage from "./ui/page/CategoryProductPage";
 import CheckoutPage from "./ui/page/CheckoutPage";
 import LoginPage from "./ui/page/LoginPage";
 import ProductDetailsPage from "./ui/page/ProductDetailsPage";
@@ -69,6 +68,11 @@ export default class App extends React.Component<Props, State> {
         }))
     }
 
+    onClickSearchButton(){
+        
+    }
+
+
     renderCategoryList() {
         const list: JSX.Element[] = [];
         if (!this.state.category) {
@@ -104,51 +108,56 @@ export default class App extends React.Component<Props, State> {
         <div className="App">
             <HashRouter>
             
-            <Navbar expand="lg" className="siteNavbar">
-            <Container>
-                
-                <FontAwesomeIcon 
-                    className="nav-icon" 
-                    icon={faBars}
-                    onClick={this.onClickSidebarToggle}
-                />
-                
-
-                <Navbar.Brand href="#">Ventail</Navbar.Brand>
-                <Navbar.Collapse className="justify-content-end">
-
-                {/* <input 
-                    type="text" 
-                    placeholder="Search Product">
-                    </input> */}
-
-                <div className="dropdown">
-                    {/* <Nav.Link href="#/login" className="btn">
-                        <FontAwesomeIcon className="nav-icon account" icon={faUser} />
-                    </Nav.Link> */}
-                    {
-                        (AuthService.isSignedIn())? (
-                            <Nav.Link onClick={this.onClickSignOut}>
-                                <FontAwesomeIcon className="nav-icon signOut" icon={faSignOutAlt}/>
-                            </Nav.Link>    
-                        ) : (
-                            <Nav.Link href="#/login" className="btn">
-                                <FontAwesomeIcon className="nav-icon account" icon={faUser} />
-                            </Nav.Link>
-                        )
-                    }
-                    <div className="dropdown-content">
-                        <a href="#/login">Login</a>
-                    </div>
-                    
-                </div>
-
-                <Nav.Link href="#/cart" className="btn">
-                    <FontAwesomeIcon
-                    className="nav-icon cart"
-                    icon={faShoppingCart}
+                <Navbar expand="lg" className="siteNavbar">
+                <Container>
+                    <FontAwesomeIcon 
+                        className="nav-icon" 
+                        icon={faBars}
+                        onClick={this.onClickSidebarToggle}
                     />
-                </Nav.Link>
+                    <Navbar.Brand href="#">Ventail</Navbar.Brand>
+                    <Navbar.Collapse className="justify-content-end">
+
+                    {/* <input 
+                        type="text" 
+                        placeholder="Search Product">
+                        </input> */}
+                    
+                    {/* onSubmit={} */}
+                    <div className="searchBox">
+                        <input className="searchInput"type="text" name="" placeholder="Search"/>
+                        <button className="searchButton" >
+                            <FontAwesomeIcon icon={faSearch}/>
+                        </button>
+                    </div>
+
+                    <div className="dropdown">
+                        {/* <Nav.Link href="#/login" className="btn">
+                            <FontAwesomeIcon className="nav-icon account" icon={faUser} />
+                        </Nav.Link> */}
+                        {
+                            (AuthService.isSignedIn())? (
+                                <Nav.Link onClick={this.onClickSignOut}>
+                                    <FontAwesomeIcon className="nav-icon signOut" icon={faSignOutAlt}/>
+                                </Nav.Link>    
+                            ) : (
+                                <Nav.Link href="#/login" className="btn">
+                                    <FontAwesomeIcon className="nav-icon account" icon={faUser} />
+                                </Nav.Link>
+                            )
+                        }
+                        <div className="dropdown-content">
+                            <a href="#/login">Login</a>
+                        </div>
+                        
+                    </div>
+
+                    <Nav.Link href="#/cart" className="btn">
+                        <FontAwesomeIcon
+                        className="nav-icon cart"
+                        icon={faShoppingCart}
+                        />
+                    </Nav.Link>
                 </Navbar.Collapse>
             </Container>
             </Navbar>
@@ -194,11 +203,7 @@ export default class App extends React.Component<Props, State> {
             
 
             <div className={loadingOverlayClassName}>
-                <div className="loader loadingSpinner">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
+                <div className="lds-ellipsis loading"><div></div><div></div><div></div><div></div></div>
             </div>
 
             <footer className="site-footer">
@@ -216,8 +221,8 @@ export default class App extends React.Component<Props, State> {
                         <h6>Categories</h6>
                         <ul className="footer-links">
                         <li>
-                            <a href="http://scanfcode.com/category/java-programming-language/">
-                            Java
+                            <a href="#/">
+                            Bike
                             </a>
                         </li>
                         </ul>

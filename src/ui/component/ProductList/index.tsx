@@ -13,17 +13,6 @@ type State = {};
 
 export default class ProductList extends React.Component<Props, State>{
     renderListItems(){
-        //ArrayList<JSX.Element> carItems = new ArrayList<>();
-        //for (productIds){
-        // carItems.push(
-        //     new TableRow(productId) <- TableRow is a subclass of JSX.Element
-        //     )
-        //}
-        //
-        //return [
-        // <tr>1</tr>
-        // <tr>2</tr>
-        // ]
         const cartItems: JSX.Element[] = [];
     
         if(!this.props.displayItems){

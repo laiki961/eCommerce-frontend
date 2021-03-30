@@ -5,7 +5,7 @@ import { ShoppingCartItemDto } from '../../../domain/dto/backendDtos';
 import BackendExtService from '../../../extService/BackendExtService';
 import AuthService from '../../../service/AuthService';
 import ShoppingCartService from '../../../service/ShoppingCartService';
-import ShoppingCartList from '../../component/ShoppingCartList';
+import ShoppingCartList from '../../component/CartList';
 
 import './style.css';
 

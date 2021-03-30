@@ -95,9 +95,6 @@ export default class LoginPage extends React.Component<Props, State>{
                             Login
                         </Button>
                         <br/>
-                        {/* <GoogleButton className="button"
-                            onClick={this.onSignInWithGoogle}
-                        /> */}
                         
                     </Form>
 
