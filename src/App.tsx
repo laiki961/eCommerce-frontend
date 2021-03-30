@@ -1,11 +1,12 @@
 import { faShoppingCart, faSignOutAlt, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { Container, Nav, Navbar, Spinner } from "react-bootstrap";
-import { HashRouter, Route, Switch } from "react-router-dom";
+import { Container, Nav, Navbar} from "react-bootstrap";
+import { HashRouter, Link, Route, Switch } from "react-router-dom";
 import "./App.css";
 import AuthService from "./service/AuthService";
 import ShoppingCartService from "./service/ShoppingCartService";
+import CategoryProductPage from "./ui/page/CategoryProductPage";
 import CheckoutPage from "./ui/page/CheckoutPage";
 import LoginPage from "./ui/page/LoginPage";
 import ProductDetailsPage from "./ui/page/ProductDetailsPage";
@@ -30,7 +31,7 @@ export default class App extends React.Component<Props, State> {
         super(props);
         this.onAuthStateChange = this.onAuthStateChange.bind(this);
         this.onClickSignOut = this.onClickSignOut.bind(this);
-        
+
         this.shoppingCartService = new ShoppingCartService();
         this.authService = new AuthService(this.onAuthStateChange);
     }
@@ -64,6 +65,7 @@ export default class App extends React.Component<Props, State> {
             <Container>
                 <Navbar.Brand href="#">Ventail</Navbar.Brand>
                 <Navbar.Collapse className="justify-content-end">
+
                 {/* <input 
                     type="text" 
                     placeholder="Search Product">
@@ -74,7 +76,7 @@ export default class App extends React.Component<Props, State> {
                         <FontAwesomeIcon className="nav-icon account" icon={faUser} />
                     </Nav.Link> */}
                     {
-                        (this.authService.isSignedIn())? (
+                        (AuthService.isSignedIn())? (
                             <Nav.Link onClick={this.onClickSignOut}>
                                 <FontAwesomeIcon className="nav-icon signOut" icon={faSignOutAlt}/>
                             </Nav.Link>    
@@ -100,12 +102,22 @@ export default class App extends React.Component<Props, State> {
             </Container>
             </Navbar>
 
+           
             <HashRouter>
             {/* HashRouter: using the string after # to decide which page the user are going */}
             <Switch>
                 <Route exact path="/">
                     <ProductListingPage />
                 </Route>
+                <Route 
+                    exact 
+                    path="/category/:category"
+                    render={routeProps => (
+                        <ProductListingPage
+                            categoryId={routeProps.match.params.category}
+                        />
+                    )}
+                />
                 <Route exact path="/details/:productId">
                     <ProductDetailsPage
                     shoppingCartService={this.shoppingCartService} // Step: 1 -> new productDetailsPage({shopingCartService: this.shoppingCartService}) i.e. constructor

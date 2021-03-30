@@ -48,3 +48,9 @@ export type ShoppingCartItemDto ={
     productId: number, 
     quantity: number
 }
+
+///////////////////////////////////
+export type CategoryResponseDto ={
+    id: string,
+    name: string
+}

@@ -3,6 +3,7 @@ import { Breadcrumb, Button, Container } from 'react-bootstrap';
 import { ProductMap, ShoppingCartProduct, Transaction } from '../../../domain/backendDos';
 import { ShoppingCartItemDto } from '../../../domain/dto/backendDtos';
 import BackendExtService from '../../../extService/BackendExtService';
+import AuthService from '../../../service/AuthService';
 import ShoppingCartService from '../../../service/ShoppingCartService';
 import ShoppingCartList from '../../component/ShoppingCartList';
 
@@ -62,7 +63,16 @@ export default class ShoppingCartPage extends React.Component<Props, State>{
                 quantity: this.props.shoppingCartService.shoppingCart[+productId].quantity
             });
         }
-        BackendExtService.checkout(checkoutItems, this.onCreatedTransaction)
+        if(AuthService.isSignedIn()){
+            AuthService.getIdToken()
+            .then((idToken) => {
+                BackendExtService.checkout(idToken, checkoutItems, this.onCreatedTransaction);
+            })
+        //BackendExtService.checkout(checkoutItems, this.onCreatedTransaction);
+        }else{
+            alert("Please login inorder to complete the checkout process")
+            window.location.href = "#/login"
+        }
     }
 
     onCreatedTransaction(data: Transaction){

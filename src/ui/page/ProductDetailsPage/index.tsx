@@ -123,7 +123,7 @@ class ProductDetailsPage extends React.Component<Props, State>{
 
     render(){
         return (
-                <Container id="productDetailPage">
+                <Container id="productDetailPage" >
                     <div className="toastContainer">
                     <Toast show={this.state.isShowToast} onClose={this.onCloseToast} delay={3000} autohide>
                         <Toast.Header>

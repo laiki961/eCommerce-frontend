@@ -3,6 +3,7 @@ import { Breadcrumb, Button, Col, Container, Form, Row} from 'react-bootstrap';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { PaymentDetails, PersonalInformation, ShoppingCartProduct, Transaction } from '../../../domain/backendDos';
 import BackendExtService from '../../../extService/BackendExtService';
+import AuthService from '../../../service/AuthService';
 import ShoppingCartList from '../../component/ShoppingCartList';
 import "./style.css";
 
@@ -54,7 +55,11 @@ class CheckoutPage extends React.Component<Props, State>{
     }
 
     componentDidMount(){
-        BackendExtService.getTransaction(+this.props.match.params.transactionId, this.onLoadedTransaction)
+        AuthService.getIdToken()
+            .then((idToken) => {
+                BackendExtService.getTransaction(idToken, +this.props.match.params.transactionId, this.onLoadedTransaction);
+            })
+        //BackendExtService.getTransaction(+this.props.match.params.transactionId, this.onLoadedTransaction)
     }
 
     onLoadedTransaction(data: Transaction){
@@ -121,7 +126,7 @@ class CheckoutPage extends React.Component<Props, State>{
 
     render(){
         return (
-                <Container>
+                <Container >
                     <Breadcrumb>
                         <Breadcrumb.Item href="#/">All Products</Breadcrumb.Item>
                         <Breadcrumb.Item href="#/cart">Shopping Cart</Breadcrumb.Item>

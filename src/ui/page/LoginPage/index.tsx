@@ -1,5 +1,7 @@
 import React from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
+import GoogleButton from 'react-google-button';
+import { FacebookLoginButton, GoogleLoginButton } from 'react-social-login-buttons';
 import AuthService from '../../../service/AuthService';
 import "./style.css";
 
@@ -11,6 +13,7 @@ type State = {
     password: string,
     isMember: boolean,
 };
+
 export default class LoginPage extends React.Component<Props, State>{
     state = {
         email: "",
@@ -23,11 +26,24 @@ export default class LoginPage extends React.Component<Props, State>{
         this.onClickLogin = this.onClickLogin.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.onSignInWithGoogle = this.onSignInWithGoogle.bind(this);
+        this.onSignInWithFacebook = this.onSignInWithFacebook.bind(this);
     }
 
     onClickLogin(event: React.FormEvent<HTMLFormElement>){
         event.preventDefault(); //prevent change page
-        this.props.authService.signInWithEmailPassword(this.state.email, this.state.password);
+        this.props.authService.signInWithEmailPassword(this.state.email, this.state.password, this.onSignInError);
+    }
+
+    onSignInWithGoogle(){
+        this.props.authService.signInWithGoogle(this.onSignInError);
+    }
+
+    onSignInWithFacebook(){
+        this.props.authService.signInWithFacebook(this.onSignInError);
+    }
+
+    onSignInError(code: string, message: string){
+        alert(code+": " + message);
     }
 
     handleInputChange(event: React.ChangeEvent<HTMLInputElement| HTMLSelectElement>) {
@@ -43,15 +59,9 @@ export default class LoginPage extends React.Component<Props, State>{
         }as State);
     }
 
-    onSignInWithGoogle(event: React.MouseEvent<HTMLButtonElement>){
-        event.preventDefault();
-        this.props.authService.signInWithGoogle();
-    }
-
-
     render(){
         return(
-            <div className="loginBackground">
+            <div className="content loginBackground">
                 <Container>
                     <div className="login-box">
                     <Form id="loginForm" onSubmit={this.onClickLogin}>
@@ -78,19 +88,21 @@ export default class LoginPage extends React.Component<Props, State>{
                                 />
                         </Form.Group>
                         <Button 
+                            className="button"
                             variant="primary" 
                             type="submit"
                             >
                             Login
                         </Button>
                         <br/>
-                        <Button 
+                        {/* <GoogleButton className="button"
                             onClick={this.onSignInWithGoogle}
-                        >
-                            Sign In with Google
-                        </Button>
-
+                        /> */}
+                        
                     </Form>
+
+                    <GoogleLoginButton onClick={this.onSignInWithGoogle}/>
+                    <FacebookLoginButton onClick={this.onSignInWithFacebook}/>
                     </div>
                 </Container>
             </div>
