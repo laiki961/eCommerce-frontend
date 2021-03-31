@@ -123,7 +123,7 @@ export default class ProductListingPage extends React.Component<Props, State> {
                                 >
                                     Menu
                                 </Button> */}
-                                <div className="productContainer">
+                                <div className="content productContainer">
                                     {this.renderProductItems()}
                                 </div>
                              </Container>

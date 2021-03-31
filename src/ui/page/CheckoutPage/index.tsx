@@ -126,6 +126,7 @@ class CheckoutPage extends React.Component<Props, State>{
 
     render(){
         return (
+                <div className="content">
                 <Container >
                     <Breadcrumb>
                         <Breadcrumb.Item href="#/">All Products</Breadcrumb.Item>
@@ -258,6 +259,7 @@ class CheckoutPage extends React.Component<Props, State>{
                         </div>
                     </div>
                 </Container>
+                </div>
                 )
     }
 

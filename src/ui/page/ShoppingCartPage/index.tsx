@@ -131,6 +131,7 @@ export default class ShoppingCartPage extends React.Component<Props, State>{
         console.log(this.props.shoppingCartService.shoppingCart);
 
         return(
+            <div className="content">
             <Container>
                 <Breadcrumb>
                     <Breadcrumb.Item href="#/">All Products</Breadcrumb.Item>
@@ -151,6 +152,7 @@ export default class ShoppingCartPage extends React.Component<Props, State>{
                 /> */}
                 {this.renderShoppingCartTotalPrice()}
             </Container>
+            </div>
         )
     }
 }

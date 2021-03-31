@@ -4,7 +4,7 @@ import React from "react";
 import { Container, Nav, Navbar} from "react-bootstrap";
 import { HashRouter, Link, Route, Switch } from "react-router-dom";
 import "./App.css";
-import { Category } from "./domain/backendDos";
+import { Category, ProductList } from "./domain/backendDos";
 import BackendExtService from "./extService/BackendExtService";
 import AuthService from "./service/AuthService";
 import ShoppingCartService from "./service/ShoppingCartService";
@@ -17,28 +17,50 @@ import ThankyouPage from "./ui/page/ThankyouPage";
 
 type Props = {};
 type State = {
-  isLoading: boolean;
+  isLoading: boolean,
   isShowSidebar: boolean,
-  category?: Category[]
+  isShowNavbar: boolean,
+  category?: Category[],
+//   search: string,
+//   searchProduct?: ProductList
 };
 
 export default class App extends React.Component<Props, State> {
     state = {
         isLoading: false,
+        isShowNavbar: true
+        // search: ""
     } as State;
 
     shoppingCartService: ShoppingCartService; //contain the latest shoppingCartItems
     authService: AuthService;
 
+    prevScrollpos: number;
+
     constructor(props: Props) {
         super(props);
         this.onAuthStateChange = this.onAuthStateChange.bind(this);
+        this.onClickSignOut = this.onClickSignOut.bind(this);
+
         this.onClickSidebarToggle = this.onClickSidebarToggle.bind(this);
         this.onLoadedCategoryList = this.onLoadedCategoryList.bind(this);
-        this.onClickSignOut = this.onClickSignOut.bind(this);
+
+        this.handleInputChange = this.handleInputChange.bind(this);
 
         this.shoppingCartService = new ShoppingCartService();
         this.authService = new AuthService(this.onAuthStateChange);
+
+        this.prevScrollpos = window.pageYOffset;
+        window.onscroll = () => {
+            let currentScrollPos = window.pageYOffset;
+            if (this.prevScrollpos > currentScrollPos) {
+                this.setState({isShowNavbar: true}) ;
+            } else {
+                this.setState({isShowNavbar: false});
+            }
+            this.prevScrollpos = currentScrollPos;
+        }
+
     }
 
     onAuthStateChange(isLoading: boolean){
@@ -57,7 +79,6 @@ export default class App extends React.Component<Props, State> {
         BackendExtService.getCategoryList(this.onLoadedCategoryList);
     }
 
-
     onLoadedCategoryList(data: Category[]){
         this.setState({category: data})
     }
@@ -68,10 +89,16 @@ export default class App extends React.Component<Props, State> {
         }))
     }
 
-    onClickSearchButton(){
-        
+    handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+    
+        // @ts-ignore
+        this.setState({
+            [name]: value
+            } as State);
     }
-
 
     renderCategoryList() {
         const list: JSX.Element[] = [];
@@ -79,14 +106,37 @@ export default class App extends React.Component<Props, State> {
             return null;
         }
         console.log(this.state.category)
-        for (let category of this.state.category)
+        for (let category of this.state.category){
         list.push(
             <Link to={"/category/" + category.id} key={category.id}>
                 <div className="categoryName">{category.name}</div>
             </Link>
-        )
+        )}
         return list;
     }
+
+
+    // renderSearchProduct(){
+    //     const list: JSX.Element[] = [];
+    //     if(this.state.search == null){
+    //         return null;
+    //     }
+    //     for(let products of this.state.searchProduct){
+    //         list.push(
+    //             <Link to={"/details/" + products.productId} key={products.productId}>
+    //                 <div className="searchProduct">
+    //                     {products.imageUrl}
+    //                     <div>
+    //                         <span>{products.productName}</span>
+    //                         <span>{products.price}</span>
+    //                     </div>
+    //                 </div>
+    //             </Link>
+    //         )
+    //     }
+    //     return list;
+    // }
+
 
 
 
@@ -98,17 +148,23 @@ export default class App extends React.Component<Props, State> {
             loadingOverlayClassName += " active";
         }
 
-
         let sidebarClassName = "sidenav";
         if (this.state.isShowSidebar) {
             sidebarClassName += " active";
         }
 
+        let navbarStyle = {};
+        if (this.state.isShowNavbar) {
+            navbarStyle = {top: 0};
+        } else {
+            navbarStyle = {top: "-58px"}
+        }
+
         return (
-        <div className="App">
+        <div id="App" className="App">
             <HashRouter>
-            
-                <Navbar expand="lg" className="siteNavbar">
+                <div className="narBar-Container">
+                <Navbar expand="lg" className="siteNavbar" style={navbarStyle}>
                 <Container>
                     <FontAwesomeIcon 
                         className="nav-icon" 
@@ -118,23 +174,21 @@ export default class App extends React.Component<Props, State> {
                     <Navbar.Brand href="#">Ventail</Navbar.Brand>
                     <Navbar.Collapse className="justify-content-end">
 
-                    {/* <input 
-                        type="text" 
-                        placeholder="Search Product">
-                        </input> */}
-                    
-                    {/* onSubmit={} */}
-                    <div className="searchBox">
-                        <input className="searchInput"type="text" name="" placeholder="Search"/>
+                    {/* <div className="searchBox">
+                        <input 
+                            className="searchInput" 
+                            type="text" 
+                            name="search" 
+                            value={this.state.search} 
+                            placeholder="Search" 
+                            onChange={this.handleInputChange}
+                        />
                         <button className="searchButton" >
                             <FontAwesomeIcon icon={faSearch}/>
                         </button>
-                    </div>
+                    </div> */}
 
                     <div className="dropdown">
-                        {/* <Nav.Link href="#/login" className="btn">
-                            <FontAwesomeIcon className="nav-icon account" icon={faUser} />
-                        </Nav.Link> */}
                         {
                             (AuthService.isSignedIn())? (
                                 <Nav.Link onClick={this.onClickSignOut}>
@@ -161,6 +215,7 @@ export default class App extends React.Component<Props, State> {
                 </Navbar.Collapse>
             </Container>
             </Navbar>
+            </div>
 
             <div className={sidebarClassName}>
                 {this.renderCategoryList()}

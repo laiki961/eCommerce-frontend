@@ -123,22 +123,23 @@ class ProductDetailsPage extends React.Component<Props, State>{
 
     render(){
         return (
-                <Container id="productDetailPage" >
-                    <div className="toastContainer">
-                    <Toast show={this.state.isShowToast} onClose={this.onCloseToast} delay={3000} autohide>
-                        <Toast.Header>
-                            <strong className="mr-auto">Your item has been successfully added to your cart!</strong>
-                        </Toast.Header>
-                    </Toast>
-                    </div>
-                    {
-                        (this.state.productDetails) ? this.renderProductDetails() : (  //true: this.renderProductDetails(); false: Loading...
-                            <div className="lds-ellipsis loading"><div></div><div></div><div></div><div></div></div>
-                        )
-                    }
-                </Container>
+                <div className="content">
+                    <Container id="productDetailPage" >
+                        <div className="toastContainer">
+                        <Toast show={this.state.isShowToast} onClose={this.onCloseToast} delay={3000} autohide>
+                            <Toast.Header>
+                                <strong className="mr-auto">Your item has been successfully added to your cart!</strong>
+                            </Toast.Header>
+                        </Toast>
+                        </div>
+                        {
+                            (this.state.productDetails) ? this.renderProductDetails() : (  //true: this.renderProductDetails(); false: Loading...
+                                <div className="lds-ellipsis loading"><div></div><div></div><div></div><div></div></div>
+                            )
+                        }
+                    </Container>
+                </div>
         );
     }
 }
-
 export default withRouter(ProductDetailsPage);
