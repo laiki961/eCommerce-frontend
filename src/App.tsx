@@ -14,6 +14,7 @@ import ProductDetailsPage from "./ui/page/ProductDetailsPage";
 import ProductListingPage from "./ui/page/ProductListingPage";
 import ShoppingCartPage from "./ui/page/ShoppingCartPage";
 import ThankyouPage from "./ui/page/ThankyouPage";
+import WeatherForecasrPage from "./ui/page/WeatherForecasrPage";
 
 type Props = {};
 type State = {
@@ -254,6 +255,9 @@ export default class App extends React.Component<Props, State> {
                 <Route exact path="/thankyou">
                     <ThankyouPage />
                 </Route>
+                <Route exact path="/weather">
+                    <WeatherForecasrPage />
+                </Route>
             </Switch>
             
 
@@ -292,7 +296,7 @@ export default class App extends React.Component<Props, State> {
                             <a href="http://scanfcode.com/contact/">Contact Us</a>
                         </li>
                         <li>
-                            <a href="http://scanfcode.com/contribute-at-scanfcode/">
+                            <a href="#/weather">
                             Weather
                             </a>
                         </li>
