@@ -1,7 +1,7 @@
 import React from "react";
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import { Card, Container} from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { Category, ProductList } from "../../../domain/backendDos";
+import { ProductList } from "../../../domain/backendDos";
 import BackendExtService from "../../../extService/BackendExtService";
 import "./style.css";
 
@@ -92,6 +92,7 @@ export default class ProductListingPage extends React.Component<Props, State> {
                     <Card.Title className="cardTitle productName">
                         {item.productName}
                     </Card.Title>
+                    <br/>
                     <Card.Text className="price">
                         <span className="priceTag listing">HK$ </span>
                         {item.price}
@@ -104,31 +105,13 @@ export default class ProductListingPage extends React.Component<Props, State> {
     }
 
     render() {
-        // let sidebarClassName = "sidenav listing-left";
-        // if (this.state.isShowSidebar) {
-        //     sidebarClassName += " active";
-        // }
-
-
         return (
-                (this.state.productList ) ? (   // && this.state.category
-                    // <div className="listing-content">
-                    //     <div className={sidebarClassName}>
-                    //         {this.renderCategoryList()}
-                    //     </div>
-                    //     <div className="productListContainer listing-right">
+                (this.state.productList ) ? (
                             <Container>
-                                 {/* <Button
-                                    onClick={this.onClickSidebarToggle}
-                                >
-                                    Menu
-                                </Button> */}
                                 <div className="content productContainer">
                                     {this.renderProductItems()}
                                 </div>
                              </Container>
-                    //     </div>
-                    // </div>
                 ):(
                     <div className="loadingOverlay-content active">
                         <div className="lds-ellipsis loading">

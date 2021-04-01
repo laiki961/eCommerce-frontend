@@ -52,11 +52,11 @@
 
 
 
-.narBar-Container{
+/* .navBar-Container{
   position: fixed;
   width: 100%;
   z-index: 1
-}
+} */
 .siteNavbar {
   height: 58px;
   z-index: 2;

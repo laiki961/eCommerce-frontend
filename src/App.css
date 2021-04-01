@@ -21,10 +21,12 @@
 }
 
 .content{
-  padding: 58px;
+  min-height: 100%;
 }
 
-
+/* .navBar-Container {
+  height: 100%;
+} */
 
 
 
@@ -101,14 +103,6 @@ h1{
 }
 .price{
     display: inline-block;
-}
-
-
-.loading{
-  margin: 16px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
 }
 
 .dropdown{
@@ -320,6 +314,14 @@ h1{
 
 
 
+
+
+.loading{
+  margin: 16px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+}
 
 
 

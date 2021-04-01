@@ -24,7 +24,6 @@ export default class AuthService{
     constructor(onAuthStateChange: OnAuthStateChange){
         if(!firebase.apps.length){
             firebase.initializeApp(this.firebaseConfig);
-
         }else{
             firebase.app();
         }
@@ -52,6 +51,7 @@ export default class AuthService{
                             // login process finished
                             this.onAuthStateChange(false);
                             //call API for asking user details
+                            window.location.href = "#/"
                         })
                     })
             }else{

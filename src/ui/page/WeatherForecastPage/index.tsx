@@ -1,4 +1,4 @@
-import { Col, Container, Form, Row, Table } from 'react-bootstrap';
+import { Col, Container, Row, Table } from 'react-bootstrap';
 import "./style.css";
 import RefreshImg from "./refresh.svg";
 import { ForecastWeather } from '../../../domain/weatherDos';
@@ -128,15 +128,12 @@ export default class WeatherForecasrPage extends React.Component<Props, State> {
                                 </div>
                             </Col>
                         </Row>
-                        
                     </header>
-                    
                     <div id="weatherChartContainer">
                         <WeatherChart
                             data={chartData}
                         />
                     </div>
-
                     {this.renderTable()}
                 </Container>
             </div>

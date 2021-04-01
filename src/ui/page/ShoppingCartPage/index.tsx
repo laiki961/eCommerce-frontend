@@ -70,7 +70,7 @@ export default class ShoppingCartPage extends React.Component<Props, State>{
             })
         //BackendExtService.checkout(checkoutItems, this.onCreatedTransaction);
         }else{
-            alert("Please login inorder to complete the checkout process")
+            alert("Please login in order to complete the checkout process")
             window.location.href = "#/login"
         }
     }
@@ -141,8 +141,8 @@ export default class ShoppingCartPage extends React.Component<Props, State>{
                 <ShoppingCartList
                     shouldEnableQuantityButton={true}
                     onUpdatedQuantity={this.onUpdatedQuantity}
-                    shouldShowRemoveButton={true}
                     displayItems={this.state.shoppingCartProduct}
+                    shouldShowRemoveButton={true}
                     onClickRemoveFromCartButton={this.onClickRemoveFromCartButton}
                 />
                 {/* <ProductList

@@ -4,39 +4,44 @@ import React from "react";
 import { Container, Nav, Navbar} from "react-bootstrap";
 import { HashRouter, Link, Route, Switch } from "react-router-dom";
 import "./App.css";
-import { Category, ProductList } from "./domain/backendDos";
+import { Category, ProductList} from "./domain/backendDos";
 import BackendExtService from "./extService/BackendExtService";
 import AuthService from "./service/AuthService";
 import ShoppingCartService from "./service/ShoppingCartService";
+import SearchList from "./ui/component/SearchList";
 import CheckoutPage from "./ui/page/CheckoutPage";
 import LoginPage from "./ui/page/LoginPage";
 import ProductDetailsPage from "./ui/page/ProductDetailsPage";
 import ProductListingPage from "./ui/page/ProductListingPage";
 import ShoppingCartPage from "./ui/page/ShoppingCartPage";
 import ThankyouPage from "./ui/page/ThankyouPage";
-import WeatherForecasrPage from "./ui/page/WeatherForecasrPage";
+import WeatherForecasrPage from "./ui/page/WeatherForecastPage";
 
 type Props = {};
 type State = {
   isLoading: boolean,
   isShowSidebar: boolean,
   isShowNavbar: boolean,
+  shouldShowSearchList: boolean,
   category?: Category[],
-//   search: string,
-//   searchProduct?: ProductList
+  search: string,
+  searchProduct: ProductList;
 };
 
 export default class App extends React.Component<Props, State> {
     state = {
         isLoading: false,
-        isShowNavbar: true
-        // search: ""
+        isShowNavbar: true,
+        shouldShowSearchList: false,
+        search: ""
     } as State;
 
     shoppingCartService: ShoppingCartService; //contain the latest shoppingCartItems
     authService: AuthService;
 
     prevScrollpos: number;
+    // count: number | undefined;
+   
 
     constructor(props: Props) {
         super(props);
@@ -47,6 +52,9 @@ export default class App extends React.Component<Props, State> {
         this.onLoadedCategoryList = this.onLoadedCategoryList.bind(this);
 
         this.handleInputChange = this.handleInputChange.bind(this);
+
+        this.onLoadedSearchProduct = this.onLoadedSearchProduct.bind(this);
+        this.onClickSearchListOverlay = this.onClickSearchListOverlay.bind(this);
 
         this.shoppingCartService = new ShoppingCartService();
         this.authService = new AuthService(this.onAuthStateChange);
@@ -80,6 +88,11 @@ export default class App extends React.Component<Props, State> {
         BackendExtService.getCategoryList(this.onLoadedCategoryList);
     }
 
+    onLoadedSearchProduct(data: ProductList){
+        console.log("onLoadedSearchProduct", data);
+        this.setState({ searchProduct: data });
+    }
+
     onLoadedCategoryList(data: Category[]){
         this.setState({category: data})
     }
@@ -97,8 +110,11 @@ export default class App extends React.Component<Props, State> {
     
         // @ts-ignore
         this.setState({
-            [name]: value
-            } as State);
+            [name]: value,
+            shouldShowSearchList: true
+        } as State, () => {
+            BackendExtService.getProductList(this.onLoadedSearchProduct, undefined, this.state.search);
+        });
     }
 
     renderCategoryList() {
@@ -116,29 +132,12 @@ export default class App extends React.Component<Props, State> {
         return list;
     }
 
-
-    // renderSearchProduct(){
-    //     const list: JSX.Element[] = [];
-    //     if(this.state.search == null){
-    //         return null;
-    //     }
-    //     for(let products of this.state.searchProduct){
-    //         list.push(
-    //             <Link to={"/details/" + products.productId} key={products.productId}>
-    //                 <div className="searchProduct">
-    //                     {products.imageUrl}
-    //                     <div>
-    //                         <span>{products.productName}</span>
-    //                         <span>{products.price}</span>
-    //                     </div>
-    //                 </div>
-    //             </Link>
-    //         )
-    //     }
-    //     return list;
-    // }
-
-
+    onClickSearchListOverlay(){
+        //change boolean
+        this.setState({
+            shouldShowSearchList: false
+        });
+    }
 
 
     render() {
@@ -175,7 +174,7 @@ export default class App extends React.Component<Props, State> {
                     <Navbar.Brand href="#">Ventail</Navbar.Brand>
                     <Navbar.Collapse className="justify-content-end">
 
-                    {/* <div className="searchBox">
+                    <div className="searchBox">
                         <input 
                             className="searchInput" 
                             type="text" 
@@ -187,7 +186,7 @@ export default class App extends React.Component<Props, State> {
                         <button className="searchButton" >
                             <FontAwesomeIcon icon={faSearch}/>
                         </button>
-                    </div> */}
+                    </div>
 
                     <div className="dropdown">
                         {
@@ -216,6 +215,14 @@ export default class App extends React.Component<Props, State> {
                 </Navbar.Collapse>
             </Container>
             </Navbar>
+            {
+                (this.state.shouldShowSearchList) ? (
+                <SearchList 
+                    searchProduct={this.state.searchProduct}
+                    onClickSearchListOverlay={this.onClickSearchListOverlay} //<- if this is true show list, false hide
+                />):(null)
+            }
+                
             </div>
 
             <div className={sidebarClassName}>

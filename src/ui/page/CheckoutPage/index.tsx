@@ -1,7 +1,7 @@
 import React from 'react';
 import { Breadcrumb, Button, Col, Container, Form, Row} from 'react-bootstrap';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import { PaymentDetails, PersonalInformation, ShoppingCartProduct, Transaction } from '../../../domain/backendDos';
+import { ShoppingCartProduct, Transaction } from '../../../domain/backendDos';
 import BackendExtService from '../../../extService/BackendExtService';
 import AuthService from '../../../service/AuthService';
 import ShoppingCartList from '../../component/CartList';
