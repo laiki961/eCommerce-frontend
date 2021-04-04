@@ -17,28 +17,46 @@ export default class AuthService{
         measurementId: "G-CN2L8EV21Z"
       };
 
+    static isInitializing: boolean = false;
     static signedInUserInfo?: UserInfo;
 
     onAuthStateChange: OnAuthStateChange;
 
     constructor(onAuthStateChange: OnAuthStateChange){
-        if(!firebase.apps.length){
-            firebase.initializeApp(this.firebaseConfig);
-        }else{
-            firebase.app();
-        }
         this.onAuthStateChange = onAuthStateChange;
     }
 
     static getIdToken(){
         //if true -> firebase will return a new idToken
         //if false -> firebase will return the previous idToken if not yet expired
-        return firebase.auth().currentUser!.getIdToken(false);
+        if(!AuthService.isInitializing){
+            return firebase.auth().currentUser!.getIdToken(/*forceRefresh*/false);
+        }else{
+            //if initialising
+            return new Promise<firebase.User | null> ((resolve, reject) =>{
+                const unsubscribe = firebase.auth().onAuthStateChanged((user)=>{
+                    unsubscribe();
+                    resolve(user);
+                })
+            }).then(() => firebase.auth().currentUser!.getIdToken(/*forceRefresh*/false))
+        }
+        // return firebase.auth().currentUser!.getIdToken(false);
     }
 
 
     init(){
+        AuthService.isInitializing = true;
+        if(!firebase.apps.length){
+            firebase.initializeApp(this.firebaseConfig);
+        }else{
+            firebase.app();
+        }
+        //do initialiseApp will run the below at least once
+        // if doing initialise false
+
+
         firebase.auth().onAuthStateChanged((user)=> {
+            AuthService.isInitializing = false;
             console.log("onAuthStateChanged: ", user)
             if(user){
                 //signed In

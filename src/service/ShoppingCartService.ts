@@ -14,10 +14,14 @@ export default class ShoppingCartService{
     }
 
     updateCart(productId: number, quantity: number){
-        this.shoppingCart[productId] = {
-            productId: productId,
-            quantity: quantity
-        };
+        if(this.shoppingCart[productId]){
+            this.shoppingCart[productId].quantity += quantity;
+        }else{
+            this.shoppingCart[productId] = {
+                 productId: productId,
+                 quantity: quantity
+                };
+        }
         LocalStorageUtil.setValue(this.shoppingCartKey, this.shoppingCart);
     }
 

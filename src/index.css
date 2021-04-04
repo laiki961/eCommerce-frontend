@@ -43,5 +43,7 @@ html, body .App {
 
 
 .container{
-  min-height: 100%; 
+  min-height: 100%;
+  padding-left: 0px !important;
+  padding-right: 0px !important; 
 }

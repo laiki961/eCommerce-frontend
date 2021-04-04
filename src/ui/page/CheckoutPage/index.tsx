@@ -4,7 +4,7 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { ShoppingCartProduct, Transaction } from '../../../domain/backendDos';
 import BackendExtService from '../../../extService/BackendExtService';
 import AuthService from '../../../service/AuthService';
-import ShoppingCartList from '../../component/CartList';
+import CartList from '../../component/CartList';
 import "./style.css";
 
 type RouterParamProps = {
@@ -86,7 +86,7 @@ class CheckoutPage extends React.Component<Props, State>{
         }
         return (
             <section>
-                <ShoppingCartList
+                <CartList
                     shouldEnableQuantityButton={false}
                     shouldShowRemoveButton={false}
                     displayItems={shoppingCartProduct}
@@ -112,11 +112,10 @@ class CheckoutPage extends React.Component<Props, State>{
         });
     }
 
-
     onClickPlaceOrderButton(){
-        this.openThankyouPage();
+        // this.openThankyouPage();
+        BackendExtService.completeTransaction(this.openThankyouPage);
     }
-
 
     openThankyouPage(){
         //widnow = browser's function

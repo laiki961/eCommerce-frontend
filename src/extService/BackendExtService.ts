@@ -153,4 +153,19 @@ export default class BackendExtService{
         });
     }
 
+
+    static completeTransaction(callback: ()=> void){
+            new Promise<void>((resolve, reject) => {
+                setTimeout(() => {
+                    // Step 1 success, bring mockProductList to the next step
+                    resolve()//function
+                }, 5000); //number
+            // data = mockProduct in the step 1
+            }).then(data => {
+                // Step 2
+                // callback refers to onLoadedProductList
+                callback();
+            })
+        }
+
 }

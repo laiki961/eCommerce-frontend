@@ -70,6 +70,7 @@ export default class App extends React.Component<Props, State> {
             this.prevScrollpos = currentScrollPos;
         }
 
+        this.authService.init();
     }
 
     onAuthStateChange(isLoading: boolean){
@@ -84,7 +85,7 @@ export default class App extends React.Component<Props, State> {
     }
 
     componentDidMount() {
-        this.authService.init();
+        
         BackendExtService.getCategoryList(this.onLoadedCategoryList);
     }
 
