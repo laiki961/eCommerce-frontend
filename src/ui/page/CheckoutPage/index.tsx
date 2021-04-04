@@ -85,7 +85,7 @@ class CheckoutPage extends React.Component<Props, State>{
             }
         }
         return (
-            <section>
+            <section id="checkoutSection">
                 <CartList
                     shouldEnableQuantityButton={false}
                     shouldShowRemoveButton={false}
@@ -93,9 +93,8 @@ class CheckoutPage extends React.Component<Props, State>{
                 />
                 <hr/>
                 <div className="price checkout">
-                    <span className="priceTotal checkout">Total: </span>
-                    <span className="priceTag checkout">HK$ </span>
-                    {this.state.transaction.total}
+                    <div id="checkoutTotal"><span className="priceTotal checkout">Total</span></div>
+                    <div id="checkoutPrice"><span className="priceTag checkout">HK$ </span>{this.state.transaction.total}</div>
                 </div>
             </section>
         )   
@@ -136,7 +135,7 @@ class CheckoutPage extends React.Component<Props, State>{
                     <h1 className="checkout">Checkout</h1>
                     {this.renderProductList()}
                     <hr/>
-                    <div>
+                    <div id="checkoutInfo">
                         <Row>
                         <Col>
                             <div className="billingInformation">

@@ -14,6 +14,9 @@
 
 .price.checkout{
     font-size: 35px;
+    position: absolute;
+    right: 0px;
+    padding-right: 16px;
 }
 
 .priceTag.checkout{
@@ -27,4 +30,12 @@
 .checkout.button{
     text-align: right;
     margin-bottom: 20px;  
+}
+
+#checkoutSection{
+    position: relative;
+}
+
+#checkoutInfo{
+    padding-top: 60px;
 }
