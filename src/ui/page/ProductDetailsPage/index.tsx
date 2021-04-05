@@ -83,6 +83,9 @@ class ProductDetailsPage extends React.Component<Props, State>{
                         <div>
                             <img className="bannerImage" src={productDetails.imageUrl} alt={"Product "+ productDetails.productName + " image"}/>
                         </div>
+                        <div id="imageContainer">
+                            <img className="supportImage" src={productDetails.imageUrl} alt={"Product "+ productDetails.productName + " image"}/>
+                        </div>
                     </Col>
                     <Col>
                         <div className="product-details">

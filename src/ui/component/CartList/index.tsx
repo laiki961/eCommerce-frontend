@@ -16,7 +16,7 @@ type Props = {
 };
 type State = {};
 
-export default class ShoppingCartList extends React.Component<Props, State> {
+export default class CartList extends React.Component<Props, State> {
     state = {} as State;
 
     constructor(props: Props) {

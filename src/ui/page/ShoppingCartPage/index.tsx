@@ -5,7 +5,7 @@ import { ShoppingCartItemDto } from '../../../domain/dto/backendDtos';
 import BackendExtService from '../../../extService/BackendExtService';
 import AuthService from '../../../service/AuthService';
 import ShoppingCartService from '../../../service/ShoppingCartService';
-import ShoppingCartList from '../../component/CartList';
+import CartList from '../../component/CartList';
 
 import './style.css';
 
@@ -138,7 +138,7 @@ export default class ShoppingCartPage extends React.Component<Props, State>{
                     <Breadcrumb.Item active>Shopping Cart</Breadcrumb.Item>
                 </Breadcrumb>
                 
-                <ShoppingCartList
+                <CartList
                     shouldEnableQuantityButton={true}
                     onUpdatedQuantity={this.onUpdatedQuantity}
                     displayItems={this.state.shoppingCartProduct}
