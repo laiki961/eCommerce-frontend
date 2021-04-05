@@ -17,6 +17,7 @@ export type ShoppingCartProduct ={
 export type ProductItem = {
     productId: number,
     productName: string,
+    category: string,
     description: string,
     price: number,
     imageUrl: string
@@ -69,4 +70,9 @@ export type PersonalInformation ={
     addressLine2: string,
     city: string,
     zip: string
+}
+///////////////////////////////
+export type Category ={
+    id: string,
+    name: string
 }

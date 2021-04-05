@@ -47,14 +47,36 @@
 }
 
 
-.quantity-input{
+/* .quantity-input{
     width: 38px;
     height: 28px;
     border: 0;
     text-align: center;
-}
+} */
 
 .details-quantity{
     padding: 16px 0;
 }
 
+
+
+
+
+
+
+
+
+
+#imageContainer{
+    display: inline-block;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    margin: 0 16px;
+}
+
+.supportImage{
+    object-fit: contain;
+    width:80px;
+    height: 80px;
+}

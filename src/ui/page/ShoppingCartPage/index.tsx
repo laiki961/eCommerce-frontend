@@ -3,8 +3,9 @@ import { Breadcrumb, Button, Container } from 'react-bootstrap';
 import { ProductMap, ShoppingCartProduct, Transaction } from '../../../domain/backendDos';
 import { ShoppingCartItemDto } from '../../../domain/dto/backendDtos';
 import BackendExtService from '../../../extService/BackendExtService';
+import AuthService from '../../../service/AuthService';
 import ShoppingCartService from '../../../service/ShoppingCartService';
-import ShoppingCartList from '../../component/ShoppingCartList';
+import CartList from '../../component/CartList';
 
 import './style.css';
 
@@ -62,7 +63,16 @@ export default class ShoppingCartPage extends React.Component<Props, State>{
                 quantity: this.props.shoppingCartService.shoppingCart[+productId].quantity
             });
         }
-        BackendExtService.checkout(checkoutItems, this.onCreatedTransaction)
+        if(AuthService.isSignedIn()){
+            AuthService.getIdToken()
+            .then((idToken) => {
+                BackendExtService.checkout(idToken, checkoutItems, this.onCreatedTransaction);
+            })
+        //BackendExtService.checkout(checkoutItems, this.onCreatedTransaction);
+        }else{
+            alert("Please login in order to complete the checkout process")
+            window.location.href = "#/login"
+        }
     }
 
     onCreatedTransaction(data: Transaction){
@@ -107,9 +117,11 @@ export default class ShoppingCartPage extends React.Component<Props, State>{
         return (
             <section>
                 <hr/>
-                <div className="price cart"><span className="priceTag cart">Total: $ </span>{totalPrice}</div>
-                <br/>
-                <Button variant="primary" onClick={this.onClickCheckoutButton}>Checkout</Button>
+                
+                    <div className="price cart"><span className="priceTag cart">Total: $ </span>{totalPrice}</div>
+                    <br/>
+                    <Button variant="primary" onClick={this.onClickCheckoutButton}>Checkout</Button>
+                
             </section>
         )
     }
@@ -119,17 +131,18 @@ export default class ShoppingCartPage extends React.Component<Props, State>{
         console.log(this.props.shoppingCartService.shoppingCart);
 
         return(
+            <div className="content">
             <Container>
                 <Breadcrumb>
                     <Breadcrumb.Item href="#/">All Products</Breadcrumb.Item>
                     <Breadcrumb.Item active>Shopping Cart</Breadcrumb.Item>
                 </Breadcrumb>
                 
-                <ShoppingCartList
+                <CartList
                     shouldEnableQuantityButton={true}
                     onUpdatedQuantity={this.onUpdatedQuantity}
-                    shouldShowRemoveButton={true}
                     displayItems={this.state.shoppingCartProduct}
+                    shouldShowRemoveButton={true}
                     onClickRemoveFromCartButton={this.onClickRemoveFromCartButton}
                 />
                 {/* <ProductList
@@ -139,6 +152,7 @@ export default class ShoppingCartPage extends React.Component<Props, State>{
                 /> */}
                 {this.renderShoppingCartTotalPrice()}
             </Container>
+            </div>
         )
     }
 }

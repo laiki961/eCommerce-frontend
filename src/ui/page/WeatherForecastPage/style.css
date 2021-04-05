@@ -1,0 +1,76 @@
+header {
+    padding: 16px 0;
+}
+
+#title {
+    font-size: 48px;
+    font-weight: bold;
+    color: black;
+}
+
+#location {
+    font-style: italic;
+    font-size: 36px;
+    color: #353738;
+}
+
+#lastUpdateTimeContainer {
+    padding-top: 16px;
+    text-align: end;
+}
+
+#lastUpdateTimeContainer > div {
+    display: inline-block;
+    vertical-align: top;
+}
+
+#lastUpdateTimeContainer > #lastUpdateText {
+    margin-right: 16px;
+    margin-top: 6px;
+}
+
+#refreshButton {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 3px solid #FFF;
+    border-radius: 6px;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+#refreshButton:hover {
+    background-color: #FFF;
+    border-radius: 32px;
+}
+
+#refreshButton img {
+    position: absolute;
+    width: 32px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.5s;
+}
+
+#refreshButton:hover img {
+    transform: translate(-50%, -50%) rotate(180deg);
+}
+
+#forecastTable tbody {
+    font-size: 18px;
+}
+
+#forecastTable tbody td {
+    vertical-align: middle;
+}
+
+#forecastTable .icon {
+    width: 64px;
+}
+
+#weatherChartContainer {
+    height: 500px;
+    margin-bottom: 16px;
+}

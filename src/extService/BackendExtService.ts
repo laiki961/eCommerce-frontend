@@ -1,10 +1,11 @@
 import React from 'react';
-import { Login, ProductItem, ProductList, ProductMap, Transaction } from '../domain/backendDos'; 
+import { Category, Login, ProductItem, ProductList, ProductMap, Transaction } from '../domain/backendDos'; 
 import mockLoginUser from './loginUser.json';
-import { CheckoutResponseDto, LoginResponseDto, ProductDetailsResponseDto, ProductListResponseDto, ShoppingCartItemDto, ShoppingCartItemResponseDto, TransactionResponseDto } from '../domain/dto/backendDtos';
+import { CategoryResponseDto, CheckoutResponseDto, LoginResponseDto, ProductDetailsResponseDto, ProductListResponseDto, ShoppingCartItemDto, ShoppingCartItemResponseDto, TransactionResponseDto } from '../domain/dto/backendDtos';
 import axios from 'axios';
 
 export default class BackendExtService{
+
     // static getProductList(callback: (data: ProductList)=> void){
     //     new Promise((resolve, reject) => {
     //         // Step 1: in the new world
@@ -20,12 +21,46 @@ export default class BackendExtService{
     //     })
     // }
 
-    static getProductList(callback: (data: ProductList) =>void){
-        axios.get<ProductListResponseDto>("http://localhost:8080/product/all")
+
+    //All products (previous)
+    static getProductList(callback: (data: ProductList) =>void, categoryId?: string, search?: string){
+        (categoryId)?(
+            axios.get<ProductListResponseDto>("http://localhost:8080/public/product/"+ categoryId)
+             .then(response => {
+                 callback(response.data as ProductList);
+            })
+        ):(search)?(
+            axios.get<ProductListResponseDto>("http://localhost:8080/public/product/all?productName="+ search)
+             .then(response => {
+                 callback(response.data as ProductList);
+            })
+        ):(
+            axios.get<ProductListResponseDto>("http://localhost:8080/public/product/all")
             .then(response => {
                 callback(response.data as ProductList);
             })
+        )
     }
+
+    
+    
+    // //Specific Categoty Product List
+    // static getCategoryProductList(categoryId: string, callback: (data: ProductList) =>void){
+    //     axios.get<ProductListResponseDto>("http://localhost:8080/public/product/"+ categoryId)
+    //         .then(response => {
+    //             callback(response.data as ProductList);
+    //         })
+    // }
+
+
+    static getCategoryList(callback: (data: Category[]) =>void){
+        axios.get<CategoryResponseDto[]>("http://localhost:8080/public/category/all")
+            .then(response => {
+                callback(response.data as Category[]);
+            })
+    }
+
+
 
     // static getProductDetails(callback: (data: ProductItem) => void){
     //     new Promise((resolve, reject)=> {
@@ -38,7 +73,7 @@ export default class BackendExtService{
     // }
 
     static getProductDetails(productId: number, callback: (data: ProductItem) => void){
-        axios.get<ProductDetailsResponseDto>("http://localhost:8080/product/details?productId="+ productId)
+        axios.get<ProductDetailsResponseDto>("http://localhost:8080/public/product/details?productId="+ productId)
             .then(response => {
                 callback(response.data as ProductItem);
             })
@@ -53,7 +88,7 @@ export default class BackendExtService{
         // }).then(data =>{
         //     callback(data as ProductMap);
 
-        axios.post<ShoppingCartItemResponseDto>('http://localhost:8080/product/byIds', productIds)
+        axios.post<ShoppingCartItemResponseDto>('http://localhost:8080/public/product/byIds', productIds)
             .then(response =>{
                 callback(response.data as ProductMap)
             })
@@ -70,7 +105,7 @@ export default class BackendExtService{
         // })
     }
 
-    static checkout(items: ShoppingCartItemDto[], callback: (data: Transaction) => void){
+    static checkout(idToken: string, items: ShoppingCartItemDto[], callback: (data: Transaction) => void){
         // new Promise((resolve, reject)=> {
         //     setTimeout(() => {
         //         resolve(mockCheckout as CheckoutResponseDto); 
@@ -78,13 +113,17 @@ export default class BackendExtService{
         // }).then(data =>{
         //     callback(data as Transaction);
         // });
-        axios.post<CheckoutResponseDto>('http://localhost:8080/transaction', items)
+        axios.post<CheckoutResponseDto>('http://localhost:8080/transaction', items,{
+            headers: {
+                Authorization: "Bearer " + idToken
+            }
+        })
         .then(response =>{
             callback(response.data as Transaction)
         })
     }
 
-    static getTransaction(transactionId: number, callback:(data: Transaction) => void){
+    static getTransaction(idToken: string, transactionId: number, callback:(data: Transaction) => void){
         // new Promise((resolve, reject)=> {
         //     setTimeout(() => {
         //         resolve(mockCheckout as CheckoutResponseDto); 
@@ -92,7 +131,11 @@ export default class BackendExtService{
         // }).then(data =>{
         //     callback(data as Transaction);
         // });
-        axios.get<TransactionResponseDto>('http://localhost:8080/transaction/'+ transactionId)
+        axios.get<TransactionResponseDto>('http://localhost:8080/transaction/'+ transactionId,{
+            headers: {
+                Authorization: "Bearer " + idToken
+            }
+        })
         .then(response =>{
             callback(response.data as Transaction);
         });
@@ -109,5 +152,20 @@ export default class BackendExtService{
             callback(data as Login);
         });
     }
+
+
+    static completeTransaction(callback: ()=> void){
+            new Promise<void>((resolve, reject) => {
+                setTimeout(() => {
+                    // Step 1 success, bring mockProductList to the next step
+                    resolve()//function
+                }, 5000); //number
+            // data = mockProduct in the step 1
+            }).then(data => {
+                // Step 2
+                // callback refers to onLoadedProductList
+                callback();
+            })
+        }
 
 }

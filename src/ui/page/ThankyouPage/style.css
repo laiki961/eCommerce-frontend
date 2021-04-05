@@ -1,0 +1,18 @@
+#thankyouContent{
+    text-align: center;
+    color: rgb(103, 163, 79);
+    padding-top: 150px;
+}
+
+#thankyou-icon{
+    height: 10em;
+    width: 10em;
+}
+
+#thankyou-title{
+    font-size: 40px;
+}
+
+#thankyou-content{
+    font-size: 40px;
+}

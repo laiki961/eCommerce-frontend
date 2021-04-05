@@ -2,6 +2,7 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react'
 import { Button, Table } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { ShoppingCartProduct } from '../../../domain/backendDos';
 import Quantity from '../Quantity';
 import "./style.css";
@@ -15,7 +16,7 @@ type Props = {
 };
 type State = {};
 
-export default class ShoppingCartList extends React.Component<Props, State> {
+export default class CartList extends React.Component<Props, State> {
     state = {} as State;
 
     constructor(props: Props) {
@@ -37,14 +38,15 @@ export default class ShoppingCartList extends React.Component<Props, State> {
             cartItems.push(
             <tr>
                 <td>
-                    <img className="cartImg" src={item.imageUrl}/>
-                    <div className="productName">
-                        {item.productName}<br/>
-                        <span>Unit price: </span>HK$ {item.price}
-                    </div>
+                    <Link to={"detail/" + item.productId}>
+                        <img className="cartImg" src={item.imageUrl}/>
+                        <div className="productName">
+                            {item.productName}<br/>
+                            <span>Unit price: </span>HK$ {item.price}
+                        </div>
+                    </Link>
                 </td>
                 <td>
-                    {console.log("productId: ", this.props.displayItems[+productId], "quantity: ", this.props.displayItems[+productId].quantity)}
                     {
                         (this.props.shouldEnableQuantityButton) ? (
                         <div className="quantity">
@@ -60,7 +62,10 @@ export default class ShoppingCartList extends React.Component<Props, State> {
                 <td>
                     {/* <span>Unit price: </span>HK$ {item.price} */}
                     <br/>
-                    <span>Subtotal: </span>HK$ {subtotal}
+                    <div className="price">
+                        <span className="priceTag">HK$ </span>{subtotal}
+                    </div>
+                    
                 </td>
                 {
                     (this.props.shouldShowRemoveButton)?(

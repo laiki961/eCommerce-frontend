@@ -1,6 +1,7 @@
 export type ProductItemDto = {
     productId: number,
     productName: string,
+    category: string,
     description: string,
     price: number,
     imageUrl: string
@@ -47,4 +48,10 @@ export type LoginResponseDto = {
 export type ShoppingCartItemDto ={
     productId: number, 
     quantity: number
+}
+
+///////////////////////////////////
+export type CategoryResponseDto ={
+    id: string,
+    name: string
 }

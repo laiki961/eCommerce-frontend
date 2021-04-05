@@ -1,0 +1,34 @@
+.searchList {
+    position: relative;
+    background-color: rgb(156, 156, 156);
+    float: right;
+    padding:5px;
+    /* display: none; */
+}
+
+#searchImage{
+    height: 100px;
+    width: 100px;
+    display: inline-block;
+}
+
+#searchContent{
+    display: inline-block;
+    padding: 10px;
+    color: black;
+}
+
+.searchResultItem {
+    width: 300px;
+}
+
+.searchListOverlay{
+    position: absolute;
+    width:100%;
+    height: 100%
+}
+
+.searchListContainer{
+    width: 100%; 
+    height: 100%
+}

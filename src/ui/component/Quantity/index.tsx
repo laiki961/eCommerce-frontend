@@ -39,28 +39,47 @@ export default class Quantity extends React.Component<Props, State> {
 
     render(){
         return (
-            <div>
-                <div 
-                    className="quantity-deduct quantity-icon" 
+            // <div>
+            //     <div 
+            //         className="quantity-deduct quantity-icon" 
+            //         onClick={this.onClickDecrementButton}
+            //     >
+            //     -
+            //     </div>
+            //     <input 
+            //         className="quantity quantity-input"
+            //         type="number"
+            //         placeholder="Quantity"
+            //         value={this.props.quantity}
+            //         disabled
+            //         onChange={this.handleInputChange}
+            //     />
+            //     <div
+            //         className="quantity-add quantity-icon" 
+            //         onClick={this.onClickIncrementButton}
+            //     >
+            //     +
+            //     </div>
+            // </div>
+            <div className="quantity-input">
+                <button 
+                    className="quantity-input__modifier quantity-input__modifier--left" 
                     onClick={this.onClickDecrementButton}
                 >
-                -
-                </div>
+                &mdash;
+                </button>
                 <input 
-                    className="quantity quantity-input"
+                    className="quantity-input__screen" 
                     type="number"
-                    placeholder="Quantity"
                     value={this.props.quantity}
-                    disabled
-                    onChange={this.handleInputChange}
-                />
-                <div
-                    className="quantity-add quantity-icon" 
-                    onClick={this.onClickIncrementButton}
-                >
-                +
-                </div>
-            </div>
+                    disabled/>
+            <button 
+                className="quantity-input__modifier quantity-input__modifier--right" 
+                onClick={this.onClickIncrementButton}
+            >
+            &#xff0b;
+            </button>  
+          </div>
         )
     }
 }

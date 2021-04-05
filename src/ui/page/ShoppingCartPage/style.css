@@ -8,6 +8,6 @@
 }
 
 .price.cart{
+    float: right;
     font-size: 30px;
 }
-

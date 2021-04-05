@@ -21,6 +21,9 @@ export default class BusMapperPage extends React.Component<Props, State> {
     render(){
         return (
             <Container>
+                <div className="content">
+                    
+                </div>
 
             </Container>
         )
