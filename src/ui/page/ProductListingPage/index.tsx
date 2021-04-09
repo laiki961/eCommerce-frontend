@@ -79,15 +79,16 @@ export default class ProductListingPage extends React.Component<Props, State> {
         if (!this.state.productList) {
             return null; // null | [] | cards <-- they all represent null
         }
-        for (let item of this.state.productList) {
+        console.log(this.state.productList);
+        for (let item of this.state.productList!) {
         cards.push(
             //Link is from Router
             <Link to={"/details/" + item.productId} key={item.productId}>
                 <Card className="productCard">
                     <Card.Img
-                    className="image centerCropped"
-                    variant="top"
-                    src={item.imageUrl}
+                        className="image centerCropped"
+                        variant="top"
+                        src={item.imageUrls[0].imageUrl}
                     />
                     <Card.Body>
                     <Card.Title className="cardTitle productName">

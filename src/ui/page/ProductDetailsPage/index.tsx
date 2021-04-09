@@ -88,7 +88,7 @@ class ProductDetailsPage extends React.Component<Props, State>{
                 <Row>
                     <Col>
                         <div>
-                            <img className="bannerImage" src={productDetails.imageUrl} alt={"Product "+ productDetails.productName + " image"}/>
+                            <img className="bannerImage" src={productDetails.imageUrls[0].imageUrl} alt={"Product "+ productDetails.productName + " image"}/>
                         </div>
                         <div id="imageContainer" >
                             <img className="supportImage" src="https://contents.mediadecathlon.com/p1856755/k$03e210b0a54f3832df4eee0d1ead5e0c/sq/500+TILT+14+SILVER+GREY.webp?f=1000x1000" alt="supportImage"/>
@@ -136,11 +136,11 @@ class ProductDetailsPage extends React.Component<Props, State>{
                 <div className="content">
                     <Container id="productDetailPage" >
                         <div className="toastContainer">
-                        <Toast show={this.state.isShowToast} onClose={this.onCloseToast} delay={3000} autohide>
-                            <Toast.Header>
-                                <strong className="mr-auto">Your item has been successfully added to your cart!</strong>
-                            </Toast.Header>
-                        </Toast>
+                            <Toast show={this.state.isShowToast} onClose={this.onCloseToast} delay={3000} autohide>
+                                <Toast.Header>
+                                    <strong className="mr-auto">Your item has been successfully added to your cart!</strong>
+                                </Toast.Header>
+                            </Toast>
                         </div>
                         {
                             (this.state.productDetails) ? this.renderProductDetails() : (  //true: this.renderProductDetails(); false: Loading...

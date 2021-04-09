@@ -1,20 +1,20 @@
-export type ProductItemDto = {
-    productId: number,
-    productName: string,
-    category: string,
-    description: string,
-    price: number,
-    imageUrl: string
-};
-/////??????/////
 // export type ProductItemDto = {
 //     productId: number,
 //     productName: string,
 //     category: string,
 //     description: string,
 //     price: number,
-//     imageUrl: ProductImageDto[]
+//     imageUrl: string
 // };
+/////??????/////
+export type ProductItemDto = {
+    productId: number,
+    productName: string,
+    category: string,
+    description: string,
+    price: number,
+    imageUrls: ProductImageDto[]
+};
 /////??????//////
 
 export type ProductListResponseDto = PoductItemDto[];
@@ -26,10 +26,10 @@ export type ShoppingCartItemResponseDto = {
 }
 
 // ////?????????////////
-// export type ProductImageDto={
-//     id: number,
-//     image: string
-// }
+export type ProductImageDto={
+    id: number,
+    imageUrl: string
+}
 // //////?????//////
 
 

@@ -14,34 +14,34 @@ export type ShoppingCartProduct ={
     
 // }
 
-export type ProductItem = {
-    productId: number,
-    productName: string,
-    category: string,
-    description: string,
-    price: number,
-    imageUrl: string
-};
-
-// /////??????/////
 // export type ProductItem = {
 //     productId: number,
 //     productName: string,
 //     category: string,
 //     description: string,
 //     price: number,
-//     imageUrl: ProductImage[]
+//     imageUrl: string
 // };
-// /////??????//////
-// ////?????????////////
-// export type ProductImage={
-//     id: number,
-//     image: string
-// }
-// //////?????//////
+
+/////??????/////
+export type ProductItem = {
+    productId: number,
+    productName: string,
+    category: string,
+    description: string,
+    price: number,
+    imageUrls: ProductImage[]
+};
+/////??????//////
+////?????????////////
+export type ProductImage={
+    id: number,
+    imageUrl: string
+}
+//////?????//////
 
 
-export type ProductList = PoductItem[];
+export type ProductList = ProductItem[];
 
 export type ProductMap ={
     [key:number] : ProductItem

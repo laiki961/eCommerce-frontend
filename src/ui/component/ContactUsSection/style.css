@@ -7,3 +7,7 @@
 .contactUsContainer .map{
     width: 100%;
 }
+
+#contactUs{
+    left: 50%
+}
