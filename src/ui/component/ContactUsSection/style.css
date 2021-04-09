@@ -1,0 +1,9 @@
+.contactUsContainer{
+    background-color: #111111;
+    color: #EEEEEE;
+    padding: 32px;
+}
+
+.contactUsContainer .map{
+    width: 100%;
+}

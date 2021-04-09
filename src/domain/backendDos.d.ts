@@ -23,6 +23,24 @@ export type ProductItem = {
     imageUrl: string
 };
 
+// /////??????/////
+// export type ProductItem = {
+//     productId: number,
+//     productName: string,
+//     category: string,
+//     description: string,
+//     price: number,
+//     imageUrl: ProductImage[]
+// };
+// /////??????//////
+// ////?????????////////
+// export type ProductImage={
+//     id: number,
+//     image: string
+// }
+// //////?????//////
+
+
 export type ProductList = PoductItem[];
 
 export type ProductMap ={

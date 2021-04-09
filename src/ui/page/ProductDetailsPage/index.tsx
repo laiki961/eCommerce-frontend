@@ -18,7 +18,8 @@ type Props =
 type State = {
     productDetails?: ProductItem, //since there is nth at the beginning
     isShowToast: boolean,
-    quantity: number;
+    quantity: number,
+    // image: string
 };
 
 class ProductDetailsPage extends React.Component<Props, State>{
@@ -70,6 +71,12 @@ class ProductDetailsPage extends React.Component<Props, State>{
         });
     }
 
+    // onClickImage(){
+    //     this.setState({
+    //         image: 
+    //     })
+    // }
+
     renderProductDetails(){
         const productDetails = this.state.productDetails!;
         return(
@@ -83,8 +90,8 @@ class ProductDetailsPage extends React.Component<Props, State>{
                         <div>
                             <img className="bannerImage" src={productDetails.imageUrl} alt={"Product "+ productDetails.productName + " image"}/>
                         </div>
-                        <div id="imageContainer">
-                            <img className="supportImage" src={productDetails.imageUrl} alt={"Product "+ productDetails.productName + " image"}/>
+                        <div id="imageContainer" >
+                            <img className="supportImage" src="https://contents.mediadecathlon.com/p1856755/k$03e210b0a54f3832df4eee0d1ead5e0c/sq/500+TILT+14+SILVER+GREY.webp?f=1000x1000" alt="supportImage"/>
                         </div>
                     </Col>
                     <Col>

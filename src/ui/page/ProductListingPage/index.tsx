@@ -3,6 +3,7 @@ import { Card, Container} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { ProductList } from "../../../domain/backendDos";
 import BackendExtService from "../../../extService/BackendExtService";
+import ContactUsSection from "../../component/ContactUsSection";
 import "./style.css";
 
 type Props = {
@@ -106,25 +107,29 @@ export default class ProductListingPage extends React.Component<Props, State> {
 
     render() {
         return (
-                (this.state.productList ) ? (
+                <>
+                    {
+                        (this.state.productList) ? (
                             <Container>
                                 <div className="content productContainer">
                                     {this.renderProductItems()}
                                 </div>
-                             </Container>
-                ):(
-                    <div className="loadingOverlay-content active">
-                        <div className="lds-ellipsis loading">
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                        </div>
-                    </div>
-                            
-                )
+                            </Container>
+                        ):(
+                            <div className="loadingOverlay-content active">
+                                <div className="lds-ellipsis loading">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        )
+                    }
+                    <ContactUsSection/>
+                </>
             )
-
+                   
         //     {/* <Carousel fade>
         //                         <Carousel.Item>
         //                             <img
