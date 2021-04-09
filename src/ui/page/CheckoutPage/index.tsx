@@ -80,7 +80,7 @@ class CheckoutPage extends React.Component<Props, State>{
                 productName: item.details.productName,
                 description: item.details.description,
                 price: item.details.price,
-                imageUrl: item.details.imageUrl,
+                imageUrl: item.details.imageUrls[0].imageUrl,
                 quantity: item.quantity
             }
         }

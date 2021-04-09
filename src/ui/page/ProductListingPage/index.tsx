@@ -3,6 +3,7 @@ import { Card, Container} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { ProductList } from "../../../domain/backendDos";
 import BackendExtService from "../../../extService/BackendExtService";
+import ContactUsSection from "../../component/ContactUsSection";
 import "./style.css";
 
 type Props = {
@@ -78,15 +79,16 @@ export default class ProductListingPage extends React.Component<Props, State> {
         if (!this.state.productList) {
             return null; // null | [] | cards <-- they all represent null
         }
-        for (let item of this.state.productList) {
+        console.log(this.state.productList);
+        for (let item of this.state.productList!) {
         cards.push(
             //Link is from Router
             <Link to={"/details/" + item.productId} key={item.productId}>
                 <Card className="productCard">
                     <Card.Img
-                    className="image centerCropped"
-                    variant="top"
-                    src={item.imageUrl}
+                        className="image centerCropped"
+                        variant="top"
+                        src={item.imageUrls[0].imageUrl}
                     />
                     <Card.Body>
                     <Card.Title className="cardTitle productName">
@@ -106,25 +108,29 @@ export default class ProductListingPage extends React.Component<Props, State> {
 
     render() {
         return (
-                (this.state.productList ) ? (
+                <>
+                    {
+                        (this.state.productList) ? (
                             <Container>
                                 <div className="content productContainer">
                                     {this.renderProductItems()}
                                 </div>
-                             </Container>
-                ):(
-                    <div className="loadingOverlay-content active">
-                        <div className="lds-ellipsis loading">
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                        </div>
-                    </div>
-                            
-                )
+                            </Container>
+                        ):(
+                            <div className="loadingOverlay-content active">
+                                <div className="lds-ellipsis loading">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        )
+                    }
+                    <ContactUsSection/>
+                </>
             )
-
+                   
         //     {/* <Carousel fade>
         //                         <Carousel.Item>
         //                             <img

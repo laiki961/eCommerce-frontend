@@ -4,8 +4,13 @@ export type ProductItemDto = {
     category: string,
     description: string,
     price: number,
-    imageUrl: string
+    imageUrls: ProductImageDto[]
 };
+
+export type ProductImageDto={
+    id: number,
+    imageUrl: string
+}
 
 export type ProductListResponseDto = PoductItemDto[];
 
@@ -15,7 +20,9 @@ export type ShoppingCartItemResponseDto = {
     [key:number]: ProductItemDto
 }
 
-///////////////////////////////////
+//////////////////////////////
+
+
 export type TransactionItemDto ={
     details: ProductItemDto,
     quantity: number,

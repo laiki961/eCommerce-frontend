@@ -3,6 +3,7 @@ import { Category, Login, ProductItem, ProductList, ProductMap, Transaction } fr
 import mockLoginUser from './loginUser.json';
 import { CategoryResponseDto, CheckoutResponseDto, LoginResponseDto, ProductDetailsResponseDto, ProductListResponseDto, ShoppingCartItemDto, ShoppingCartItemResponseDto, TransactionResponseDto } from '../domain/dto/backendDtos';
 import axios from 'axios';
+import config from '../config/config';
 
 export default class BackendExtService{
 
@@ -25,17 +26,17 @@ export default class BackendExtService{
     //All products (previous)
     static getProductList(callback: (data: ProductList) =>void, categoryId?: string, search?: string){
         (categoryId)?(
-            axios.get<ProductListResponseDto>("http://localhost:8080/public/product/"+ categoryId)
+            axios.get<ProductListResponseDto>(config().backend.baseUrl + "/public/product/"+ categoryId)
              .then(response => {
                  callback(response.data as ProductList);
             })
         ):(search)?(
-            axios.get<ProductListResponseDto>("http://localhost:8080/public/product/all?productName="+ search)
+            axios.get<ProductListResponseDto>(config().backend.baseUrl + "/public/product/all?productName="+ search)
              .then(response => {
                  callback(response.data as ProductList);
             })
         ):(
-            axios.get<ProductListResponseDto>("http://localhost:8080/public/product/all")
+            axios.get<ProductListResponseDto>(config().backend.baseUrl + "/public/product/all")
             .then(response => {
                 callback(response.data as ProductList);
             })
@@ -54,7 +55,7 @@ export default class BackendExtService{
 
 
     static getCategoryList(callback: (data: Category[]) =>void){
-        axios.get<CategoryResponseDto[]>("http://localhost:8080/public/category/all")
+        axios.get<CategoryResponseDto[]>(config().backend.baseUrl + "/public/category/all")
             .then(response => {
                 callback(response.data as Category[]);
             })
@@ -73,7 +74,7 @@ export default class BackendExtService{
     // }
 
     static getProductDetails(productId: number, callback: (data: ProductItem) => void){
-        axios.get<ProductDetailsResponseDto>("http://localhost:8080/public/product/details?productId="+ productId)
+        axios.get<ProductDetailsResponseDto>(config().backend.baseUrl + "/public/product/details?productId="+ productId)
             .then(response => {
                 callback(response.data as ProductItem);
             })
@@ -88,7 +89,7 @@ export default class BackendExtService{
         // }).then(data =>{
         //     callback(data as ProductMap);
 
-        axios.post<ShoppingCartItemResponseDto>('http://localhost:8080/public/product/byIds', productIds)
+        axios.post<ShoppingCartItemResponseDto>(config().backend.baseUrl + '/public/product/byIds', productIds)
             .then(response =>{
                 callback(response.data as ProductMap)
             })
@@ -113,7 +114,7 @@ export default class BackendExtService{
         // }).then(data =>{
         //     callback(data as Transaction);
         // });
-        axios.post<CheckoutResponseDto>('http://localhost:8080/transaction', items,{
+        axios.post<CheckoutResponseDto>(config().backend.baseUrl + '/transaction', items,{
             headers: {
                 Authorization: "Bearer " + idToken
             }
@@ -131,7 +132,7 @@ export default class BackendExtService{
         // }).then(data =>{
         //     callback(data as Transaction);
         // });
-        axios.get<TransactionResponseDto>('http://localhost:8080/transaction/'+ transactionId,{
+        axios.get<TransactionResponseDto>(config().backend.baseUrl + '/transaction/'+ transactionId,{
             headers: {
                 Authorization: "Bearer " + idToken
             }

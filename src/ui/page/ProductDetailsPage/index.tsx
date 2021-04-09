@@ -5,6 +5,7 @@ import { ProductItem } from '../../../domain/backendDos';
 import BackendExtService from '../../../extService/BackendExtService';
 import ShoppingCartService from '../../../service/ShoppingCartService';
 import Quantity from '../../component/Quantity';
+import Image from '../../component/Image';
 import "./style.css";
 
 type RouterParams = {
@@ -18,11 +19,13 @@ type Props =
 type State = {
     productDetails?: ProductItem, //since there is nth at the beginning
     isShowToast: boolean,
-    quantity: number;
+    quantity: number,
+    imageIndex: number
 };
 
 class ProductDetailsPage extends React.Component<Props, State>{
     state = {
+        imageIndex: 0,
         quantity: 1,
         isShowToast: false
     } as State;
@@ -35,6 +38,7 @@ class ProductDetailsPage extends React.Component<Props, State>{
         this.onCloseToast = this.onCloseToast.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.updateQuantity = this.updateQuantity.bind(this);
+        this.onClickImage = this.onClickImage.bind(this);
     }
 
     componentDidMount(){
@@ -70,6 +74,34 @@ class ProductDetailsPage extends React.Component<Props, State>{
         });
     }
 
+    onClickImage(imageIndex: number){
+        console.log(imageIndex);
+        this.setState({
+            imageIndex: imageIndex
+        })
+    }
+
+    renderProductImage(){
+        if (!this.state.productDetails?.imageUrls) {
+            return null;
+        }
+        const imageUrls: JSX.Element[] = [];
+        
+        // @ts-ignore
+        for(let [index, image] of this.state.productDetails.imageUrls.entries()) {
+            imageUrls.push(
+                <Image
+                    imageIndex={index}
+                    imageUrl={image.imageUrl}
+                    // "https://contents.mediadecathlon.com/p1856755/k$03e210b0a54f3832df4eee0d1ead5e0c/sq/500+TILT+14+SILVER+GREY.webp?f=1000x1000"
+                    onClickImage={this.onClickImage}
+                />
+            )
+        }
+        return imageUrls;
+    }
+
+
     renderProductDetails(){
         const productDetails = this.state.productDetails!;
         return(
@@ -81,11 +113,14 @@ class ProductDetailsPage extends React.Component<Props, State>{
                 <Row>
                     <Col>
                         <div>
-                            <img className="bannerImage" src={productDetails.imageUrl} alt={"Product "+ productDetails.productName + " image"}/>
+                            <img className="bannerImage" src={productDetails.imageUrls[this.state.imageIndex].imageUrl} alt={"Product "+ productDetails.productName + " image"}/>
                         </div>
-                        <div id="imageContainer">
-                            <img className="supportImage" src={productDetails.imageUrl} alt={"Product "+ productDetails.productName + " image"}/>
-                        </div>
+                        {this.renderProductImage()}
+                        {/* <Image 
+                            imageIndex={0}
+                            imageUrl="https://contents.mediadecathlon.com/p1856755/k$03e210b0a54f3832df4eee0d1ead5e0c/sq/500+TILT+14+SILVER+GREY.webp?f=1000x1000"
+                            onClickImage={this.onClickImage}
+                        /> */}
                     </Col>
                     <Col>
                         <div className="product-details">
@@ -108,7 +143,7 @@ class ProductDetailsPage extends React.Component<Props, State>{
                                     variant="primary"
                                     onClick={this.onClickAddToCartButton}
                                 >
-                                Add to cart
+                                    Add to cart
                                 </Button>
                             </div>
                         </div>
@@ -129,11 +164,11 @@ class ProductDetailsPage extends React.Component<Props, State>{
                 <div className="content">
                     <Container id="productDetailPage" >
                         <div className="toastContainer">
-                        <Toast show={this.state.isShowToast} onClose={this.onCloseToast} delay={3000} autohide>
-                            <Toast.Header>
-                                <strong className="mr-auto">Your item has been successfully added to your cart!</strong>
-                            </Toast.Header>
-                        </Toast>
+                            <Toast show={this.state.isShowToast} onClose={this.onCloseToast} delay={3000} autohide>
+                                <Toast.Header>
+                                    <strong className="mr-auto">Your item has been successfully added to your cart!</strong>
+                                </Toast.Header>
+                            </Toast>
                         </div>
                         {
                             (this.state.productDetails) ? this.renderProductDetails() : (  //true: this.renderProductDetails(); false: Loading...

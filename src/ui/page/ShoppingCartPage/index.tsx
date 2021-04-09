@@ -48,7 +48,7 @@ export default class ShoppingCartPage extends React.Component<Props, State>{
                 productName: data![+productId].productName,
                 description: data![+productId].description,
                 price: data![+productId].price,
-                imageUrl: data![+productId].imageUrl,
+                imageUrl: data![+productId].imageUrls[0].imageUrl,
                 quantity: this.props.shoppingCartService.shoppingCart[+productId].quantity
             })
         }

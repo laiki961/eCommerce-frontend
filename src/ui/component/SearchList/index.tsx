@@ -36,7 +36,7 @@ export default class SearchList extends React.Component<Props, State> {
         for(let item of this.props.searchProduct){
             searchList.push(
                 <Link to={"detail/" + item.productId} key={item.productId} className="searchResultItem">
-                    <img id="searchImage" src={item.imageUrl}/>
+                    <img id="searchImage" src={item.imageUrls[0].imageUrl}/>
                     <div id="searchContent">
                         {item.productName}<br/>
                         <span>HK$ </span>{item.price}

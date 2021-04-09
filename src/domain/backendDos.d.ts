@@ -14,16 +14,24 @@ export type ShoppingCartProduct ={
     
 // }
 
+
+
 export type ProductItem = {
     productId: number,
     productName: string,
     category: string,
     description: string,
     price: number,
-    imageUrl: string
+    imageUrls: ProductImage[]
 };
 
-export type ProductList = PoductItem[];
+export type ProductImage={
+    id: number,
+    imageUrl: string
+}
+
+
+export type ProductList = ProductItem[];
 
 export type ProductMap ={
     [key:number] : ProductItem

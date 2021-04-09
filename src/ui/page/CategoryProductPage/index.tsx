@@ -40,7 +40,7 @@ class CategoryProductPage extends React.Component<Props, State> {
             <Col md={3} sm={6} key={item.productId}>
                 <Link to={"/details/" + item.productId}>
                     <Card className="productCard">
-                        <Card.Img className="image centerCropped" variant="top" src={item.imageUrl}/>
+                        <Card.Img className="image centerCropped" variant="top" src={item.imageUrls[0].imageUrl}/>
                         <Card.Body>
                             <Card.Title className="cardTitle productName">{item.productName}</Card.Title>
                                 <Card.Text className="price">
