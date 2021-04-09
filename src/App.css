@@ -16,6 +16,10 @@
     color: white;
 }
 
+.nav-icon.toggle{
+  margin-left:16px;
+}
+
 .navbar-brand{
     color: white !important;
 }
@@ -24,9 +28,6 @@
   min-height: 100%;
 }
 
-/* .navBar-Container {
-  height: 100%;
-} */
 
 
 

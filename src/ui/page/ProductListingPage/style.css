@@ -18,8 +18,22 @@
     /* padding: 3px; */
 }
 
+.listing.priceContainer{
+  position: absolute;
+  right: 16px;
+
+}
+
 .priceTag.listing{
     padding-left:10px;
+}
+
+.listing.product{
+  color: black;
+}
+
+.listing.product.name{
+  font-weight: 600;
 }
 
 .centerCropped {
@@ -115,3 +129,11 @@
   .categoryName{
       color: white;
   }
+
+
+
+
+
+
+
+

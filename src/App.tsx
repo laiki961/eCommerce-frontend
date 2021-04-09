@@ -168,7 +168,7 @@ export default class App extends React.Component<Props, State> {
                 <Navbar expand="lg" className="siteNavbar" style={navbarStyle}>
                 <Container>
                     <FontAwesomeIcon 
-                        className="nav-icon" 
+                        className="nav-icon toggle" 
                         icon={faBars}
                         onClick={this.onClickSidebarToggle}
                     />
@@ -209,8 +209,8 @@ export default class App extends React.Component<Props, State> {
 
                     <Nav.Link href="#/cart" className="btn">
                         <FontAwesomeIcon
-                        className="nav-icon cart"
-                        icon={faShoppingCart}
+                            className="nav-icon cart"
+                            icon={faShoppingCart}
                         />
                     </Nav.Link>
                 </Navbar.Collapse>
@@ -246,19 +246,21 @@ export default class App extends React.Component<Props, State> {
                 />
                 <Route exact path="/details/:productId">
                     <ProductDetailsPage
-                    shoppingCartService={this.shoppingCartService} // Step: 1 -> new productDetailsPage({shopingCartService: this.shoppingCartService}) i.e. constructor
+                        shoppingCartService={this.shoppingCartService} // Step: 1 -> new productDetailsPage({shopingCartService: this.shoppingCartService}) i.e. constructor
                     />
                 </Route>
                 <Route exact path="/cart">
                     <ShoppingCartPage
-                    shoppingCartService={this.shoppingCartService}
+                        shoppingCartService={this.shoppingCartService}
                     />
                 </Route>
                 <Route exact path="/checkout/:transactionId">
                     <CheckoutPage />
                 </Route>
                 <Route exact path="/login">
-                    <LoginPage authService={this.authService} />
+                    <LoginPage 
+                        authService={this.authService}
+                    />
                 </Route>
                 <Route exact path="/thankyou">
                     <ThankyouPage />
@@ -273,69 +275,83 @@ export default class App extends React.Component<Props, State> {
                 <div className="lds-ellipsis loading"><div></div><div></div><div></div><div></div></div>
             </div>
 
-            <footer className="site-footer">
-                <div className="container">
-                    <div className="row">
-                    <div className="col-sm-12 col-md-6">
-                        <h6>About</h6>
-                        <p className="text-justify">
-                        Ventail Company Ltd. <br />
-                        <i>Bike eCommerce </i>
-                        <br /> Created by Nikki Ip
-                        </p>
+                <footer className="site-footer">
+                    <div className="container">
+                        <div className="row">
+                        <div className="col-sm-12 col-md-6">
+                            <h6>About</h6>
+                            <p className="text-justify">
+                                Ventail Company Ltd.
+                                <br/> 
+                                Address: Oi Yin Street, Aldrich Bay Road
+                                <br/>
+                                <br/>
+                                <i>Bike eCommerce</i>
+                            </p>
+                        </div>
+                        <div className="col-xs-6 col-md-3">
+                            <h6>Categories</h6>
+                            <ul className="footer-links">
+                                <li>
+                                    <a href="#/category/city">City Bikes</a>
+                                </li>
+                                <li>
+                                    <a href="#/category/folding">Folding Bikes</a>
+                                </li>
+                                <li>
+                                    <a href="#/category/hybrid">Hybrid Bikes</a>
+                                </li>
+                                <li>
+                                    <a href="#/category/kids">Kids Bikes</a>
+                                </li>
+                                <li>
+                                    <a href="#/category/mountain">Mountain Bikes</a>
+                                </li>
+                                <li>
+                                    <a href="#/category/road">Road Bikes</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div className="col-xs-6 col-md-3">
+                            <h6>Quick Links</h6>
+                            <ul className="footer-links">
+                            <li>
+                                <a href="https://www.linkedin.com/in/nikkilkip/">About Me</a>
+                            </li>
+                            <li>
+                                <a href="#/dest/EiZBbGRyaWNoIEJheSBSZCwgQWxkcmljaCBCYXksIEhvbmcgS29uZyIuKiwKFAoSCd8sWCl4AQQ0EU_PTF0tbPvlEhQKEglLSK9JdwEENBGAraT03BRFHQ">Contact Us</a>
+                            </li>
+                            <li>
+                                <a href="#/weather">Weather</a>
+                            </li>
+                            </ul>
+                        </div>
+                        </div>
+                        <hr />
                     </div>
-                    <div className="col-xs-6 col-md-3">
-                        <h6>Categories</h6>
-                        <ul className="footer-links">
-                        <li>
-                            <a href="#/">
-                            Bike
-                            </a>
-                        </li>
-                        </ul>
-                    </div>
-                    <div className="col-xs-6 col-md-3">
-                        <h6>Quick Links</h6>
-                        <ul className="footer-links">
-                        <li>
-                            <a href="http://scanfcode.com/about/">About Us</a>
-                        </li>
-                        <li>
-                            <a href="http://scanfcode.com/contact/">Contact Us</a>
-                        </li>
-                        <li>
-                            <a href="#/weather">
-                            Weather
-                            </a>
-                        </li>
-                        </ul>
-                    </div>
-                    </div>
-                    <hr />
-                </div>
-                <div className="container">
-                    <div className="row">
-                    <div className="col-md-8 col-sm-6 col-xs-12">
-                        <p className="copyright-text">
-                        Copyright @ {year} All Rights Reserved by Nikki.
-                        </p>
-                    </div>
+                    <div className="container">
+                        <div className="row">
+                        <div className="col-md-8 col-sm-6 col-xs-12">
+                            <p className="copyright-text">
+                                Copyright @ {year} All Rights Reserved by Nikki.
+                            </p>
+                        </div>
 
-                    <div className="col-md-4 col-sm-6 col-xs-12">
-                        <ul className="social-icons">
-                        {/* <li><a className="facebook" href="#"><i className="fa fa-facebook"></i></a></li>
-                        <li><a className="twitter" href="#"><i className="fa fa-twitter"></i></a></li>
-                        <li><a className="dribbble" href="#"><i className="fa fa-dribbble"></i></a></li> */}
-                        <li>
-                            <a className="linkedin" href="#">
-                            <i className="fa fa-linkedin"></i>
-                            </a>
-                        </li>
-                        </ul>
+                        <div className="col-md-4 col-sm-6 col-xs-12">
+                            <ul className="social-icons">
+                            {/* <li><a className="facebook" href="#"><i className="fa fa-facebook"></i></a></li>
+                            <li><a className="twitter" href="#"><i className="fa fa-twitter"></i></a></li>
+                            <li><a className="dribbble" href="#"><i className="fa fa-dribbble"></i></a></li> */}
+                            <li>
+                                <a className="linkedin" href="#">
+                                <i className="fa fa-linkedin"></i>
+                                </a>
+                            </li>
+                            </ul>
+                        </div>
+                        </div>
                     </div>
-                    </div>
-                </div>
-            </footer>
+                </footer>
             </HashRouter>
         </div>
         );

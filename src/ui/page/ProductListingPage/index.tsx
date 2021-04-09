@@ -92,12 +92,12 @@ export default class ProductListingPage extends React.Component<Props, State> {
                     />
                     <Card.Body>
                     <Card.Title className="cardTitle productName">
-                        {item.productName}
+                        <p className="listing product name">{item.productName}</p>
                     </Card.Title>
                     <br/>
-                    <Card.Text className="price">
-                        <span className="priceTag listing">HK$ </span>
-                        {item.price}
+                    <Card.Text className="listing priceContainer">
+                        <span className="listing product priceTag">HK$ </span>
+                        <p className="listing product price">{item.price}</p>
                     </Card.Text>
                     </Card.Body>
                 </Card>
@@ -105,6 +105,14 @@ export default class ProductListingPage extends React.Component<Props, State> {
         )}
         return cards;
     }
+
+
+    
+
+
+
+
+
 
     render() {
         return (
