@@ -1,12 +1,3 @@
-// export type ProductItemDto = {
-//     productId: number,
-//     productName: string,
-//     category: string,
-//     description: string,
-//     price: number,
-//     imageUrl: string
-// };
-/////??????/////
 export type ProductItemDto = {
     productId: number,
     productName: string,
@@ -15,7 +6,11 @@ export type ProductItemDto = {
     price: number,
     imageUrls: ProductImageDto[]
 };
-/////??????//////
+
+export type ProductImageDto={
+    id: number,
+    imageUrl: string
+}
 
 export type ProductListResponseDto = PoductItemDto[];
 
@@ -25,16 +20,9 @@ export type ShoppingCartItemResponseDto = {
     [key:number]: ProductItemDto
 }
 
-// ////?????????////////
-export type ProductImageDto={
-    id: number,
-    imageUrl: string
-}
-// //////?????//////
+//////////////////////////////
 
 
-
-///////////////////////////////////
 export type TransactionItemDto ={
     details: ProductItemDto,
     quantity: number,

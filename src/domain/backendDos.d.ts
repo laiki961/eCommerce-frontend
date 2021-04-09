@@ -14,16 +14,8 @@ export type ShoppingCartProduct ={
     
 // }
 
-// export type ProductItem = {
-//     productId: number,
-//     productName: string,
-//     category: string,
-//     description: string,
-//     price: number,
-//     imageUrl: string
-// };
 
-/////??????/////
+
 export type ProductItem = {
     productId: number,
     productName: string,
@@ -32,13 +24,11 @@ export type ProductItem = {
     price: number,
     imageUrls: ProductImage[]
 };
-/////??????//////
-////?????????////////
+
 export type ProductImage={
     id: number,
     imageUrl: string
 }
-//////?????//////
 
 
 export type ProductList = ProductItem[];
