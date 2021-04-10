@@ -1,5 +1,5 @@
 import React from 'react';
-import { Breadcrumb, Button, Col, Container, Row, Toast } from 'react-bootstrap';
+import { Breadcrumb, Button, Col, Container, Form, Row, Toast } from 'react-bootstrap';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { ProductItem } from '../../../domain/backendDos';
 import BackendExtService from '../../../extService/BackendExtService';
@@ -7,6 +7,7 @@ import ShoppingCartService from '../../../service/ShoppingCartService';
 import Quantity from '../../component/Quantity';
 import Image from '../../component/Image';
 import "./style.css";
+
 
 type RouterParams = {
     productId: string
@@ -20,7 +21,8 @@ type State = {
     productDetails?: ProductItem, //since there is nth at the beginning
     isShowToast: boolean,
     quantity: number,
-    imageIndex: number
+    imageIndex: number,
+    selectedOption: string
 };
 
 class ProductDetailsPage extends React.Component<Props, State>{
@@ -39,6 +41,9 @@ class ProductDetailsPage extends React.Component<Props, State>{
         this.handleInputChange = this.handleInputChange.bind(this);
         this.updateQuantity = this.updateQuantity.bind(this);
         this.onClickImage = this.onClickImage.bind(this);
+
+        // this.onValueChange = this.onValueChange.bind(this);
+        this.onClickformSubmit = this.onClickformSubmit.bind(this);
     }
 
     componentDidMount(){
@@ -93,7 +98,6 @@ class ProductDetailsPage extends React.Component<Props, State>{
                 <Image
                     imageIndex={index}
                     imageUrl={image.imageUrl}
-                    // "https://contents.mediadecathlon.com/p1856755/k$03e210b0a54f3832df4eee0d1ead5e0c/sq/500+TILT+14+SILVER+GREY.webp?f=1000x1000"
                     onClickImage={this.onClickImage}
                 />
             )
@@ -116,11 +120,6 @@ class ProductDetailsPage extends React.Component<Props, State>{
                             <img className="bannerImage" src={productDetails.imageUrls[this.state.imageIndex].imageUrl} alt={"Product "+ productDetails.productName + " image"}/>
                         </div>
                         {this.renderProductImage()}
-                        {/* <Image 
-                            imageIndex={0}
-                            imageUrl="https://contents.mediadecathlon.com/p1856755/k$03e210b0a54f3832df4eee0d1ead5e0c/sq/500+TILT+14+SILVER+GREY.webp?f=1000x1000"
-                            onClickImage={this.onClickImage}
-                        /> */}
                     </Col>
                     <Col>
                         <div className="product-details">
@@ -149,6 +148,7 @@ class ProductDetailsPage extends React.Component<Props, State>{
                         </div>
                     </Col>
                 </Row>
+                {this.renderReviewCommentBox()}
             </div>
         )
     }
@@ -157,6 +157,51 @@ class ProductDetailsPage extends React.Component<Props, State>{
         this.setState({
             isShowToast: false
         });
+    }
+
+
+
+    onValueChange(event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
+        this.setState({
+          selectedOption: event.target.value
+        });
+    }
+
+    onClickformSubmit(event: React.MouseEvent<any>) {
+        event.preventDefault();
+        console.log(this.state.selectedOption)
+    }
+
+    renderReviewCommentBox(){
+        return(
+        <div className="review commentBox">
+            <Form onSubmit={this.onClickformSubmit}>
+                <Form.Group controlId="exampleForm.ControlInput1">
+                    <Form.Label>Display Name</Form.Label>
+                    <Form.Control type="text" placeholder="e.g. Paul" />
+                </Form.Group>
+                <Form.Control>
+                    <Form.Label>Rating</Form.Label>
+                    <div className="radio">
+                        <label>1</label>
+                        <input
+                            checked={this.state.selectedOption === "1"}
+                            type="radio"
+                            value="1"
+                            onChange={this.onValueChange}
+                        />
+                    </div>
+                </Form.Control>
+                <Form.Group controlId="exampleForm.ControlTextarea1">
+                    <Form.Label>Comment</Form.Label>
+                    <Form.Control as="textarea" rows={3} />
+                </Form.Group>
+                <Button className="btn btn-default" type="submit">
+                    Submit
+                </Button>
+            </Form>
+        </div>
+       )
     }
 
     render(){
@@ -175,6 +220,7 @@ class ProductDetailsPage extends React.Component<Props, State>{
                                 <div className="lds-ellipsis loading"><div></div><div></div><div></div><div></div></div>
                             )
                         }
+                        
                     </Container>
                 </div>
         );
