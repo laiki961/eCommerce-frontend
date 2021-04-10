@@ -22,7 +22,6 @@ type State = {
     isShowToast: boolean,
     quantity: number,
     imageIndex: number,
-    selectedOption: string
 };
 
 class ProductDetailsPage extends React.Component<Props, State>{
@@ -42,7 +41,7 @@ class ProductDetailsPage extends React.Component<Props, State>{
         this.updateQuantity = this.updateQuantity.bind(this);
         this.onClickImage = this.onClickImage.bind(this);
 
-        // this.onValueChange = this.onValueChange.bind(this);
+        this.onValueChange = this.onValueChange.bind(this);
         this.onClickformSubmit = this.onClickformSubmit.bind(this);
     }
 
@@ -65,7 +64,7 @@ class ProductDetailsPage extends React.Component<Props, State>{
     
         // @ts-ignore
         this.setState({
-            [name]: value //district: Kwun -> trigger rerender
+            [name]: value
             } as State);
     }
 
@@ -162,14 +161,18 @@ class ProductDetailsPage extends React.Component<Props, State>{
 
 
     onValueChange(event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
-        this.setState({
-          selectedOption: event.target.value
-        });
+        this.setState((prevState) => ({
+        //   selectedOption: event.target.value
+          productDetails:{
+            ...prevState.
+          }
+        }));
     }
 
     onClickformSubmit(event: React.MouseEvent<any>) {
         event.preventDefault();
-        console.log(this.state.selectedOption)
+        // console.log(this.state.selectedOption)
+        // save to database, call api
     }
 
     renderReviewCommentBox(){
@@ -185,7 +188,7 @@ class ProductDetailsPage extends React.Component<Props, State>{
                     <div className="radio">
                         <label>1</label>
                         <input
-                            checked={this.state.selectedOption === "1"}
+                            name="rating"
                             type="radio"
                             value="1"
                             onChange={this.onValueChange}
