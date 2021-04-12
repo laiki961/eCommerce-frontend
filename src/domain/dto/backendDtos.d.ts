@@ -6,7 +6,7 @@ export type ProductItemDto = {
     price: number,
     imageUrls: ProductImageDto[],
     //new
-    reviews: ReviewDto[]
+    // reviews: ReviewResponseDto[]
     //
 
 };
@@ -16,13 +16,19 @@ export type ProductImageDto={
     imageUrl: string
 }
 //new
-export type ReviewDto ={
+export type ReviewResponseDto ={
     reviewId: number,
-    username: string,
+    userName: string,
     rating: number,
     comment: string
 }
 //
+export type CreateReviewRequestDto ={
+    productId: string,
+    userName: string,
+    rating: number,
+    comment: string
+}
 
 
 export type ProductListResponseDto = PoductItemDto[];

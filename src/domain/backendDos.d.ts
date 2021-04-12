@@ -21,9 +21,6 @@ export type ProductItem = {
     description: string,
     price: number,
     imageUrls: ProductImage[],
-    //new
-    reviews: Review[]
-    //
 };
 
 export type ProductImage={
@@ -34,7 +31,7 @@ export type ProductImage={
 //new
 export type Review ={
     reviewId: number,
-    username: string,
+    userName: string,
     rating: number,
     comment: string
 }

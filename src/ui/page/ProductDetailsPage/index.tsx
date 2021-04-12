@@ -1,12 +1,13 @@
 import React from 'react';
-import { Breadcrumb, Button, Col, Container, Form, Row, Toast } from 'react-bootstrap';
+import { Breadcrumb, Button, Col, Container, Row, Toast } from 'react-bootstrap';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import { ProductItem } from '../../../domain/backendDos';
+import { ProductItem, Review } from '../../../domain/backendDos';
 import BackendExtService from '../../../extService/BackendExtService';
 import ShoppingCartService from '../../../service/ShoppingCartService';
 import Quantity from '../../component/Quantity';
 import Image from '../../component/Image';
 import "./style.css";
+import ReviewSection from '../../component/ReviewSection';
 
 
 type RouterParams = {
@@ -19,6 +20,7 @@ type Props =
     };
 type State = {
     productDetails?: ProductItem, //since there is nth at the beginning
+    reviews: Review[],
     isShowToast: boolean,
     quantity: number,
     imageIndex: number,
@@ -41,8 +43,8 @@ class ProductDetailsPage extends React.Component<Props, State>{
         this.updateQuantity = this.updateQuantity.bind(this);
         this.onClickImage = this.onClickImage.bind(this);
 
-        this.onValueChange = this.onValueChange.bind(this);
-        this.onClickformSubmit = this.onClickformSubmit.bind(this);
+        this.onLoadedNewReview = this.onLoadedNewReview.bind(this);
+        this.onLoadedReviewList = this.onLoadedReviewList.bind(this);
     }
 
     componentDidMount(){
@@ -104,7 +106,6 @@ class ProductDetailsPage extends React.Component<Props, State>{
         return imageUrls;
     }
 
-
     renderProductDetails(){
         const productDetails = this.state.productDetails!;
         return(
@@ -147,7 +148,6 @@ class ProductDetailsPage extends React.Component<Props, State>{
                         </div>
                     </Col>
                 </Row>
-                {this.renderReviewCommentBox()}
             </div>
         )
     }
@@ -158,53 +158,16 @@ class ProductDetailsPage extends React.Component<Props, State>{
         });
     }
 
-
-
-    onValueChange(event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
+    onLoadedNewReview(data: Review){
         this.setState((prevState) => ({
-        //   selectedOption: event.target.value
-          productDetails:{
-            ...prevState.
-          }
+            reviews: [
+                data, ...prevState.reviews
+            ]
         }));
     }
 
-    onClickformSubmit(event: React.MouseEvent<any>) {
-        event.preventDefault();
-        // console.log(this.state.selectedOption)
-        // save to database, call api
-    }
-
-    renderReviewCommentBox(){
-        return(
-        <div className="review commentBox">
-            <Form onSubmit={this.onClickformSubmit}>
-                <Form.Group controlId="exampleForm.ControlInput1">
-                    <Form.Label>Display Name</Form.Label>
-                    <Form.Control type="text" placeholder="e.g. Paul" />
-                </Form.Group>
-                <Form.Control>
-                    <Form.Label>Rating</Form.Label>
-                    <div className="radio">
-                        <label>1</label>
-                        <input
-                            name="rating"
-                            type="radio"
-                            value="1"
-                            onChange={this.onValueChange}
-                        />
-                    </div>
-                </Form.Control>
-                <Form.Group controlId="exampleForm.ControlTextarea1">
-                    <Form.Label>Comment</Form.Label>
-                    <Form.Control as="textarea" rows={3} />
-                </Form.Group>
-                <Button className="btn btn-default" type="submit">
-                    Submit
-                </Button>
-            </Form>
-        </div>
-       )
+    onLoadedReviewList(data: Review[]){
+        this.setState({reviews: data});
     }
 
     render(){
@@ -223,7 +186,12 @@ class ProductDetailsPage extends React.Component<Props, State>{
                                 <div className="lds-ellipsis loading"><div></div><div></div><div></div><div></div></div>
                             )
                         }
-                        
+                        <ReviewSection 
+                            reviews={this.state.reviews}
+                            onLoadedNewReview={this.onLoadedNewReview}
+                            onLoadedReviewList={this.onLoadedReviewList}
+                            productId={this.props.match.params.productId}
+                        />
                     </Container>
                 </div>
         );
