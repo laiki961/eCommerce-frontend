@@ -11,13 +11,10 @@ type Props = {
 };
 type State = {
     productList?: ProductList,
-    // category?: Category[],
-    // isShowSidebar: boolean
 };
 
 export default class ProductListingPage extends React.Component<Props, State> {
     state = {
-        // isShowSidebar: false
     } as State;
 
     prevCategoryId?: string;
@@ -26,14 +23,12 @@ export default class ProductListingPage extends React.Component<Props, State> {
         super(props);
 
         this.onLoadedProductList = this.onLoadedProductList.bind(this);
-        // this.onLoadedCategoryList = this.onLoadedCategoryList.bind(this);
-        // this.onClickSidebarToggle = this.onClickSidebarToggle.bind(this);
+
     }
 
     componentDidMount() {
         this.prevCategoryId = this.props.categoryId;
         BackendExtService.getProductList(this.onLoadedProductList, this.props.categoryId); //ask BackendExtService call method, then jump to onLoadedProductList
-        // BackendExtService.getCategoryList(this.onLoadedCategoryList);
     }
 
     componentDidUpdate() {
@@ -41,38 +36,11 @@ export default class ProductListingPage extends React.Component<Props, State> {
             BackendExtService.getProductList(this.onLoadedProductList, this.props.categoryId); 
             this.prevCategoryId = this.props.categoryId;
         }
-        // BackendExtService.getProductList(this.onLoadedProductList); 
     }
 
     onLoadedProductList(data: ProductList) {
         this.setState({ productList: data });
     }
-
-    // onLoadedCategoryList(data: Category[]){
-    //     this.setState({category: data})
-    // }
-
-
-    // onClickSidebarToggle() {
-    //     this.setState((prevState) => ({
-    //         isShowSidebar: !prevState.isShowSidebar
-    //     }))
-    // }
-
-    // renderCategoryList() {
-    //     const list: JSX.Element[] = [];
-    //     if (!this.state.category) {
-    //         return null;
-    //     }
-    //     console.log(this.state.category)
-    //     for (let category of this.state.category)
-    //     list.push(
-    //         <Link to={"/category/" + category.id} key={category.id}>
-    //             <div className="categoryName">{category.name}</div>
-    //         </Link>
-    //     )
-    //     return list;
-    // }
 
     renderProductItems() {
         const cards: JSX.Element[] = [];
@@ -105,13 +73,6 @@ export default class ProductListingPage extends React.Component<Props, State> {
         )}
         return cards;
     }
-
-
-    
-
-
-
-
 
 
     render() {

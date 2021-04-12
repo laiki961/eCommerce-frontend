@@ -177,8 +177,8 @@ export default class BackendExtService{
        })
     }
 
-    static fetchAllReviews(callback: (data: Review[]) => void){
-        axios.get<ReviewResponseDto[]>(config().backend.baseUrl + "/public/review/")
+    static fetchAllReviews(callback: (data: Review[]) => void, productId: string){
+        axios.get<ReviewResponseDto[]>(config().backend.baseUrl + "/public/review/?productId=" + productId)
         .then(response => {
             callback(response.data as Review[]);
        })

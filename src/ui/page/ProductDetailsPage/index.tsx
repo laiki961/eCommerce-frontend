@@ -24,13 +24,17 @@ type State = {
     isShowToast: boolean,
     quantity: number,
     imageIndex: number,
+    shouldShowWriteReview: boolean,
+    shouldShowReviewList: boolean
 };
 
 class ProductDetailsPage extends React.Component<Props, State>{
     state = {
         imageIndex: 0,
         quantity: 1,
-        isShowToast: false
+        isShowToast: false,
+        shouldShowWriteReview: false,
+        shouldShowReviewList: false
     } as State;
 
     constructor(props: Props){ // Step 2: props = shopingCartService: this.shoppingCartService
@@ -45,6 +49,10 @@ class ProductDetailsPage extends React.Component<Props, State>{
 
         this.onLoadedNewReview = this.onLoadedNewReview.bind(this);
         this.onLoadedReviewList = this.onLoadedReviewList.bind(this);
+
+        this.onClickShowWriteReview = this.onClickShowWriteReview.bind(this);
+        this.onClickShowReviewList = this.onClickShowReviewList.bind(this);
+
     }
 
     componentDidMount(){
@@ -97,6 +105,7 @@ class ProductDetailsPage extends React.Component<Props, State>{
         for(let [index, image] of this.state.productDetails.imageUrls.entries()) {
             imageUrls.push(
                 <Image
+                    key={image.id}
                     imageIndex={index}
                     imageUrl={image.imageUrl}
                     onClickImage={this.onClickImage}
@@ -109,7 +118,7 @@ class ProductDetailsPage extends React.Component<Props, State>{
     renderProductDetails(){
         const productDetails = this.state.productDetails!;
         return(
-            <div>
+            <div id="productDetailsInfo">
                 <Breadcrumb>
                     <Breadcrumb.Item href="#/">All Products</Breadcrumb.Item>
                     <Breadcrumb.Item active>{productDetails.productName}</Breadcrumb.Item>
@@ -136,7 +145,6 @@ class ProductDetailsPage extends React.Component<Props, State>{
                                     quantity={this.state.quantity}
                                     updateQuantity={this.updateQuantity}
                                 />
-                                
                                 <Button 
                                     className="addtoCart button"
                                     variant="primary"
@@ -148,6 +156,8 @@ class ProductDetailsPage extends React.Component<Props, State>{
                         </div>
                     </Col>
                 </Row>
+                <div className="detailsReviewButton"><Button onClick={this.onClickShowWriteReview}>Write a Review</Button></div>
+                <div className="detailsReviewButton"><Button onClick={this.onClickShowReviewList}>Show Reviews</Button></div>
             </div>
         )
     }
@@ -170,6 +180,21 @@ class ProductDetailsPage extends React.Component<Props, State>{
         this.setState({reviews: data});
     }
 
+
+
+
+    onClickShowWriteReview(){
+        this.setState({
+            shouldShowWriteReview: true
+        });
+    }
+
+    onClickShowReviewList(){
+        this.setState({
+            shouldShowReviewList: true
+        });
+    }
+
     render(){
         return (
                 <div className="content">
@@ -182,17 +207,43 @@ class ProductDetailsPage extends React.Component<Props, State>{
                             </Toast>
                         </div>
                         {
-                            (this.state.productDetails) ? this.renderProductDetails() : (  //true: this.renderProductDetails(); false: Loading...
+                            (this.state.productDetails) ? this.renderProductDetails() 
+                            : (  //true: this.renderProductDetails(); false: Loading...
                                 <div className="lds-ellipsis loading"><div></div><div></div><div></div><div></div></div>
                             )
                         }
-                        <ReviewSection 
+                        
+                    </Container>
+                    <div id="reviewSection">
+                        {
+                            (this.state.shouldShowWriteReview)?(
+                                <ReviewSection 
+                                    reviews={this.state.reviews}
+                                    onLoadedNewReview={this.onLoadedNewReview}
+                                    onLoadedReviewList={this.onLoadedReviewList}
+                                    productId={this.props.match.params.productId}
+                                    shouldShowWriteReview={this.onClickShowWriteReview}
+                                />
+                            ):(null)
+                        }
+                        {
+                            (this.state.shouldShowReviewList)?(
+                                <ReviewSection 
+                                    reviews={this.state.reviews}
+                                    onLoadedNewReview={this.onLoadedNewReview}
+                                    onLoadedReviewList={this.onLoadedReviewList}
+                                    productId={this.props.match.params.productId}
+                                    shouldShowReviewList={this.onClickShowWriteReview}
+                                />
+                            ):(null)
+                        }
+                        {/* <ReviewSection 
                             reviews={this.state.reviews}
                             onLoadedNewReview={this.onLoadedNewReview}
                             onLoadedReviewList={this.onLoadedReviewList}
                             productId={this.props.match.params.productId}
-                        />
-                    </Container>
+                        /> */}
+                    </div>
                 </div>
         );
     }
