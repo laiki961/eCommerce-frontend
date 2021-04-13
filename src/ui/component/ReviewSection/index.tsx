@@ -129,7 +129,7 @@ export default class ReviewSection extends React.Component<Props, State> {
 
     renderProductReviewList(){
         const noreview: JSX.Element[] = [<div>No reviews for this product</div>];
-        if(!this.props.reviews){
+        if(!this.props.reviews || this.props.reviews.length === 0){
             return noreview;
         }
         const reviews: JSX.Element[] = [];

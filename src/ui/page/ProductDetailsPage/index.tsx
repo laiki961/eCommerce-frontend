@@ -186,15 +186,15 @@ class ProductDetailsPage extends React.Component<Props, State>{
 
 
     onClickShowWriteReview(){
-        this.setState({
-            shouldShowWriteReview: true
-        });
+        this.setState((prevState)=>({
+            shouldShowWriteReview: !this.state.shouldShowWriteReview
+        }));
     }
 
     onClickShowReviewList(){
-        this.setState({
-            shouldShowReviewList: true
-        });
+        this.setState((prevState)=>({
+            shouldShowReviewList: !this.state.shouldShowReviewList
+        }));
     }
 
     render(){
