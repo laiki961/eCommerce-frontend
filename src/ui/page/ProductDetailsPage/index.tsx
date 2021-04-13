@@ -199,54 +199,34 @@ class ProductDetailsPage extends React.Component<Props, State>{
 
     render(){
         return (
-                <div className="content">
-                    <Container id="productDetailPage" >
-                        <div className="toastContainer">
-                            <Toast show={this.state.isShowToast} onClose={this.onCloseToast} delay={3000} autohide>
-                                <Toast.Header>
-                                    <strong className="mr-auto">Your item has been successfully added to your cart!</strong>
-                                </Toast.Header>
-                            </Toast>
-                        </div>
-                        {
-                            (this.state.productDetails) ? this.renderProductDetails() 
-                            : (  //true: this.renderProductDetails(); false: Loading...
-                                <div className="lds-ellipsis loading"><div></div><div></div><div></div><div></div></div>
-                            )
-                        }
-                        
-                    </Container>
-                    <div id="reviewSection">
-                        {
-                            (this.state.shouldShowWriteReview)?(
-                                <ReviewSection 
-                                    reviews={this.state.reviews}
-                                    onLoadedNewReview={this.onLoadedNewReview}
-                                    onLoadedReviewList={this.onLoadedReviewList}
-                                    productId={this.props.match.params.productId}
-                                    shouldShowWriteReview={this.onClickShowWriteReview}
-                                />
-                            ):(null)
-                        }
-                        {
-                            (this.state.shouldShowReviewList)?(
-                                <ReviewSection 
-                                    reviews={this.state.reviews}
-                                    onLoadedNewReview={this.onLoadedNewReview}
-                                    onLoadedReviewList={this.onLoadedReviewList}
-                                    productId={this.props.match.params.productId}
-                                    shouldShowReviewList={this.onClickShowWriteReview}
-                                />
-                            ):(null)
-                        }
-                        {/* <ReviewSection 
-                            reviews={this.state.reviews}
-                            onLoadedNewReview={this.onLoadedNewReview}
-                            onLoadedReviewList={this.onLoadedReviewList}
-                            productId={this.props.match.params.productId}
-                        /> */}
+            <div className="content">
+                <Container id="productDetailPage" >
+                    <div className="toastContainer">
+                        <Toast show={this.state.isShowToast} onClose={this.onCloseToast} delay={3000} autohide>
+                            <Toast.Header>
+                                <strong className="mr-auto">Your item has been successfully added to your cart!</strong>
+                            </Toast.Header>
+                        </Toast>
                     </div>
+                    {
+                        (this.state.productDetails) ? this.renderProductDetails() 
+                        : (  //true: this.renderProductDetails(); false: Loading...
+                            <div className="lds-ellipsis loading"><div></div><div></div><div></div><div></div></div>
+                        )
+                    }
+                </Container>
+                <div id="reviewSection">
+                    <ReviewSection 
+                        reviews={this.state.reviews}
+                        onLoadedNewReview={this.onLoadedNewReview}
+                        onLoadedReviewList={this.onLoadedReviewList}
+                        productId={this.props.match.params.productId}
+                        onClickShowWriteReview={this.onClickShowWriteReview}
+                        shouldShowWriteReview={this.state.shouldShowWriteReview}
+                        shouldShowReviewList={this.state.shouldShowReviewList}
+                    />
                 </div>
+            </div>
         );
     }
 }

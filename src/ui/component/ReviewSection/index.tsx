@@ -12,8 +12,11 @@ type Props = {
     onLoadedNewReview: (data: Review)=>void,
     onLoadedReviewList: (data: Review[]) => void,
     productId: string,
-    shouldShowWriteReview?: (shouldShowWriteReview: boolean) => void,
-    shouldShowReviewList?: (shouldShowReviewList: boolean)=> void
+
+    onClickShowWriteReview?: () => void,
+    onClickShowReviewList?: ()=> void,
+    shouldShowWriteReview: boolean,
+    shouldShowReviewList: boolean
 };
 type State = {
     inputForm: {
@@ -116,7 +119,7 @@ export default class ReviewSection extends React.Component<Props, State> {
                         />
                     </div>
                 </Form.Group>
-                <Button className="btn btn-danger button-cancel" >
+                <Button className="btn btn-danger button-cancel" onClick={this.props.onClickShowWriteReview!} >
                     Cancel
                 </Button>
                 <Button className="btn btn-default button-submit" type="submit">
@@ -128,7 +131,7 @@ export default class ReviewSection extends React.Component<Props, State> {
     }
 
     renderProductReviewList(){
-        const noreview: JSX.Element[] = [<div>No reviews for this product</div>];
+        const noreview: JSX.Element[] = [<div className="noReview">No reviews for this product</div>];
         if(!this.props.reviews || this.props.reviews.length === 0){
             return noreview;
         }
@@ -159,15 +162,6 @@ export default class ReviewSection extends React.Component<Props, State> {
                             </div>
                         </Col>
                     </Row>
-                    {/* <div className="review username">
-                        <span>Display Name: </span>{review.userName}
-                    </div>
-                    <div className="review rating">
-                        <span>Rating: </span>{review.rating}
-                    </div>
-                    <div className="review comment">
-                        <span>Comment: </span>{review.comment}
-                    </div> */}
                 </div>
             )
         }
