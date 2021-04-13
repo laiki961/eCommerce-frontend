@@ -73,3 +73,7 @@
     display: inline-block;
     margin: 10px 10px;
 }
+
+.detailsReviewButton:first-child{
+    margin-left: 16px;
+}

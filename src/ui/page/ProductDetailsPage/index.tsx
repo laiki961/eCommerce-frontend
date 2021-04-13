@@ -156,8 +156,10 @@ class ProductDetailsPage extends React.Component<Props, State>{
                         </div>
                     </Col>
                 </Row>
-                <div className="detailsReviewButton"><Button onClick={this.onClickShowWriteReview}>Write a Review</Button></div>
-                <div className="detailsReviewButton"><Button onClick={this.onClickShowReviewList}>Show Reviews</Button></div>
+                <div className="detailsReviewButtonContainer">
+                    <div className="detailsReviewButton"><Button onClick={this.onClickShowWriteReview}>Write a Review</Button></div>
+                    <div className="detailsReviewButton"><Button onClick={this.onClickShowReviewList}>Show Reviews</Button></div>
+                </div>
             </div>
         )
     }
