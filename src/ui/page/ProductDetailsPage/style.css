@@ -1,5 +1,6 @@
 #productDetailPage{
     margin-top: 16px;
+    margin-bottom: 16px;
 }
 
 #productDetailPage h1{
@@ -19,6 +20,9 @@
     top: 56px;
     right: 80px;
     z-index: 2;
+}
+#productDetailsInfo{
+    margin-bottom: 20px;
 }
 
 
@@ -58,19 +62,18 @@
     padding: 16px 0;
 }
 
-
-
-
-
-
-
-
-
-
-
-
 .supportImage{
     object-fit: contain;
     width:80px;
     height: 80px;
+}
+
+
+.detailsReviewButton{
+    display: inline-block;
+    margin: 10px 10px;
+}
+
+.detailsReviewButton:first-child{
+    margin-left: 16px;
 }

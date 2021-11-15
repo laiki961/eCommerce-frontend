@@ -1,7 +1,19 @@
-#imageContainer{
+.imageContainer{
     display: inline-block;
     border: 1px solid #ddd;
     border-radius: 4px;
-    padding: 5px;
+    padding: 3px;
+}
 
+.testing{
+    display: inline-block;
+}
+
+/* //not working */
+.imageContainer:first-child{
+    margin-left:16px; 
+}
+
+.imageInlineBlock{
+    display: inline-block;
 }

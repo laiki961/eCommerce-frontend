@@ -4,13 +4,32 @@ export type ProductItemDto = {
     category: string,
     description: string,
     price: number,
-    imageUrls: ProductImageDto[]
+    imageUrls: ProductImageDto[],
+    //new
+    // reviews: ReviewResponseDto[]
+    //
+
 };
 
 export type ProductImageDto={
     id: number,
     imageUrl: string
 }
+//new
+export type ReviewResponseDto ={
+    reviewId: number,
+    userName: string,
+    rating: number,
+    comment: string
+}
+//
+export type CreateReviewRequestDto ={
+    productId: string,
+    userName: string,
+    rating: number,
+    comment: string
+}
+
 
 export type ProductListResponseDto = PoductItemDto[];
 

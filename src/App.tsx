@@ -85,7 +85,6 @@ export default class App extends React.Component<Props, State> {
     }
 
     componentDidMount() {
-        
         BackendExtService.getCategoryList(this.onLoadedCategoryList);
     }
 
@@ -123,7 +122,6 @@ export default class App extends React.Component<Props, State> {
         if (!this.state.category) {
             return null;
         }
-        console.log(this.state.category)
         for (let category of this.state.category){
         list.push(
             <Link to={"/category/" + category.id} key={category.id}>
@@ -173,48 +171,53 @@ export default class App extends React.Component<Props, State> {
                         onClick={this.onClickSidebarToggle}
                     />
                     <Navbar.Brand href="#">Ventail</Navbar.Brand>
-                    <Navbar.Collapse className="justify-content-end">
-
-                    <div className="searchBox">
-                        <input 
-                            className="searchInput" 
-                            type="text" 
-                            name="search" 
-                            value={this.state.search} 
-                            placeholder="Search" 
-                            onChange={this.handleInputChange}
-                        />
-                        <button className="searchButton" >
-                            <FontAwesomeIcon icon={faSearch}/>
-                        </button>
-                    </div>
-
                     <div className="dropdown">
-                        {
-                            (AuthService.isSignedIn())? (
-                                <Nav.Link onClick={this.onClickSignOut}>
-                                    <FontAwesomeIcon className="nav-icon signOut" icon={faSignOutAlt}/>
-                                </Nav.Link>    
-                            ) : (
-                                <Nav.Link href="#/login" className="btn">
-                                    <FontAwesomeIcon className="nav-icon account" icon={faUser} />
-                                </Nav.Link>
-                            )
-                        }
+                            <div className="nav-icon">Categories</div>
                         <div className="dropdown-content">
-                            <a href="#/login">Login</a>
+                            {this.renderCategoryList()}
                         </div>
-                        
                     </div>
+                    <Navbar.Collapse className="justify-content-end">
+                        <div className="searchBox">
+                            <input 
+                                className="searchInput" 
+                                type="text" 
+                                name="search" 
+                                value={this.state.search} 
+                                placeholder="Search" 
+                                onChange={this.handleInputChange}
+                            />
+                            <button className="searchButton" >
+                                <FontAwesomeIcon icon={faSearch}/>
+                            </button>
+                        </div>
 
-                    <Nav.Link href="#/cart" className="btn">
-                        <FontAwesomeIcon
-                            className="nav-icon cart"
-                            icon={faShoppingCart}
-                        />
-                    </Nav.Link>
-                </Navbar.Collapse>
-            </Container>
+                        {/* <div className="dropdown"> */}
+                            {
+                                (AuthService.isSignedIn())? (
+                                    <Nav.Link onClick={this.onClickSignOut}>
+                                        <FontAwesomeIcon className="nav-icon signOut" icon={faSignOutAlt}/>
+                                    </Nav.Link>    
+                                ) : (
+                                    <Nav.Link href="#/login" className="btn">
+                                        <FontAwesomeIcon className="nav-icon account" icon={faUser} />
+                                    </Nav.Link>
+                                )
+                            }
+                            {/* <div className="dropdown-content">
+                                <a href="#/login">Login</a>
+                            </div> */}
+                            
+                        {/* </div> */}
+
+                        <Nav.Link href="#/cart" className="btn">
+                            <FontAwesomeIcon
+                                className="nav-icon cart"
+                                icon={faShoppingCart}
+                            />
+                        </Nav.Link>
+                    </Navbar.Collapse>
+                </Container>
             </Navbar>
             {
                 (this.state.shouldShowSearchList) ? (
@@ -286,7 +289,9 @@ export default class App extends React.Component<Props, State> {
                                 Address: Oi Yin Street, Aldrich Bay Road
                                 <br/>
                                 <br/>
-                                <i>Bike eCommerce</i>
+                                <i>Bike eCommerce by Nikki Ip Lai Ki</i>
+                                <br/>
+                                <i>Contact: +1 (416) 732-9870</i>
                             </p>
                         </div>
                         <div className="col-xs-6 col-md-3">
@@ -339,9 +344,6 @@ export default class App extends React.Component<Props, State> {
 
                         <div className="col-md-4 col-sm-6 col-xs-12">
                             <ul className="social-icons">
-                            {/* <li><a className="facebook" href="#"><i className="fa fa-facebook"></i></a></li>
-                            <li><a className="twitter" href="#"><i className="fa fa-twitter"></i></a></li>
-                            <li><a className="dribbble" href="#"><i className="fa fa-dribbble"></i></a></li> */}
                             <li>
                                 <a className="linkedin" href="#">
                                 <i className="fa fa-linkedin"></i>

@@ -18,8 +18,10 @@ export default class Image extends React.Component<Props, State> {
 
     render(){
         return (
-            <div id="imageContainer">
-                <img onClick={(e) => this.props.onClickImage(this.props.imageIndex)} className="supportImage" src={this.props.imageUrl} alt="supportImage"/>
+            <div className="imageInlineBlock">
+                <div className="imageContainer">
+                    <img onClick={(e) => this.props.onClickImage(this.props.imageIndex)} className="supportImage" src={this.props.imageUrl} alt="supportImage"/>
+                </div>
             </div>
         )
     }
