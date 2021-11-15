@@ -289,7 +289,9 @@ export default class App extends React.Component<Props, State> {
                                 Address: Oi Yin Street, Aldrich Bay Road
                                 <br/>
                                 <br/>
-                                <i>Bike eCommerce</i>
+                                <i>Bike eCommerce by Nikki Ip Lai Ki</i>
+                                <br/>
+                                <i>Contact: +1 (416) 732-9870</i>
                             </p>
                         </div>
                         <div className="col-xs-6 col-md-3">
