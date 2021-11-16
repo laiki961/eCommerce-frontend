@@ -1,0 +1,71 @@
+#reviewSection{
+    /* background-color: white; */
+}
+
+.review.commentBox{
+    background-color: white;
+    padding: 10px;
+
+    width: 50%;
+    position: relative;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    top: 140px;
+}
+
+#writeAReview{
+    font-weight: bold;
+}
+
+#writeReviewComment{
+    margin-bottom: 50px;
+}
+.button-submit{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 10px
+}
+
+.button-cancel{
+    position: absolute;
+    bottom: 0;
+    right: 90px;
+    margin: 10px
+}
+
+.writeReviewRating{
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    margin-right: 10px;
+
+}
+.writeReviewComment.label{
+    display: inline-block;
+}
+
+
+#reviewListContainer{
+
+}
+#reviewContainer{
+    background-color: white;
+    padding: 10px;
+    width: 50%;
+    position: relative;
+    margin: 60px auto 10px auto;
+}
+
+.reviewTitle{
+    font-weight: bold;
+}
+
+.reviewSubject{
+    color: rgb(41, 154, 230);
+}
+
+.noReview{
+    margin-left: 16px;
+}

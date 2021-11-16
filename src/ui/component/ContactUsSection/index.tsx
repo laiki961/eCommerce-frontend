@@ -31,7 +31,7 @@ export default class ContactUsSection extends React.Component<Props, State> {
                         <Col md={6}>
                             <div id="contactUs">
                                 <h2>Contact Us</h2>
-                                <p>Phone: 9616 9619</p>
+                                <p>Phone: +1 (416) 732-9870</p>
                                 <p>Address: Oi Yin Street, Aldrich Bay Road</p>
                                 <p>
                                     <Button 

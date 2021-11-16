@@ -20,13 +20,23 @@ export type ProductItem = {
     category: string,
     description: string,
     price: number,
-    imageUrls: ProductImage[]
+    imageUrls: ProductImage[],
 };
 
 export type ProductImage={
     id: number,
     imageUrl: string
 }
+
+//new
+export type Review ={
+    reviewId: number,
+    userName: string,
+    rating: number,
+    comment: string
+}
+//
+
 
 export type ProductList = ProductItem[];
 

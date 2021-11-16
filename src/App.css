@@ -413,3 +413,9 @@ h1{
     transform: translate(24px, 0);
   }
 }
+
+
+
+.categoryName{
+  color: rgb(12, 240, 190);
+}
