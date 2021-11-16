@@ -1,14 +1,12 @@
 import React from 'react';
 import { Breadcrumb, Button, Col, Container, Row, Toast } from 'react-bootstrap';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import { ProductItem, Review } from '../../../domain/backendDos';
+import { ProductItem } from '../../../domain/backendDos';
 import BackendExtService from '../../../extService/BackendExtService';
 import ShoppingCartService from '../../../service/ShoppingCartService';
 import Quantity from '../../component/Quantity';
 import Image from '../../component/Image';
 import "./style.css";
-import ReviewSection from '../../component/ReviewSection';
-
 
 type RouterParams = {
     productId: string
@@ -20,21 +18,16 @@ type Props =
     };
 type State = {
     productDetails?: ProductItem, //since there is nth at the beginning
-    reviews: Review[],
     isShowToast: boolean,
     quantity: number,
-    imageIndex: number,
-    shouldShowWriteReview: boolean,
-    shouldShowReviewList: boolean
+    imageIndex: number
 };
 
 class ProductDetailsPage extends React.Component<Props, State>{
     state = {
         imageIndex: 0,
         quantity: 1,
-        isShowToast: false,
-        shouldShowWriteReview: false,
-        shouldShowReviewList: false
+        isShowToast: false
     } as State;
 
     constructor(props: Props){ // Step 2: props = shopingCartService: this.shoppingCartService
@@ -46,13 +39,6 @@ class ProductDetailsPage extends React.Component<Props, State>{
         this.handleInputChange = this.handleInputChange.bind(this);
         this.updateQuantity = this.updateQuantity.bind(this);
         this.onClickImage = this.onClickImage.bind(this);
-
-        this.onLoadedNewReview = this.onLoadedNewReview.bind(this);
-        this.onLoadedReviewList = this.onLoadedReviewList.bind(this);
-
-        this.onClickShowWriteReview = this.onClickShowWriteReview.bind(this);
-        this.onClickShowReviewList = this.onClickShowReviewList.bind(this);
-
     }
 
     componentDidMount(){
@@ -74,7 +60,7 @@ class ProductDetailsPage extends React.Component<Props, State>{
     
         // @ts-ignore
         this.setState({
-            [name]: value
+            [name]: value //district: Kwun -> trigger rerender
             } as State);
     }
 
@@ -105,9 +91,9 @@ class ProductDetailsPage extends React.Component<Props, State>{
         for(let [index, image] of this.state.productDetails.imageUrls.entries()) {
             imageUrls.push(
                 <Image
-                    key={image.id}
                     imageIndex={index}
                     imageUrl={image.imageUrl}
+                    // "https://contents.mediadecathlon.com/p1856755/k$03e210b0a54f3832df4eee0d1ead5e0c/sq/500+TILT+14+SILVER+GREY.webp?f=1000x1000"
                     onClickImage={this.onClickImage}
                 />
             )
@@ -115,10 +101,11 @@ class ProductDetailsPage extends React.Component<Props, State>{
         return imageUrls;
     }
 
+
     renderProductDetails(){
         const productDetails = this.state.productDetails!;
         return(
-            <div id="productDetailsInfo">
+            <div>
                 <Breadcrumb>
                     <Breadcrumb.Item href="#/">All Products</Breadcrumb.Item>
                     <Breadcrumb.Item active>{productDetails.productName}</Breadcrumb.Item>
@@ -129,6 +116,11 @@ class ProductDetailsPage extends React.Component<Props, State>{
                             <img className="bannerImage" src={productDetails.imageUrls[this.state.imageIndex].imageUrl} alt={"Product "+ productDetails.productName + " image"}/>
                         </div>
                         {this.renderProductImage()}
+                        {/* <Image 
+                            imageIndex={0}
+                            imageUrl="https://contents.mediadecathlon.com/p1856755/k$03e210b0a54f3832df4eee0d1ead5e0c/sq/500+TILT+14+SILVER+GREY.webp?f=1000x1000"
+                            onClickImage={this.onClickImage}
+                        /> */}
                     </Col>
                     <Col>
                         <div className="product-details">
@@ -145,6 +137,7 @@ class ProductDetailsPage extends React.Component<Props, State>{
                                     quantity={this.state.quantity}
                                     updateQuantity={this.updateQuantity}
                                 />
+                                
                                 <Button 
                                     className="addtoCart button"
                                     variant="primary"
@@ -156,10 +149,6 @@ class ProductDetailsPage extends React.Component<Props, State>{
                         </div>
                     </Col>
                 </Row>
-                <div className="detailsReviewButtonContainer">
-                    <div className="detailsReviewButton"><Button onClick={this.onClickShowWriteReview}>Write a Review</Button></div>
-                    <div className="detailsReviewButton"><Button onClick={this.onClickShowReviewList}>Show Reviews</Button></div>
-                </div>
             </div>
         )
     }
@@ -170,63 +159,24 @@ class ProductDetailsPage extends React.Component<Props, State>{
         });
     }
 
-    onLoadedNewReview(data: Review){
-        this.setState((prevState) => ({
-            reviews: [
-                data, ...prevState.reviews
-            ]
-        }));
-    }
-
-    onLoadedReviewList(data: Review[]){
-        this.setState({reviews: data});
-    }
-
-
-
-
-    onClickShowWriteReview(){
-        this.setState((prevState)=>({
-            shouldShowWriteReview: !this.state.shouldShowWriteReview
-        }));
-    }
-
-    onClickShowReviewList(){
-        this.setState((prevState)=>({
-            shouldShowReviewList: !this.state.shouldShowReviewList
-        }));
-    }
-
     render(){
         return (
-            <div className="content">
-                <Container id="productDetailPage" >
-                    <div className="toastContainer">
-                        <Toast show={this.state.isShowToast} onClose={this.onCloseToast} delay={3000} autohide>
-                            <Toast.Header>
-                                <strong className="mr-auto">Your item has been successfully added to your cart!</strong>
-                            </Toast.Header>
-                        </Toast>
-                    </div>
-                    {
-                        (this.state.productDetails) ? this.renderProductDetails() 
-                        : (  //true: this.renderProductDetails(); false: Loading...
-                            <div className="lds-ellipsis loading"><div></div><div></div><div></div><div></div></div>
-                        )
-                    }
-                </Container>
-                <div id="reviewSection">
-                    <ReviewSection 
-                        reviews={this.state.reviews}
-                        onLoadedNewReview={this.onLoadedNewReview}
-                        onLoadedReviewList={this.onLoadedReviewList}
-                        productId={this.props.match.params.productId}
-                        onClickShowWriteReview={this.onClickShowWriteReview}
-                        shouldShowWriteReview={this.state.shouldShowWriteReview}
-                        shouldShowReviewList={this.state.shouldShowReviewList}
-                    />
+                <div className="content">
+                    <Container id="productDetailPage" >
+                        <div className="toastContainer">
+                            <Toast show={this.state.isShowToast} onClose={this.onCloseToast} delay={3000} autohide>
+                                <Toast.Header>
+                                    <strong className="mr-auto">Your item has been successfully added to your cart!</strong>
+                                </Toast.Header>
+                            </Toast>
+                        </div>
+                        {
+                            (this.state.productDetails) ? this.renderProductDetails() : (  //true: this.renderProductDetails(); false: Loading...
+                                <div className="lds-ellipsis loading"><div></div><div></div><div></div><div></div></div>
+                            )
+                        }
+                    </Container>
                 </div>
-            </div>
         );
     }
 }

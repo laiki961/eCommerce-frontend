@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.34",
-    "@fortawesome/free-regular-svg-icons": "^5.15.3",
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@testing-library/jest-dom": "^5.11.9",
@@ -23,7 +22,6 @@
     "react-bootstrap": "^1.5.1",
     "react-dom": "^17.0.1",
     "react-google-button": "^0.7.2",
-    "react-rating": "^2.0.5",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-social-login-buttons": "^3.4.0",
@@ -32,7 +30,7 @@
     "web-vitals": "^1.1.0"
   },
   "scripts": {
-    "start": "PORT=3010 react-scripts start",
+"start": "PORT=3010 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

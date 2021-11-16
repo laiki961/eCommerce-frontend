@@ -55,6 +55,14 @@ export default class SearchList extends React.Component<Props, State> {
                 <div className="searchListOverlay" onClick={() => this.props.onClickSearchListOverlay!(false)}/>
                 <Container>
                     <div className="searchList">
+                        {/* <Link to={"detail/2"} key="2">
+                                <img id="searchImage" src="https://contents.mediadecathlon.com/p1856758/k$9ec57efa37d2d07c1b107fb2fd5cd98c/sq/500+TILT+14+SILVER+GREY.webp?f=1000x1000"/>
+                            <div id="searchContent">
+                                500 TILT 14" SILVER GREY<br/>
+                                <span>HK$ </span>1899
+                            </div>
+                            <hr/>
+                        </Link> */}
                         {this.renderSearchProduct()}
                     </div>
                 </Container>

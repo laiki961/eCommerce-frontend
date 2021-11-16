@@ -1,7 +1,7 @@
 import React from 'react';
-import { Category, Login, ProductItem, ProductList, ProductMap, Review, Transaction } from '../domain/backendDos'; 
+import { Category, Login, ProductItem, ProductList, ProductMap, Transaction } from '../domain/backendDos'; 
 import mockLoginUser from './loginUser.json';
-import { CategoryResponseDto, CheckoutResponseDto, CreateReviewRequestDto, LoginResponseDto, ProductDetailsResponseDto, ProductListResponseDto, ReviewResponseDto, ShoppingCartItemDto, ShoppingCartItemResponseDto, TransactionResponseDto } from '../domain/dto/backendDtos';
+import { CategoryResponseDto, CheckoutResponseDto, LoginResponseDto, ProductDetailsResponseDto, ProductListResponseDto, ShoppingCartItemDto, ShoppingCartItemResponseDto, TransactionResponseDto } from '../domain/dto/backendDtos';
 import axios from 'axios';
 import config from '../config/config';
 
@@ -156,32 +156,17 @@ export default class BackendExtService{
 
 
     static completeTransaction(callback: ()=> void){
-        new Promise<void>((resolve, reject) => {
-            setTimeout(() => {
-                // Step 1 success, bring mockProductList to the next step
-                resolve()//function
-            }, 5000); //number
-        // data = mockProduct in the step 1
-        }).then(data => {
-            // Step 2
-            // callback refers to onLoadedProductList
-            callback();
-        })
-    }
-
-
-    static createNewReview(callback: (data: Review)=> void,  product: CreateReviewRequestDto){
-        axios.post<ReviewResponseDto>(config().backend.baseUrl + "/public/review/", product)
-        .then(response => {
-            callback(response.data as Review);
-       })
-    }
-
-    static fetchAllReviews(callback: (data: Review[]) => void, productId: string){
-        axios.get<ReviewResponseDto[]>(config().backend.baseUrl + "/public/review/?productId=" + productId)
-        .then(response => {
-            callback(response.data as Review[]);
-       })
-    }
+            new Promise<void>((resolve, reject) => {
+                setTimeout(() => {
+                    // Step 1 success, bring mockProductList to the next step
+                    resolve()//function
+                }, 5000); //number
+            // data = mockProduct in the step 1
+            }).then(data => {
+                // Step 2
+                // callback refers to onLoadedProductList
+                callback();
+            })
+        }
 
 }
