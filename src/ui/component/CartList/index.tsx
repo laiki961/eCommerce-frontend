@@ -42,7 +42,7 @@ export default class CartList extends React.Component<Props, State> {
                         <img className="cartImg" src={item.imageUrl}/>
                         <div className="productName">
                             {item.productName}<br/>
-                            <span>Unit price: </span>HK$ {item.price}
+                            <span>Unit price: </span>CAD$ {item.price}
                         </div>
                     </Link>
                 </td>
@@ -60,10 +60,10 @@ export default class CartList extends React.Component<Props, State> {
                     }
                 </td>
                 <td>
-                    {/* <span>Unit price: </span>HK$ {item.price} */}
+                    {/* <span>Unit price: </span>CAD$ {item.price} */}
                     <br/>
                     <div className="price">
-                        <span className="priceTag">HK$ </span>{subtotal}
+                        <span className="priceTag">CAD$ </span>{subtotal}
                     </div>
                     
                 </td>
