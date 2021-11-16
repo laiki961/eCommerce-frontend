@@ -39,7 +39,7 @@ export default class SearchList extends React.Component<Props, State> {
                     <img id="searchImage" src={item.imageUrls[0].imageUrl}/>
                     <div id="searchContent">
                         {item.productName}<br/>
-                        <span>HK$ </span>{item.price}
+                        <span>CAD$ </span>{item.price}
                     </div>
                     <hr/>
                 </Link>

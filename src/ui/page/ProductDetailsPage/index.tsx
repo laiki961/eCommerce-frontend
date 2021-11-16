@@ -136,7 +136,7 @@ class ProductDetailsPage extends React.Component<Props, State>{
                             <h3>Description:</h3>
                             <p>{productDetails.description}</p>
                             <div className="price details">
-                                <span className="priceTag details">HK$ </span>{productDetails.price}
+                                <span className="priceTag details">CAD$ </span>{productDetails.price}
                             </div>
                             <div className="details-quantity">
                                 <span>Quantity </span>

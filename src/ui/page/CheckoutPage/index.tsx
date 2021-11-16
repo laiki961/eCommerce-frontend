@@ -94,7 +94,7 @@ class CheckoutPage extends React.Component<Props, State>{
                 <hr/>
                 <div className="price checkout">
                     <div id="checkoutTotal"><span className="priceTotal checkout">Total</span></div>
-                    <div id="checkoutPrice"><span className="priceTag checkout">HK$ </span>{this.state.transaction.total}</div>
+                    <div id="checkoutPrice"><span className="priceTag checkout">CAD$ </span>{this.state.transaction.total}</div>
                 </div>
             </section>
         )   

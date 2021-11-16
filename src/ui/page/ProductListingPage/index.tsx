@@ -64,7 +64,7 @@ export default class ProductListingPage extends React.Component<Props, State> {
                     </Card.Title>
                     <br/>
                     <Card.Text className="listing priceContainer">
-                        <span className="listing product priceTag">HK$ </span>
+                        <span className="listing product priceTag">CAD$ </span>
                         <p className="listing product price">{item.price}</p>
                     </Card.Text>
                     </Card.Body>

@@ -44,7 +44,7 @@ class CategoryProductPage extends React.Component<Props, State> {
                         <Card.Body>
                             <Card.Title className="cardTitle productName">{item.productName}</Card.Title>
                                 <Card.Text className="price">
-                                    <span className="priceTag listing">HK$ </span>{item.price}
+                                    <span className="priceTag listing">CAD$ </span>{item.price}
                                 </Card.Text>
                         </Card.Body>
                     </Card>
